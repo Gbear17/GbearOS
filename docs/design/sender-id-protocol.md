@@ -1,5 +1,10 @@
 > **AI Summary:** Design-level specification of the v1.4 sender envelope—wire layout, MAC, timestamps, and performance constraints distinct from inner DTO encoding.
 
+# Status
+>
+> **Status:** Implemented (design history; see normative docs below)
+> **Normative behavior:** [`docs/architecture/network-layer.md`](../architecture/network-layer.md), [`docs/architecture/igc_contract.md`](../architecture/igc_contract.md)
+
 # Sender ID protocol — stateless MAC envelope and performance (NOC Phase 1, v1.4)
 
 ## Purpose

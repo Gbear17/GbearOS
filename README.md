@@ -50,8 +50,10 @@ Normative contracts and deeper behavior: [`docs/architecture/`](docs/architectur
 
 ## LCD tag guide
 
-- **Single-module panels** — Put one of **`[INV]`**, **`[REF]`**, **`[PWR]`**, **`[ICE]`**, or **`[WARN]`** in the LCD **custom name** for a full-screen template (`[Manual]` can exclude a panel from discovery).
-- **Virtual dashboard** — Put **`[GbearOS]`** in the **name**, then list commands in the panel’s **Custom Data**, one per line: optional **`[HEAD:…]`**, then modules such as **`[INV]`**, **`[REF]`**, **`[ICE]`**, **`[PWR]`**, **`[WARN]`**, **`[STATUS]`**, and column directives **`[COL]`** / **`[COL:LEFT]`** / **`[COL:RIGHT]`** / **`[COL:FULL]`**.
+- **PB2-driven panels** — Put **`[GbearOS]`** in the panel **custom name** so PB2 discovers it. Optional **`[Manual]`** in the name excludes the panel from discovery.
+- **Commands live in panel Custom Data** — In the panel’s **Custom Data**, list commands **one per line**: optional **`[HEAD:…]`**, then modules such as **`[INV]`**, **`[REF]`**, **`[ICE]`**, **`[PWR]`**, **`[WARN]`**, **`[STATUS]`**, and column directives **`[COL]`** / **`[COL:LEFT]`** / **`[COL:RIGHT]`** / **`[COL:FULL]`**.
+  - For a “single-module” panel, just put **one** command (e.g. `[INV]`) in Custom Data.
+  - If Custom Data is empty/whitespace, PB2 defaults the command list to **`[INV]`**.
 
 Full detail: [`docs/architecture/lcd_panels_and_layout.md`](docs/architecture/lcd_panels_and_layout.md).
 

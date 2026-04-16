@@ -87,7 +87,12 @@ Human-facing or diagnostic keys for warnings often use **`ALL_CAPS`** tokens in 
 
 ## 12. LCD tag naming
 
-Panel **CustomName** substrings use **bracketed tags** (`[INV]`, `[WARN]`, `[GbearOS]`, …). PB2 matching is **substring**-based; typos break discovery.
+PB2 panel discovery uses **substring** matches on the LCD **CustomName**:
+
+- **`[GbearOS]`** — required for PB2 to discover and render the panel.
+- **`[Manual]`** — optional; excludes the panel from discovery.
+
+Module tags such as **`[INV]`**, **`[REF]`**, **`[PWR]`**, **`[ICE]`**, **`[WARN]`**, **`[STATUS]`**, and layout directives are parsed from the panel’s **Custom Data** command list, not from the name. Typos break discovery/commands.
 
 ---
 
