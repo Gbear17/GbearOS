@@ -18,7 +18,8 @@ using VRage.Game.ModAPI.Ingame;
 namespace IngameScript
 {
     /// <summary>
-    /// Positional semicolon-separated serialization. Deserialize lives in igc_serializer_deserialize.cs (generic, typeof-routed).
+    /// Positional semicolon-separated serialization.
+    /// PB2-only generic deserialize lives in GbearOS_PB2_Display/igc_serializer_deserialize.cs (typeof-routed).
     /// </summary>
     public static partial class IGCSerializer
     {

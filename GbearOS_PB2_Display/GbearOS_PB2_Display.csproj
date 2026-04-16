@@ -27,6 +27,6 @@
     <AdditionalFiles Include="thumb.png" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GbearOS_Shared\**\*.cs" Exclude="..\GbearOS_Shared\igc\serialization_pb1.cs" Link="GbearOS_Shared\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="..\GbearOS_Shared\**\*.cs" Link="GbearOS_Shared\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>

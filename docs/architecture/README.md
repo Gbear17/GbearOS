@@ -23,6 +23,7 @@ Normative **“what”** and **“why”** for GbearOS: in-game behavior, IGC co
 | [persistence.md](./persistence.md) | Panel list recovery across grid rescans |
 | [update_frequencies.md](./update_frequencies.md) | Script cadence and performance constraints |
 | [igc_contract.md](./igc_contract.md) | IGC channels, **`SenderEnvelope`** outer frame, inner DTO wire format (`Serializer` / **`IGCSerializer`**) |
+| [contract_checklist.md](./contract_checklist.md) | Developer gate: shared vs PB2-only deserialize placement, `.csproj` include rules, PB1 entrypoint bans |
 | [network-layer.md](./network-layer.md) | Identified nodes, SenderId format, zero-trust Data Link ingress |
 | [pb1_pb2_rules.md](./pb1_pb2_rules.md) | Mandatory boundaries between automation and display |
 | [naming_conventions.md](./naming_conventions.md) | Naming patterns for types, channels, and identifiers |
