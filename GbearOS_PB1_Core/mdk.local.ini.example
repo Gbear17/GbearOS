@@ -1,0 +1,9 @@
+; This file is _local_ to your machine and should not be checked in to source control.
+; Copy this file to mdk.local.ini and adjust paths for your machine.
+
+[mdk]
+; Where to output the script to (auto|specific path)
+output=C:\Users\REPLACE_WITH_YOUR_USERNAME\AppData\Roaming\SpaceEngineers\IngameScripts\local\GbearOS_PB1_Core
+; Override the default binary path (auto|specific path)
+binarypath=auto
+interactive=ShowNotification

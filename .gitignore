@@ -1,0 +1,13 @@
+# --- GbearOS Public Repository ---
+
+# Standard .NET
+[Bb]in/
+[Oo]bj/
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Privacy (local MDK overrides — keep templates tracked below)
+*.local.ini
+!*.local.ini.example

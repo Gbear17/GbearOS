@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GbearOS_PB1_Core/GbearOS_PB1_Core.csproj" />
+  <Project Path="GbearOS_PB2_Display/GbearOS_PB2_Display.csproj">
+    <Platform Project="x64" />
+  </Project>
+</Solution>
