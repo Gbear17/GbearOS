@@ -2,7 +2,7 @@
 
 // [GbearOS Component]
 // Name: igc_serializer_deserialize.cs
-// Purpose: PB2-only partial — Deserialize path for IGC DTO bodies (pairs with igc_serializer.cs).
+// Purpose: PB2-only partial — Deserialize path for IGC DTO bodies (pairs with GbearOS_Shared/igc/igc_serializer.cs).
 // PB Association: PB2
 // Dependencies: Same DTO set as IGCSerializer
 // Key Methods: Deserialize generic
@@ -320,3 +320,4 @@ namespace IngameScript
         }
     }
 }
+
