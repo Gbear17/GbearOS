@@ -93,6 +93,7 @@ Shared contracts live under [`GbearOS_Shared/`](GbearOS_Shared/) (DTOs, channel 
 - **System overview**: [`docs/architecture/system_overview.md`](docs/architecture/system_overview.md)
 - **IGC contract (channels, DTO wire format, `SenderEnvelope`)**: [`docs/architecture/igc_contract.md`](docs/architecture/igc_contract.md)
 - **Network ingress model (`SenderId`, replay, MAC)**: [`docs/architecture/network-layer.md`](docs/architecture/network-layer.md)
+- **Archived design / completed plans (non-contract)**: [`docs/history/README.md`](docs/history/README.md)
 
 ---
 

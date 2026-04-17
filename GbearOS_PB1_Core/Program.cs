@@ -5,7 +5,7 @@
 // Purpose: PB1 entry point — load config, run inventory/refinery/ice/power subsystems, wrap/broadcast DTO telemetry over IGC.
 // PB Association: PB1
 // Dependencies: Config, ConfigParser, InventoryScanner, RefineryManager, IceManager, PowerManager, DTO types, IGCChannels, Serializer, SenderEnvelope
-// Key Methods: Main (PBLimiter + tick), U (macro tick + resumable subsystem passes)
+// Key Methods: Main (PBLimiter + tick; entry surface — internal macro tick helpers are private)
 
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI.Ingame;

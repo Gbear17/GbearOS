@@ -30,9 +30,9 @@ Normative **“what”** and **“why”** for GbearOS: in-game behavior, IGC co
 | [user_config_system.md](./user_config_system.md) | Custom Data **behavior** (PB1 full INI, PB2 `[Network]` only, strict rewrite rules) |
 | [modded_block_support.md](./modded_block_support.md) | Modded block handling notes |
 
-## Design explorations
+## Design explorations and archives
 
-Non-normative notes and UX experiments may live under [../design/](../design/).
+Non-normative notes and UX experiments may live under [../design/](../design/). **Completed** design narratives that were moved out of `docs/design/` live under [../history/](../history/).
 
 ---
 

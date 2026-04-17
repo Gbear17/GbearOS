@@ -1,4 +1,4 @@
-> **Note:** `docs/ROADMAP.md` is a curated planning index. It is **not** a player-facing contract. Status values are maintained by `util-doc-sync` after reconciling docs with current source behavior.
+> **Note:** `docs/ROADMAP.md` is a curated planning index. It is **not** a player-facing contract. Status values are maintained by `util-doc-sync` after reconciling docs with current source behavior. Completed design or todo narratives may move to [`docs/history/`](./history/README.md); the original `docs/design/` or `docs/todo/` path is removed (no placeholder file).
 
 # ROADMAP
 
@@ -6,29 +6,12 @@
 
 This phased plan is the current **implementation driver** for near-term work. Detailed checklists live under `docs/todo/`.
 
-1. **Phase 1 — Contract + build-output reconciliation**  
-   Doc: `docs/todo/phase-01-contract-build-output-reconciliation.md`  
-   Decision: **1A** (`GbearOS_Shared` is canonical; spot-check merged/minified outputs)
-
-2. **Phase 2 — Protocol hardening (string safety)**  
-   Doc: `docs/todo/phase-02-protocol-hardening-string-safety.md`  
-   Decision: **2A** (sanitize player-controlled strings at ingestion; store sanitized values)
-
-3. **Phase 3 — Replay-state resilience**  
-   Doc: `docs/todo/phase-03-replay-state-resilience.md`  
-   Decision: **3A** (silence-based replay-baseline expiry; MAC verification remains mandatory)
-
-4. **Phase 4 — PB2 maintainability refactor (module interface + registry)**  
-   Doc: `docs/todo/phase-04-pb2-module-interface-and-registry.md`  
-   Decision: **4B** (static dictionary registration; initialized once; no per-tick registration)
-
-5. **Phase 5 — Extension work (telemetry + UI) with strict global versioning**  
-   Doc: `docs/todo/phase-05-extensions-telemetry-ui-global-version.md`  
-   Decision: **5B (strict)** (global protocol bumps; assume PB1+PB2 update together; no backward compatibility)
-
-6. **Phase 6 — Instruction-budget optimization (targeted) with lightweight state**  
-   Doc: `docs/todo/phase-06-instruction-budget-optimization-lightweight-state.md`  
-   Decision: **6A (lightweight)** (limited stateful caching/dirty flags with periodic full refresh guardrails)
+- [ ] (ID: ROAD-011) [STATUS: PLANNED] [AREA: BUILD] **Phase 1 — Contract + build-output reconciliation** Decision: **1A** (`GbearOS_Shared` is canonical; spot-check merged/minified outputs). (DOC: docs/todo/phase-01-contract-build-output-reconciliation.md) (EVIDENCE: docs-only)
+- [ ] (ID: ROAD-012) [STATUS: PLANNED] [AREA: IGC] **Phase 2 — Protocol hardening (string safety)** Decision: **2A** (sanitize player-controlled strings at ingestion; store sanitized values). (DOC: docs/todo/phase-02-protocol-hardening-string-safety.md) (EVIDENCE: docs-only)
+- [ ] (ID: ROAD-013) [STATUS: PLANNED] [AREA: IGC] **Phase 3 — Replay-state resilience** Decision: **3A** (silence-based replay-baseline expiry; MAC verification remains mandatory). (DOC: docs/todo/phase-03-replay-state-resilience.md) (EVIDENCE: docs-only)
+- [ ] (ID: ROAD-014) [STATUS: PLANNED] [AREA: PB2] **Phase 4 — PB2 maintainability refactor (module interface + registry)** Decision: **4B** (static dictionary registration; initialized once; no per-tick registration). (DOC: docs/todo/phase-04-pb2-module-interface-and-registry.md) (EVIDENCE: docs-only)
+- [ ] (ID: ROAD-015) [STATUS: PLANNED] [AREA: LCD] **Phase 5 — Extension work (telemetry + UI) with strict global versioning** Decision: **5B (strict)** (global protocol bumps; assume PB1+PB2 update together; no backward compatibility). (DOC: docs/todo/phase-05-extensions-telemetry-ui-global-version.md) (EVIDENCE: docs-only)
+- [ ] (ID: ROAD-016) [STATUS: PLANNED] [AREA: PB2] **Phase 6 — Instruction-budget optimization (targeted) with lightweight state** Decision: **6A (lightweight)** (limited stateful caching/dirty flags with periodic full refresh guardrails). (DOC: docs/todo/phase-06-instruction-budget-optimization-lightweight-state.md) (EVIDENCE: docs-only)
 
 ## IGC / networking (NOC)
 

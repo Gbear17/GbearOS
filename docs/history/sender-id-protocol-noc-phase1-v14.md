@@ -1,9 +1,6 @@
-> **AI Summary:** Design-level specification of the v1.4 sender envelope—wire layout, MAC, timestamps, and performance constraints distinct from inner DTO encoding.
+> **Archive notice:** Historical design record for **NOC Phase 1 (v1.4)** sender envelope work. **Current player-facing and developer contracts** live in normative architecture docs linked below—not in this file.
 
-# Status
->
-> **Status:** Implemented (design history; see normative docs below)
-> **Normative behavior:** [`docs/architecture/network-layer.md`](../architecture/network-layer.md), [`docs/architecture/igc_contract.md`](../architecture/igc_contract.md)
+> **AI Summary:** Design-level specification of the v1.4 sender envelope—wire layout, MAC, timestamps, and performance constraints distinct from inner DTO encoding.
 
 # Sender ID protocol — stateless MAC envelope and performance (NOC Phase 1, v1.4)
 
@@ -87,16 +84,16 @@ To honor **10 Hz** scripts and the **100k** character ceiling:
 ## Related documents (normative implementation)
 
 | Document | Topic |
-|----------|--------|
+|----------|-------|
 | [network-layer.md](../architecture/network-layer.md) | Zero-trust ingress, identified nodes |
 | [igc_contract.md](../architecture/igc_contract.md) | How envelopes wrap IGC DTO traffic |
 | [configuration.md](../configuration.md) | **`SharedKey`** provisioning |
-| [README.md](./README.md) | Design folder scope vs `docs/architecture/` |
+| [Design folder README](../design/README.md) | Design folder scope vs `docs/architecture/` |
 
 ## Document control
 
 | Version | Scope |
-|---------|--------|
+|---------|-------|
 | **v1.2** | NOC Phase 1 (superseded): Three-field envelope with rolling **Sequence**. |
 | **v1.3** | NOC Phase 1 (superseded wire): four pipe fields with **raw** payload (broken when payload contains **`|`**). |
 | **v1.4** | **PayloadB64** (UTF-8 Base64) + **monotonic** emit timestamps; **MAC** over decoded payload; **100k** / **10 Hz** constraints. |
