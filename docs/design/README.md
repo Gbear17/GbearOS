@@ -16,15 +16,14 @@ so design files here should avoid duplicating **build**, **deploy**, or **Git** 
 
 ## Files in this folder
 
-| Document | Purpose |
-|----------|---------|
-| [sender-id-protocol.md](./sender-id-protocol.md) | SenderId + `SenderEnvelope` wire spec and MAC notes (design exploration; see `docs/architecture/` for normative contracts) |
+There are **no** active standalone `.md` files here right now. **Normative** contracts: [`docs/architecture/`](../architecture/). **Archived** design narratives (e.g. NOC Phase 1 sender envelope): [`docs/history/`](../history/).
 
 ## Related locations
 
 | Location | Role |
 |----------|------|
 | [`docs/architecture/`](../architecture/) | Normative in-game behavior and contracts |
+| [`docs/history/`](../history/) | Archived completed design / plan narratives |
 | [`docs/configuration.md`](../configuration.md) | INI / Custom Data key reference |
 | [Root `README.md`](../../README.md) | Build, deploy, modular layout |
 

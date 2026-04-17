@@ -36,7 +36,7 @@ GbearOS adopts a **zero-trust** stance at the **ingress demarcation** modeled he
 **Policy (normative intent):**
 
 1. **Unauthenticated or unverified frame** — Admission requires both:
-   - **Replay protection:** **`Timestamp`** must **strictly increase** per **`SenderId`** relative to the receiver’s **last seen** value (see [sender-id-protocol.md](../design/sender-id-protocol.md)).
+   - **Replay protection:** **`Timestamp`** must **strictly increase** per **`SenderId`** relative to the receiver’s **last seen** value (see also [archived v1.4 narrative](../history/sender-id-protocol-noc-phase1-v14.md)).
    - **Authentication:** **`MAC`** must validate against **`SharedKey`** and the claimed **`SenderId`**, **`Timestamp`**, and **`Payload`** (lightweight deterministic **MAC**, e.g. FNV-1a over the agreed concatenation—**not** `string.GetHashCode()`).
 
    Any frame that fails format checks, **timestamp** policy, or **MAC** verification is **dropped** at this boundary: no parsing of application payload for trust decisions beyond what the **MAC** covers, no fan-out to subscribers, and no state mutation based on that frame.
@@ -73,7 +73,7 @@ The **NetworkManager** should depend on **abstractions** (interfaces or delegate
 |----------|--------|
 | [README.md](./README.md) | Architecture doc index |
 | [igc_contract.md](./igc_contract.md) | On-wire envelope usage, PB2 ingress |
-| [sender-id-protocol.md](../design/sender-id-protocol.md) | Wire spec and MAC construction |
+| [`sender-id-protocol-noc-phase1-v14.md`](../history/sender-id-protocol-noc-phase1-v14.md) | **Archive:** historical wire spec and MAC construction (v1.4) |
 | [configuration.md](../configuration.md) | **`SharedKey`**, **`SenderId`**, **`EnableNetwork`** |
 
 ## Document control

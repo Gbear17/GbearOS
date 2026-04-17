@@ -30,7 +30,7 @@ Behavior in-game is defined by the **merged** script contents, not by how many f
 
 ## IGC and DTOs (summary)
 
-- **DTO channels** carry an outer **`SenderEnvelope`** frame (`SenderId|Timestamp|Payload|MAC`); the **Payload** is the inner DTO string, produced and consumed through **`Serializer`** / **`IGCSerializer`**. Inner layout is **semicolon-separated**, with **protocol version in the first field** after splitting—see [igc_contract.md](./igc_contract.md). **`SYS_STATUS`** from PB1’s dashboard path is plain text and **not** envelope-wrapped; PB2 still requires a configured **`SharedKey`** to process any **`Route`** traffic.
+- **DTO channels** carry an outer **`SenderEnvelope`** frame (`SenderId|Timestamp|PayloadB64|MAC`); after Base64 decode, the **Payload** is the inner DTO string, produced and consumed through **`Serializer`** / **`IGCSerializer`**. Inner layout is **semicolon-separated**, with **protocol version in the first field** after splitting—see [igc_contract.md](./igc_contract.md). **`SYS_STATUS`** from PB1’s dashboard path is plain text and **not** envelope-wrapped; PB2 still requires a configured **`SharedKey`** to process any **`Route`** traffic.
 - **Channel names** are fixed string tags (e.g. broadcast names); the script holds them as constants in a shared **`IGCChannels`**-style contract.
 - **`SYS_STATUS`** is **not** DTO-encoded: senders push plain text; PB2 aggregates lines in a small **status registry** for `[STATUS]` panels (subject to PB2 **`SharedKey`** policy—see [igc_contract.md](./igc_contract.md)).
 

@@ -7,7 +7,7 @@
 Define **IGC channel tags**, **message type identifiers**, and the **on-wire string format** used between PB1 and PB2. Structured telemetry uses two layers:
 
 1. **Inner payload (DTO body):** produced and consumed by **`IGCSerializer`**, with script entry points **`Serializer.Serialize`** and generic **`Serializer.Deserialize`** (e.g. `Deserialize<InventorySummaryDTO>`). One string, split on **`;`**, **`p[0]`** = protocol version, **`p[1]`** onward = DTO fields. If `p[0]` is wrong, deserialization yields a **default/empty DTO** (no throw across the public API).
-2. **Outer sender envelope (DTO channels):** PB1 wraps the inner string with **`SenderEnvelope.Wrap`** before broadcast; PB2 verifies with **`SenderEnvelope.TryParse`** then passes the decoded inner string to **`Serializer.Deserialize`**. Normative wire rules (**v1.4:** Base64 middle field, monotonic timestamps): [sender-id-protocol.md](../design/sender-id-protocol.md); ingress model: [network-layer.md](./network-layer.md); code: **`GbearOS_Shared/network/SenderEnvelope.cs`**.
+2. **Outer sender envelope (DTO channels):** PB1 wraps the inner string with **`SenderEnvelope.Wrap`** before broadcast; PB2 verifies with **`SenderEnvelope.TryParse`** then passes the decoded inner string to **`Serializer.Deserialize`**. Normative wire rules (**v1.4:** Base64 middle field, monotonic timestamps): [network-layer.md](./network-layer.md) and this document; **historical** narrative (non-contract): [`sender-id-protocol-noc-phase1-v14.md`](../history/sender-id-protocol-noc-phase1-v14.md). Code: **`GbearOS_Shared/network/SenderEnvelope.cs`**.
 
 ## Telemetry design (at a glance)
 
@@ -164,7 +164,7 @@ Indices **1–10** floats (battery/reactor/engine totals and flows per field ord
 | [README.md](./README.md) | Architecture doc index |
 | [network-layer.md](./network-layer.md) | **`SenderId`**, zero-trust ingress, v1.3 envelope semantics |
 | [configuration.md](../configuration.md) | **`SharedKey`**, **`EnableNetwork`**, **`SenderId`** |
-| [sender-id-protocol.md](../design/sender-id-protocol.md) | Normative envelope and MAC notes (design folder) |
+| [`sender-id-protocol-noc-phase1-v14.md`](../history/sender-id-protocol-noc-phase1-v14.md) | **Archive:** historical envelope/MAC narrative (v1.4); current rules in this file + [`network-layer.md`](./network-layer.md) |
 | [pb1_pb2_rules.md](./pb1_pb2_rules.md) | Serialization responsibilities |
 | [update_frequencies.md](./update_frequencies.md) | Tick cadence |
 
