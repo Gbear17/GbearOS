@@ -29,8 +29,10 @@ Confirm PB1 does not call deserialize entrypoints:
 - No `Serializer.Deserialize<...>` usage under `GbearOS_PB1_Core/`
 - No `IGCSerializer.Deserialize<...>` usage under `GbearOS_PB1_Core/`
 
-### E. Artifact sanity (optional, when cutting a release)
-If you are about to publish `dist/` artifacts:
-- Build and deploy via MDK2 (`dotnet build`)
-- Ensure `dist/GbearOS_PB1_Core.cs` and `dist/GbearOS_PB2_Display.cs` correspond to the deployed `script.cs` outputs.
+### E. Artifact sanity (required for release; see also artifact verification)
+Normative procedure: [`artifact_verification.md`](./artifact_verification.md).
+
+- Build and deploy via MDK2 (`dotnet build`).
+- Run **`util-contract-check`**, then mirror deployed outputs into `dist/` (**`util-dist-mirror`**) so `dist/GbearOS_PB1_Core.cs` and `dist/GbearOS_PB2_Display.cs` match the deployed `script.cs` files.
+- Perform the **semantic spot-check** on those artifacts (channel string literals, DTO type names, envelope mechanics) against `GbearOS_Shared` as described in `artifact_verification.md`.
 
