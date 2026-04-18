@@ -9,7 +9,6 @@ Long-form phase plans and branch notes. Status is **planned** or **partial** unl
 
 | Document | Purpose |
 |----------|---------|
-| [phase-01-contract-build-output-reconciliation.md](./phase-01-contract-build-output-reconciliation.md) | Phase 1 — contract + build-output reconciliation |
 | [phase-02-protocol-hardening-string-safety.md](./phase-02-protocol-hardening-string-safety.md) | Phase 2 — protocol hardening (string safety) |
 | [phase-03-replay-state-resilience.md](./phase-03-replay-state-resilience.md) | Phase 3 — replay-state resilience |
 | [phase-04-pb2-module-interface-and-registry.md](./phase-04-pb2-module-interface-and-registry.md) | Phase 4 — PB2 module interface + registry |

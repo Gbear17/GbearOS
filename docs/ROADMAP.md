@@ -6,7 +6,7 @@
 
 This phased plan is the current **implementation driver** for near-term work. Detailed checklists live under `docs/todo/`.
 
-- [ ] (ID: ROAD-011) [STATUS: PLANNED] [AREA: BUILD] **Phase 1 — Contract + build-output reconciliation** Decision: **1A** (`GbearOS_Shared` is canonical; spot-check merged/minified outputs). (DOC: docs/todo/phase-01-contract-build-output-reconciliation.md) (EVIDENCE: docs-only)
+- [ ] (ID: ROAD-011) [STATUS: IMPLEMENTED] [AREA: BUILD] **Phase 1 — Contract + build-output reconciliation** Decision: **1A** (`GbearOS_Shared` is canonical; spot-check merged/minified outputs). (DOC: docs/architecture/artifact_verification.md) (EVIDENCE: mixed)
 - [ ] (ID: ROAD-012) [STATUS: PLANNED] [AREA: IGC] **Phase 2 — Protocol hardening (string safety)** Decision: **2A** (sanitize player-controlled strings at ingestion; store sanitized values). (DOC: docs/todo/phase-02-protocol-hardening-string-safety.md) (EVIDENCE: docs-only)
 - [ ] (ID: ROAD-013) [STATUS: PLANNED] [AREA: IGC] **Phase 3 — Replay-state resilience** Decision: **3A** (silence-based replay-baseline expiry; MAC verification remains mandatory). (DOC: docs/todo/phase-03-replay-state-resilience.md) (EVIDENCE: docs-only)
 - [ ] (ID: ROAD-014) [STATUS: PLANNED] [AREA: PB2] **Phase 4 — PB2 maintainability refactor (module interface + registry)** Decision: **4B** (static dictionary registration; initialized once; no per-tick registration). (DOC: docs/todo/phase-04-pb2-module-interface-and-registry.md) (EVIDENCE: docs-only)

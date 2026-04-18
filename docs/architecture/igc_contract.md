@@ -162,6 +162,7 @@ Indices **1–10** floats (battery/reactor/engine totals and flows per field ord
 | Document | Topic |
 |----------|--------|
 | [README.md](./README.md) | Architecture doc index |
+| [artifact_verification.md](./artifact_verification.md) | Canonical shared inventory + minified artifact spot-check (Phase 1) |
 | [network-layer.md](./network-layer.md) | **`SenderId`**, zero-trust ingress, v1.3 envelope semantics |
 | [configuration.md](../configuration.md) | **`SharedKey`**, **`EnableNetwork`**, **`SenderId`** |
 | [`sender-id-protocol-noc-phase1-v14.md`](../history/sender-id-protocol-noc-phase1-v14.md) | **Archive:** historical envelope/MAC narrative (v1.4); current rules in this file + [`network-layer.md`](./network-layer.md) |
