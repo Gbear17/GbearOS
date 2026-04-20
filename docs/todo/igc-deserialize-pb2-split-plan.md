@@ -28,7 +28,7 @@
 - **PB1**: 53132 / 100000 (remaining 46868) — `C:\Users\garre\AppData\Roaming\SpaceEngineers\IngameScripts\local\GbearOS_PB1_Core\script.cs`
 - **PB2**: 42872 / 100000 (remaining 57128) — `C:\Users\garre\AppData\Roaming\SpaceEngineers\IngameScripts\local\GbearOS_PB2_Display\script.cs`
 
-Moving deserialize from shared into PB2-only sources may **increase PB2** deployed size and **decrease PB1** depending on how the minifier merges symbols; re-run `util-mdk-build` after substantive edits and keep both scripts under the 100,000 limit with comfortable headroom.
+Moving deserialize from shared into PB2-only sources may **increase PB2** deployed size and **decrease PB1** depending on how the minifier merges symbols; re-run `gbearos-util-mdk-build` after substantive edits and keep both scripts under the 100,000 limit with comfortable headroom.
 
 ## High-Risk Systems
 
@@ -38,4 +38,4 @@ Moving deserialize from shared into PB2-only sources may **increase PB2** deploy
 
 ### Cleanup reminder
 
-When the split and docs are **fully** complete per the **`util-doc-sync`** documentation skill, archive this plan under `docs/history/` and **remove** this file (no placeholder).
+When the split and docs are **fully** complete per the **`gbearos-doc-sync`** documentation orchestrator, archive this plan under `docs/history/` and **remove** this file (no placeholder).

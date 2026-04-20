@@ -1,4 +1,4 @@
-> **Note:** `docs/ROADMAP.md` is a curated planning index. It is **not** a player-facing contract. Status values are maintained by `util-doc-sync` after reconciling docs with current source behavior. Completed design or todo narratives may move to [`docs/history/`](./history/README.md); the original `docs/design/` or `docs/todo/` path is removed (no placeholder file).
+> **Note:** `docs/ROADMAP.md` is a curated planning index. It is **not** a player-facing contract. Status values are maintained by `gbearos-doc-sync` after reconciling docs with current source behavior. Completed design or todo narratives may move to [`docs/history/`](./history/README.md); the original `docs/design/` or `docs/todo/` path is removed (no placeholder file).
 
 # ROADMAP
 
@@ -16,7 +16,7 @@ This phased plan is the current **implementation driver** for near-term work. De
 ## IGC / networking (NOC)
 
 - [ ] (ID: ROAD-001) [STATUS: PARTIAL] [AREA: DOCS] Public-release workflow hardening (public vs private routing/tooling). (DOC: docs/design/README.md) (EVIDENCE: docs-only)
-- [ ] (ID: ROAD-002) [STATUS: IMPLEMENTED] [AREA: IGC] NOC Phase 1 — `SenderEnvelope` stateless MAC envelope (`SenderId|Timestamp|PayloadB64|MAC`) + replay window + `SharedKey` gating. (DOC: docs/architecture/network-layer.md) (EVIDENCE: code)
+- [ ] (ID: ROAD-002) [STATUS: IMPLEMENTED] [AREA: IGC] NOC Phase 1 — `SenderEnvelope` stateless MAC envelope (`PBID|Timestamp|PayloadB64|MAC`) + replay window + `SharedKey` gating. (DOC: docs/architecture/network-layer.md) (EVIDENCE: code)
 - [ ] (ID: ROAD-003) [STATUS: PLANNED] [AREA: IGC] NOC Phase 2 — stronger-than-FNV authentication / key lifecycle (beyond current integrity check). (DOC: docs/ROADMAP.md) (EVIDENCE: docs-only)
 - [ ] (ID: ROAD-004) [STATUS: PLANNED] [AREA: IGC] NOC Phase 3 — multi-hop IGC telemetry routing via laser antennas. (DOC: docs/ROADMAP.md) (EVIDENCE: docs-only)
 
@@ -33,7 +33,7 @@ This phased plan is the current **implementation driver** for near-term work. De
 
 ## Tooling / release hygiene
 
-- [ ] (ID: ROAD-010) [STATUS: DEPRECATED] [AREA: BUILD] Python-based script size guard referencing private paths (`C:\\SpaceEngineers1\\shared\\build\\deploy.py`). Superseded by `dotnet build` + deployed-script budget checks via `util-mdk-build` (orchestrated by `git-sync`). (DOC: README.md) (EVIDENCE: mixed)
+- [ ] (ID: ROAD-010) [STATUS: DEPRECATED] [AREA: BUILD] Python-based script size guard referencing private paths (`C:\\SpaceEngineers1\\shared\\build\\deploy.py`). Superseded by `dotnet build` + deployed-script budget checks via `gbearos-util-mdk-build` (orchestrated by `gbearos-git-sync` / git sync). (DOC: README.md) (EVIDENCE: mixed)
 
 ---
 

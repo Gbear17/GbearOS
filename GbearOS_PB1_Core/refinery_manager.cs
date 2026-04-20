@@ -1267,7 +1267,7 @@ namespace IngameScript
             for (int i = 0; i < n; i++)
             {
                 var rf = _refineries[i];
-                names[i] = rf.CustomName ?? string.Empty;
+                names[i] = SanitizeIngressWireText(rf.CustomName);
 
                 float oSum;
                 string oSub = FrontInputSlotOreSubtype(rf, out oSum);
@@ -1292,6 +1292,49 @@ namespace IngameScript
             dto.hasOre = hasOre;
             AssignPriorityDisplayLines(dto, priorityRanks);
             return dto;
+        }
+
+        /// <summary>
+        /// Sanitizes player-controlled text so it cannot corrupt the semicolon-delimited DTO wire format.
+        /// Applied once at ingress (scan layer) before any DTO population/serialization/MAC signing.
+        /// </summary>
+        private static string SanitizeIngressWireText(string raw)
+        {
+            if (string.IsNullOrEmpty(raw))
+            {
+                return string.Empty;
+            }
+
+            int n = raw.Length;
+            int firstBad = -1;
+            for (int i = 0; i < n; i++)
+            {
+                char c = raw[i];
+                if (c == ';' || c == '|' || c == '\\' || c == '\r' || c == '\n')
+                {
+                    firstBad = i;
+                    break;
+                }
+            }
+
+            if (firstBad < 0)
+            {
+                return raw;
+            }
+
+            char[] buf = new char[n];
+            for (int i = 0; i < firstBad; i++)
+            {
+                buf[i] = raw[i];
+            }
+
+            for (int i = firstBad; i < n; i++)
+            {
+                char c = raw[i];
+                buf[i] = (c == ';' || c == '|' || c == '\\' || c == '\r' || c == '\n') ? ' ' : c;
+            }
+
+            return new string(buf);
         }
 
         private void AssignPriorityDisplayLines(RefineryStatusDTO dto, Dictionary<string, int> priorityRanks)

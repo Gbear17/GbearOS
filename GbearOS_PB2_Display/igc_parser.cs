@@ -119,11 +119,12 @@ namespace IngameScript
             string key = ini.Get("Network", "SharedKey").ToString("");
             bool enableNetwork = ini.Get("Network", "EnableNetwork").ToBoolean(true);
             string rawPbid = ini.Get("Network", "PBID").ToString("");
-            if (string.IsNullOrWhiteSpace(rawPbid))
-                rawPbid = ini.Get("Network", "SenderId").ToString("");
             if (rawPbid != null)
                 rawPbid = rawPbid.Trim();
             this.PBID = ComposeBoundPbid(rawPbid ?? "", "DIS");
+
+            if (ini.ContainsKey("Network", "SenderId"))
+                ini.Delete("Network", "SenderId");
 
             ini.Set("Network", "EnableNetwork", enableNetwork);
             ini.SetComment("Network", "EnableNetwork", "See docs/configuration.md — set false for offline mode (no envelope parse).");

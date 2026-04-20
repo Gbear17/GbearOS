@@ -15,7 +15,7 @@
 - Shared DTO/serialization/MAC modules under PB1 as identified during implementation (exact paths TBD in code search).
 
 ### Estimated Character Impact (baseline grounding)
-**MDK2 baseline (2026-04-17, `util-mdk-build`):**
+**MDK2 baseline (2026-04-17, `gbearos-util-mdk-build`):**
 - **PB1**: 53132 / 100000 (remaining 46868) — `C:\Users\garre\AppData\Roaming\SpaceEngineers\IngameScripts\local\GbearOS_PB1_Core\script.cs`
 - **PB2**: 42872 / 100000 (remaining 57128) — `C:\Users\garre\AppData\Roaming\SpaceEngineers\IngameScripts\local\GbearOS_PB2_Display\script.cs`
 
