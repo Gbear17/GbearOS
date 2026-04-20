@@ -254,8 +254,6 @@ namespace IngameScript
             c.EnableDebug = _ini.Get(SecDbg, "EnableDebug").ToBoolean(false);
 
             string rawPbid = _ini.Get(SecNet, "PBID").ToString("");
-            if (string.IsNullOrWhiteSpace(rawPbid))
-                rawPbid = _ini.Get(SecNet, "SenderId").ToString("");
             if (rawPbid != null)
                 rawPbid = rawPbid.Trim();
             c.PBID = ComposeBoundPbid(rawPbid ?? "", "CMD");

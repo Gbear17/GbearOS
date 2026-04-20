@@ -1,6 +1,6 @@
 > **Archive notice:** Historical planning record for **Phase 1 — contract + build-output reconciliation** (decision **1A**). **Current release procedure and semantic spot-checks** are normative in [`docs/architecture/artifact_verification.md`](../architecture/artifact_verification.md)—not in this file.
 
-> **AI Summary:** Completed phase checklist for aligning `GbearOS_Shared` contracts with minified PB1/PB2 artifacts; superseded by automated gates and `scripts/artifact-verification.ps1` as documented under architecture.
+> **AI Summary:** Completed phase checklist for aligning `GbearOS_Shared` contracts with minified PB1/PB2 artifacts; superseded by automated gates and `.cursor/skills/gbearos-util-artifact-verification/scripts/artifact-verification.ps1` as documented under architecture.
 
 ## Phase 1 — Contract + build-output reconciliation
 
@@ -29,7 +29,7 @@ Establish high confidence that **shared contracts** (channels, envelope, DTO wir
   - [x] Protocol version constant(s) match expectations
   - [x] Any string-escaping helpers are present and unchanged
 - [x] Validate the build/merge process includes the shared code in both PBs (no missing/duplicated definitions).
-- [x] Confirm that doc expectations reflect current code reality (if drift is found, capture it for util-doc-sync).
+- [x] Confirm that doc expectations reflect current code reality (if drift is found, capture it for gbearos-doc-sync).
 
 ### Acceptance criteria
 - [x] We can point to a single “contract truth” in `GbearOS_Shared` and show PB1/PB2 outputs conform to it.

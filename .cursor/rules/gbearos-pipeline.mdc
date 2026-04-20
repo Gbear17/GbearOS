@@ -1,0 +1,58 @@
+---
+description: Enforces GbearOS pipeline orchestrators for mutating git/gh/dotnet work; readonly introspection allowed.
+alwaysApply: true
+---
+
+# GbearOS pipeline policy (orchestrators only)
+
+## A) Policy
+
+**Mutations:** Do not run **state-changing** shell commands for `git`, `gh`, or `dotnet` in this workspace until the user authorizes the **STOP** prompt below. Examples of mutations include (non-exhaustive): `git add`, `git commit`, `git push`, `git merge`, `git rebase`, `git checkout` / `git switch` when it changes branch or updates tracked files, `gh pr create`, `gh pr merge`, `dotnet build`, `dotnet publish`, `dotnet pack`, and test runs you use as build gates.
+
+**Read-only:** You may use **read-only** commands when helpful, for example: `git status`, `git diff`, `git log`, `git branch --show-current`, and read-only inspection with `gh pr view` / `gh pr checks` where you are not changing GitHub state.
+
+**Orchestrators only:** Do **not** propose or manually invoke Utility/Primitive skills under `.cursor/skills/gbearos-util-*/` as user-facing workflows. Those run **only** when an orchestrator `SKILL.md` tells you to delegate.
+
+**How to run a workflow:** Read the chosen orchestrator file with the **Read** tool and follow it **end to end**, including its internal **Proceed** / approval gates. Skill entry names and chat triggers are **not** shell commands; do **not** type them into PowerShell or bash as if they were CLI invocations.
+
+## B) Routing (GbearOS orchestrators)
+
+Use this table first. Pick the **intent**, then follow the listed `SKILL.md` path from the **repository root**.
+
+| Intent | Path to follow |
+|--------|------------------|
+| Documentation-only sync (doc sync, align docs with code); filesystem only, never git | `.cursor/skills/gbearos-doc-sync/SKILL.md` |
+| Full gated doc sync, contract check, MDK build, dist mirror, artifact verification, commit, and push | `.cursor/skills/gbearos-git-sync/SKILL.md` |
+| New task: MDK baseline, `docs/todo/` plan alignment, branch from `main`, push upstream | `.cursor/skills/gbearos-git-branch-init/SKILL.md` |
+| Supervised wrap-up: git sync → PR submission → merge-readiness hold → optional merge | `.cursor/skills/gbearos-branch-complete/SKILL.md` |
+| Release: tag on clean `main`, publish GitHub Release with `dist/` artifacts | `.cursor/skills/gbearos-release-cut/SKILL.md` |
+
+## C) Disambiguation
+
+- **Documentation only (no contract/build/push)** → `.cursor/skills/gbearos-doc-sync/SKILL.md`.
+- **Full gated commit/push for this repo** → `.cursor/skills/gbearos-git-sync/SKILL.md` (not raw `git`/`dotnet`).
+- **Lightweight WIP checkpoint** without GbearOS build/doc gates → user-level **wip-save** orchestrator: Windows `%USERPROFILE%\.cursor\skills\wip-save\SKILL.md`, macOS/Linux `~/.cursor/skills/wip-save/SKILL.md`.
+- **Open a PR / merge a PR / list pipeline skills** → use the user-level orchestrators documented in `.cursor/rules/global-pipeline-user-rule.snippet.md` (copy block for Cursor User Rules).
+
+## D) Canonical STOP
+
+When a mutation (or gated `dotnet` build) is needed, **halt** and ask exactly one consolidated question like:
+
+> A state-changing or gated-build step is needed for: **[short description of intent]**.
+>
+> Should I read and follow **`[path/to/orchestrator/SKILL.md]`** end to end (including its own Proceed gates), instead of running raw mutating commands?
+>
+> Reply **proceed**, **go**, **yes**, **ok**, **lgtm**, or **approve** to authorize. Reply **no** to stop.
+
+Replace `[path/to/orchestrator/SKILL.md]` with the concrete path from section B or from optional discovery in section E.
+
+## E) Optional discovery when ambiguous
+
+Use **only** if section B does not clearly fit the user’s intent:
+
+1. List immediate subfolders under `.cursor/skills/` in this workspace.
+2. For each folder, if `SKILL.md` exists, read YAML frontmatter (`name`, `description` between the first two `---` lines).
+3. Keep candidates whose `description` contains `[ORCHESTRATOR]` (or the same orchestrator marker your skills use in frontmatter).
+4. **Exclude** any path under `gbearos-util-*` for user-facing proposals.
+5. If **one** orchestrator clearly matches, use section D with that path.
+6. If **two or more** remain plausible, **do not** mutate; ask the user to pick **A or B** (each option: path + one-line summary from `description`), then use section D with the chosen path.

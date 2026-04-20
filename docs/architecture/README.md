@@ -25,7 +25,7 @@ Normative **“what”** and **“why”** for GbearOS: in-game behavior, IGC co
 | [igc_contract.md](./igc_contract.md) | IGC channels, **`SenderEnvelope`** outer frame, inner DTO wire format (`Serializer` / **`IGCSerializer`**) |
 | [contract_checklist.md](./contract_checklist.md) | Developer gate: shared vs PB2-only deserialize placement, `.csproj` include rules, PB1 entrypoint bans |
 | [artifact_verification.md](./artifact_verification.md) | Release gate: canonical `GbearOS_Shared` inventory, automated checks, semantic spot-check of minified PB outputs |
-| [network-layer.md](./network-layer.md) | Identified nodes, SenderId format, zero-trust Data Link ingress |
+| [network-layer.md](./network-layer.md) | Identified nodes, sender identity (`PBID`) format, zero-trust Data Link ingress |
 | [pb1_pb2_rules.md](./pb1_pb2_rules.md) | Mandatory boundaries between automation and display |
 | [naming_conventions.md](./naming_conventions.md) | Naming patterns for types, channels, and identifiers |
 | [user_config_system.md](./user_config_system.md) | Custom Data **behavior** (PB1 full INI, PB2 `[Network]` only, strict rewrite rules) |

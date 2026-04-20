@@ -20,7 +20,7 @@ GbearOS is a **two-programmable-block system** for **Space Engineers**: **PB1 (C
 | `[PWR]` | Battery / reactor / engine bars and grid power snapshot. |
 | `[ICE]` | Ice targets vs actual mass across generators, irrigation, and cargo. |
 | `[WARN]` | Warning vs nominal channel (paired with PB1 warning DTO). |
-| `[STATUS]` | System / status strip (when implemented in the virtual dashboard). |
+| `[STATUS]` | System / status strip from the **`SYS_STATUS`** registry (plain-text lines keyed by message source; see [`docs/architecture/igc_contract.md`](docs/architecture/igc_contract.md)). |
 | `[HEAD:Title]` | Optional title line(s) on **`[GbearOS]`** multi-module panels. |
 | `[COL]` / `[COL:LEFT]` / `[COL:RIGHT]` / `[COL:FULL]` | Column layout for the virtual dashboard (see [`docs/architecture/lcd_panels_and_layout.md`](docs/architecture/lcd_panels_and_layout.md)). |
 
@@ -69,7 +69,7 @@ Full detail: [`docs/architecture/lcd_panels_and_layout.md`](docs/architecture/lc
 ## Connectivity & security
 
 - **SharedKey** — PB1 **`[Network]`** and PB2 **`[Network]`** must use the **same** `SharedKey` (after trim). Telemetry uses a **`SenderEnvelope`**: inner payload is **UTF-8 Base64**; the **MAC** is a fixed-width **hex** value derived from **FNV-1a** over the logical fields plus the shared key. **Mismatch or parse failure → message ignored.**
-- **Sender identity (PB1)** — Wire **`pbId`** follows **`[Prefix]-[Suffix]`**: up to **3** user-editable alphanumeric characters (from **`PBID`** / legacy **`SenderId`** in Custom Data, default prefix **`CMD`**) plus a **4-character hex** suffix taken from the block’s **entity id** (stable for that block). The script **rebinds** the suffix if hand-edited.
+- **Sender identity (PB1)** — Wire **`pbId`** follows **`[Prefix]-[Suffix]`**: up to **3** user-editable alphanumeric characters from **`[Network]` `PBID`** (default prefix **`CMD`** when absent) plus a **4-character hex** suffix taken from the block’s **entity id** (stable for that block). The script **rebinds** the suffix if hand-edited.
 
 Details: [`docs/architecture/igc_contract.md`](docs/architecture/igc_contract.md), [`docs/architecture/network-layer.md`](docs/architecture/network-layer.md).
 
@@ -92,7 +92,7 @@ Shared contracts live under [`GbearOS_Shared/`](GbearOS_Shared/) (DTOs, channel 
 - **Architecture index (start here)**: [`docs/architecture/README.md`](docs/architecture/README.md)
 - **System overview**: [`docs/architecture/system_overview.md`](docs/architecture/system_overview.md)
 - **IGC contract (channels, DTO wire format, `SenderEnvelope`)**: [`docs/architecture/igc_contract.md`](docs/architecture/igc_contract.md)
-- **Network ingress model (`SenderId`, replay, MAC)**: [`docs/architecture/network-layer.md`](docs/architecture/network-layer.md)
+- **Network ingress model (sender identity / replay, MAC)**: [`docs/architecture/network-layer.md`](docs/architecture/network-layer.md)
 - **Archived design / completed plans (non-contract)**: [`docs/history/README.md`](docs/history/README.md)
 
 ---

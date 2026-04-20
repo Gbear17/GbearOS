@@ -56,7 +56,7 @@ PB2 **must not**:
 - Count items for automation or modify production queues.
 - Move items or change block operational state for automation.
 - Use `IMyRefinery`, `IMyAssembler`, or inventory mutation APIs for base management.
-- Depend on PB1 **internals** beyond **IGC contracts**, **DTO** shapes, and **documented** paired settings (**`SharedKey`**, **`SenderId`**).
+- Depend on PB1 **internals** beyond **IGC contracts**, **DTO** shapes, and **documented** paired settings (**`SharedKey`**, **`PBID`**).
 - Read or modify **PB1** programmable block **Custom Data** (or any non-local automation config). **Exception:** PB2 may read/write **`[Network]`** keys **only** on **its own** programmable block—see [configuration.md](../configuration.md).
 
 ### Update frequency

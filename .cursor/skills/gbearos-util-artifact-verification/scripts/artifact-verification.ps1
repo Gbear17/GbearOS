@@ -8,14 +8,14 @@
   envelope wire patterns, and PB2-only ingress (TryParse) markers. Does not diff full source trees.
 
 .PARAMETER RepoRoot
-  Repository root containing dist/. Defaults to the parent of the scripts/ folder.
+  Repository root containing dist/. If omitted, walks upward from this script's directory until a folder containing dist/ is found.
 
 .EXAMPLE
-  ./scripts/artifact-verification.ps1
+  pwsh -File .cursor/skills/gbearos-util-artifact-verification/scripts/artifact-verification.ps1
   Exit 0 if all checks pass; non-zero on failure or missing inputs.
 
 .NOTES
-  Run after: dotnet build (MDK deploy) and copying outputs to dist/ (util-dist-mirror).
+  Run after: dotnet build (MDK deploy) and copying outputs to dist/ (gbearos-util-dist-mirror).
 #>
 
 [CmdletBinding()]
@@ -26,7 +26,23 @@ param(
 $ErrorActionPreference = 'Stop'
 if (-not $RepoRoot) {
     $scriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
-    $RepoRoot = (Resolve-Path (Join-Path $scriptDir '..')).Path
+    $p = $scriptDir
+    $found = $false
+    for ($i = 0; $i -lt 16; $i++) {
+        $distDir = Join-Path $p 'dist'
+        if (Test-Path -LiteralPath $distDir) {
+            $RepoRoot = (Resolve-Path $p).Path
+            $found = $true
+            break
+        }
+        $parent = Split-Path -Parent $p
+        if (-not $parent -or ($parent -eq $p)) { break }
+        $p = $parent
+    }
+    if (-not $found) {
+        Write-Host "FAIL: could not locate repository root (no dist/ directory found walking up from script)." -ForegroundColor Red
+        exit 2
+    }
 }
 $failures = New-Object System.Collections.Generic.List[string]
 

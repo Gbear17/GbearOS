@@ -27,7 +27,7 @@ bool P{get;private set;}public string S{get;private set;}="";public string V{get
 );return ç+"-"+æ;}void Ð(){IMyProgrammableBlock é=À.Me;var ê=new VRage.Game.ModAPI.Ingame.Utilities.MyIni();VRage.Game.
 ModAPI.Ingame.Utilities.MyIniParseResult ë;if(!ê.TryParse(é.CustomData??"",out ë)){ê.Clear();}string ì=ê.Get("Network",
 "SharedKey").ToString("");bool í=ê.Get("Network","EnableNetwork").ToBoolean(true);string î=ê.Get("Network","PBID").ToString("");if(
-string.IsNullOrWhiteSpace(î))î=ê.Get("Network","SenderId").ToString("");if(î!=null)î=î.Trim();this.S=è(î??"","DIS");ê.Set(
+î!=null)î=î.Trim();this.S=è(î??"","DIS");if(ê.ContainsKey("Network","SenderId"))ê.Delete("Network","SenderId");ê.Set(
 "Network","EnableNetwork",í);ê.SetComment("Network","EnableNetwork",
 "See docs/configuration.md — set false for offline mode (no envelope parse).");ê.Set("Network","PBID",this.S);ê.SetComment("Network","PBID","Format: ABC-XXXX. You may change the 3-letter prefix. The 4-character suffix is locked to this block's ID and will auto-reset if changed."
 );ê.Set("Network","SharedKey",ì);ê.SetComment("Network","SharedKey","Must match PB1 SharedKey.");é.CustomData=ê.ToString(

@@ -165,7 +165,7 @@ These booleans control which inventory categories are included in PB1-driven sum
 | Key | Type | Default | Function |
 |-----|------|---------|----------|
 | `EnableNetwork` | `bool` | true | When **false**, PB1 **does not** broadcast the five primary telemetry DTOs to PB2 (inventory, refinery, ice, power, dynamic). |
-| `SenderId` | `string` | `CMD-DEFAULT` | Sender identity on the **SenderEnvelope** IGC wrapper. Trimmed; empty after trim resets to `CMD-DEFAULT`. |
+| `PBID` | `string` | `CMD-DEFAULT` | Sender identity on the **`SenderEnvelope`** IGC wrapper (`PREFIX-XXXX`: up to **3** alphanumeric prefix characters, then **`-`**, then a **4**-character **hex** suffix from this block’s **entity id**). Trimmed; if empty after trim, the script uses **`CMD`** plus the bound suffix. The script **rewrites** Custom Data with **`PBID`** as the canonical key. |
 | `SharedKey` | `string` | `""` | Shared secret for envelope MAC. Must **match PB2** `SharedKey`. Trimmed. |
 
 ---
@@ -177,22 +177,23 @@ PB2 Custom Data uses section **`[Network]`** only:
 | Key | Type | Default | Function |
 |-----|------|---------|----------|
 | `EnableNetwork` | `bool` | true | When **false**, PB2 echoes **`NETWORK OFFLINE`** on full display ticks; LCD path shows **no signal** from PB1 when no data arrives. |
+| `PBID` | `string` | `DIS` + bound suffix | This block’s identity string (default prefix **`DIS`** when the value is empty; **4**-character hex suffix from this block’s **entity id**). Used for PB2-local features (for example **`[STATUS:…]`** filters). Not the PB1 envelope sender. |
 | `SharedKey` | `string` | `""` | Must **byte-for-byte match** PB1 after trim. If empty, **all** routed IGC messages (including `SYS_STATUS` handling inside `Route`) are **ignored** at the parser gate. |
 
-On PB2 **program compile / world load**, `LoadNetworkSharedKeyFromCustomData` rewrites `Custom Data` to ensure these keys and comments exist.
+On PB2 **program compile / world load**, `LoadNetworkSharedKeyFromCustomData` rewrites `Custom Data` to ensure these keys and comments exist, and **removes** any obsolete **`SenderId`** key under **`[Network]`** if present.
 
 ---
 
 ## Validation rules (mathematical clamping)
 
-Rules below are applied in **`ReadConfig`** and again in **`ValidateAndCorrectValues`** where applicable.
+Rules below are applied in **`ReadConfig`** and again in **`ValidateAndCorrectValues`** where applicable (PB1). PB2 applies **`[Network]`** trimming and **`PBID`** composition only inside `LoadNetworkSharedKeyFromCustomData`.
 
 | Category | Rule | Effect |
 |----------|------|--------|
 | **Non-negative scalars** (`ClampNn`) | \(x < 0 \rightarrow 0\) | Ice targets, uranium targets, solar minimum, refinery hysteresis, all `[IngotTargets]` values. |
 | **Unit interval** (`Clamp01`) | \(x < 0 \rightarrow 0\); \(x > 1 \rightarrow 1\) | All reactor/engine/battery fraction keys in `[BatteryThresholds]`. |
-| **Strings** | `.Trim()` | `IrrigationTag`, `ManualTag`, `NetworkSenderId`, `NetworkSharedKey`. |
-| **SenderId empty** | After trim | Replaced with **`CMD-DEFAULT`**. |
+| **Strings** | `.Trim()` | `IrrigationTag`, `ManualTag`, `PBID`, `SharedKey`. |
+| **`PBID` (PB1)** | After read | Composed via **`ComposeBoundPbid`**: prefix from **`[Network]` `PBID`** (or **`CMD`** when empty), suffix from entity id; hand-edited suffix is **rebound** to the block if it does not match. |
 | **Booleans** | `ToBoolean(default)` | Uses the defaults in the tables above when keys are missing or non-parseable. |
 
 The script **does not** reject invalid files; it **corrects** values and **rewrites** Custom Data to the canonical template.
@@ -229,7 +230,7 @@ There is **no** fallback to unsigned payloads through this code path: the orches
 ### Pairing checklist
 
 1. Set **identical** `SharedKey` on **PB1** and **PB2** `[Network]`.
-2. Set **`SenderId`** on PB1 as needed; align with any filtering documented in [network-layer.md](architecture/network-layer.md).
+2. Set **`PBID`** on PB1 as needed (prefix only is user-facing; suffix is bound to the block); align with any filtering documented in [network-layer.md](architecture/network-layer.md).
 3. Use **`EnableNetwork=false`** on either side only when you intentionally want **standalone** behavior and understand **PB1 `SendDto`** still enforces the key unless you provide one.
 
 ---

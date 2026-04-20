@@ -37,11 +37,11 @@ Channel constants live in **`GbearOS_Shared`** as **`IGCChannels`** (see **`Gbea
 
 For the **PB1 → PB2** rows above (all except **`SYS_STATUS`** as sent from PB1’s `SendDto` path):
 
-- **On wire (v1.4):** `SenderId|Timestamp|PayloadB64|MAC`  
+- **On wire (v1.4):** `PBID|Timestamp|PayloadB64|MAC` (first field is the PB1 **`[Network]` `PBID`** string—the same logical **sender identity** described in [network-layer.md](./network-layer.md)).  
   - **`PayloadB64`** = **Base64** (UTF-8, no line breaks) of the **inner** DTO string (semicolon-separated, protocol field first). Inner bodies may contain **`|`** (e.g. pipe-separated array fields); Base64 avoids colliding with envelope delimiters.  
   - **`Timestamp`** = decimal string; **monotonic per PB1 process** (`SenderEnvelope` bumps if `UtcNow.Ticks` would repeat) so back-to-back `SendDto` calls in one tick still pass replay checks.  
-  - **`MAC`** = **8** uppercase hex digits from **32-bit FNV-1a** over **`SenderId + Timestamp +` (decoded inner string) `+ SharedKey`**—not over the Base64 text.  
-- **Replay:** PB2 keeps **last accepted ticks per `SenderId`**; incoming timestamp must be **strictly greater** than the last seen for that sender.
+  - **`MAC`** = **8** uppercase hex digits from **32-bit FNV-1a** over **`PBID + Timestamp +` (decoded inner string) `+ SharedKey`**—not over the Base64 text.  
+- **Replay:** PB2 keeps **last accepted ticks per `PBID`** (envelope field 0); incoming timestamp must be **strictly greater** than the last seen for that sender.
 
 **PB1 transmit policy:** `SendDto` requires a **non-empty** `SharedKey` (orchestrator echoes **`NET BLOCKED: SharedKey missing.`** and does not send). **`EnableNetwork`** gates the **five** primary telemetry broadcasts; **`PB1_WARNINGS`** still uses `SendDto` and the same key requirement.
 
@@ -163,8 +163,8 @@ Indices **1–10** floats (battery/reactor/engine totals and flows per field ord
 |----------|--------|
 | [README.md](./README.md) | Architecture doc index |
 | [artifact_verification.md](./artifact_verification.md) | Canonical shared inventory + minified artifact spot-check (Phase 1) |
-| [network-layer.md](./network-layer.md) | **`SenderId`**, zero-trust ingress, v1.3 envelope semantics |
-| [configuration.md](../configuration.md) | **`SharedKey`**, **`EnableNetwork`**, **`SenderId`** |
+| [network-layer.md](./network-layer.md) | **Sender identity (`PBID` on wire)**, zero-trust ingress, v1.3 envelope semantics |
+| [configuration.md](../configuration.md) | **`SharedKey`**, **`EnableNetwork`**, **`PBID`** |
 | [`sender-id-protocol-noc-phase1-v14.md`](../history/sender-id-protocol-noc-phase1-v14.md) | **Archive:** historical envelope/MAC narrative (v1.4); current rules in this file + [`network-layer.md`](./network-layer.md) |
 | [pb1_pb2_rules.md](./pb1_pb2_rules.md) | Serialization responsibilities |
 | [update_frequencies.md](./update_frequencies.md) | Tick cadence |

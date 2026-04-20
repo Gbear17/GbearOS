@@ -15,7 +15,7 @@ This document states **normative behavior** for the split-script architecture: w
 | Block | Custom Data | Authority |
 |-------|-------------|-----------|
 | **PB1** (orchestrator) | Full INI: `[IngotTargets]`, `[IceTargets]`, `[ReactorTargets]`, `[BatteryThresholds]`, `[RefinerySettings]`, `[BlockTags]`, `[DisplayFilters]`, `[Debug]`, `[Network]` | **Authoritative** for automation and telemetry options. |
-| **PB2** (display) | **`[Network]` only:** `EnableNetwork`, `SharedKey` | **Not** a copy of PB1 config; must **match PB1** for `SharedKey` (and optional `EnableNetwork` policy). LCD **panel** Custom Data (`[GbearOS]` command lists) is separate—see [lcd_panels_and_layout.md](./lcd_panels_and_layout.md). |
+| **PB2** (display) | **`[Network]` only:** `EnableNetwork`, `PBID`, `SharedKey` | **Not** a copy of PB1 config; must **match PB1** for `SharedKey` (and optional `EnableNetwork` policy). LCD **panel** Custom Data (`[GbearOS]` command lists) is separate—see [lcd_panels_and_layout.md](./lcd_panels_and_layout.md). |
 
 ---
 
@@ -40,7 +40,7 @@ Parse failure (`TryParse` false) clears the in-memory INI before defaults are ap
 
 - **Missing sections or keys** use defaults defined in `ReadConfig` / `Config` (see [`configuration.md`](../configuration.md)).
 - **Keys** are **case-insensitive** (MyIni).
-- **String values** for tags and network fields are **trimmed**; empty `SenderId` after trim becomes **`CMD-DEFAULT`**.
+- **String values** for tags and network fields are **trimmed**; **`PBID`** is composed from **`[Network]`** on PB1 (see [`configuration.md`](../configuration.md)).
 - **Unknown keys** in a section may be read if present (e.g. dynamic `[IngotTargets]` names); anything **not** re-emitted by `WriteConfigToIni` is **dropped** on save.
 
 ### Validation (correction, not abort)
@@ -54,7 +54,7 @@ Parse failure (`TryParse` false) clears the in-memory INI before defaults are ap
 
 ## PB2 — network bootstrap only
 
-- On **PB2** `Init`, `LoadNetworkSharedKeyFromCustomData` parses the **PB2** programmable block’s Custom Data, ensures **`[Network]`** keys exist, writes a small template (including script comments), and caches **`SharedKey`** and **`EnableNetwork`**.
+- On **PB2** `Init`, `LoadNetworkSharedKeyFromCustomData` parses the **PB2** programmable block’s Custom Data, ensures **`[Network]`** keys exist, writes a small template (including script comments), and caches **`SharedKey`**, **`EnableNetwork`**, and composed **`PBID`**.
 - PB2 **does not** parse PB1’s INI, refinery tags, or display filters from PB1 Custom Data.
 - PB2 **must not** modify **PB1** Custom Data. Writing **its own** block’s Custom Data for the network template is allowed.
 
@@ -78,7 +78,7 @@ Behavioral summary only; defaults and types are in [`configuration.md`](../confi
 | `[BlockTags]` | `IrrigationTag`, `ManualTag`. |
 | `[DisplayFilters]` | Category booleans consumed on PB1 when building telemetry. |
 | `[Debug]` | `EnableDebug`. |
-| `[Network]` | `EnableNetwork`, `SenderId`, `SharedKey`. |
+| `[Network]` | `EnableNetwork`, `PBID`, `SharedKey`. |
 
 **Refinery priority lines** on the wire (`RefineryStatusDTO.priorityLine1` / `priorityLine2`) are **computed** in PB1 refinery logic from ore targets and balancing—they are **not** configured via a separate `[RefineryPriorities]` INI section in the current `ConfigParser`.
 
