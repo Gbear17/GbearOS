@@ -5,7 +5,7 @@
 // Purpose: Stateless outer frame — Base64 inner payload, monotonic UTC ticks, and FNV-style MAC for weak authentication.
 // PB Association: Shared
 // Dependencies: None (BCL only)
-// Key Methods: Wrap, TryParse
+// Key Methods: Wrap, TryParse, EvictStaleReplayState
 
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,11 @@ namespace IngameScript
     {
         private const uint FnvOffsetBasis = 2166136261u;
         private const uint FnvPrime = 16777619u;
+
+        /// <summary>
+        /// PB2-only: wall-clock silence after the last accepted envelope for a sender before its replay baseline is forgotten (Phase 3 / decision 3A).
+        /// </summary>
+        public const long ReplaySilenceExpiryTicks = 90L * TimeSpan.TicksPerSecond;
 
         private static long s_lastEmitTicks;
 
@@ -57,11 +62,16 @@ namespace IngameScript
 
         /// <summary>
         /// Parses rawMessage with Split('|', 4), decodes payload from Base64, verifies replay window and MAC.
+        /// When <paramref name="lastAcceptedWallUtcTicks"/> is non-null and <paramref name="replaySilenceExpiryTicks"/> is positive,
+        /// a sender’s last accepted envelope timestamp older than <paramref name="replaySilenceExpiryTicks"/> clears the replay baseline for that sender (PB1 restart/recompile).
         /// </summary>
         public static bool TryParse(
             string rawMessage,
             string sharedKey,
             Dictionary<string, long> lastSeenTimestamps,
+            Dictionary<string, long> lastAcceptedWallUtcTicks,
+            long utcNowTicks,
+            long replaySilenceExpiryTicks,
             out string pbId,
             out string payload)
         {
@@ -116,10 +126,36 @@ namespace IngameScript
             }
 
             long lastSeen = 0;
+            bool silenceExpiryEnabled = lastAcceptedWallUtcTicks != null && replaySilenceExpiryTicks > 0;
             long prev;
             if (lastSeenTimestamps.TryGetValue(sid, out prev))
             {
-                lastSeen = prev;
+                if (silenceExpiryEnabled)
+                {
+                    long wall;
+                    if (lastAcceptedWallUtcTicks.TryGetValue(sid, out wall))
+                    {
+                        if (utcNowTicks - wall > replaySilenceExpiryTicks)
+                        {
+                            lastSeenTimestamps.Remove(sid);
+                            lastAcceptedWallUtcTicks.Remove(sid);
+                            lastSeen = 0;
+                        }
+                        else
+                        {
+                            lastSeen = prev;
+                        }
+                    }
+                    else
+                    {
+                        lastSeenTimestamps.Remove(sid);
+                        lastSeen = 0;
+                    }
+                }
+                else
+                {
+                    lastSeen = prev;
+                }
             }
 
             if (incomingTicks <= lastSeen)
@@ -140,9 +176,66 @@ namespace IngameScript
             }
 
             lastSeenTimestamps[sid] = incomingTicks;
+            if (silenceExpiryEnabled)
+            {
+                lastAcceptedWallUtcTicks[sid] = utcNowTicks;
+            }
+
             pbId = sid;
             payload = pl;
             return true;
+        }
+
+        /// <summary>
+        /// Removes replay entries whose last accepted wall time is older than <paramref name="replaySilenceExpiryTicks"/> relative to <paramref name="utcNowTicks"/>.
+        /// Uses <paramref name="scratch"/> as temporary storage (cleared); must be non-null when expiry is enabled.
+        /// </summary>
+        public static void EvictStaleReplayState(
+            Dictionary<string, long> lastSeenTimestamps,
+            Dictionary<string, long> lastAcceptedWallUtcTicks,
+            long utcNowTicks,
+            long replaySilenceExpiryTicks,
+            List<string> scratch)
+        {
+            if (lastSeenTimestamps == null || lastAcceptedWallUtcTicks == null || scratch == null)
+            {
+                return;
+            }
+
+            if (replaySilenceExpiryTicks <= 0)
+            {
+                return;
+            }
+
+            scratch.Clear();
+            foreach (KeyValuePair<string, long> kv in lastAcceptedWallUtcTicks)
+            {
+                if (utcNowTicks - kv.Value > replaySilenceExpiryTicks)
+                {
+                    scratch.Add(kv.Key);
+                }
+            }
+
+            for (int i = 0; i < scratch.Count; i++)
+            {
+                string k = scratch[i];
+                lastSeenTimestamps.Remove(k);
+                lastAcceptedWallUtcTicks.Remove(k);
+            }
+
+            scratch.Clear();
+            foreach (string k in lastSeenTimestamps.Keys)
+            {
+                if (!lastAcceptedWallUtcTicks.ContainsKey(k))
+                {
+                    scratch.Add(k);
+                }
+            }
+
+            for (int i = 0; i < scratch.Count; i++)
+            {
+                lastSeenTimestamps.Remove(scratch[i]);
+            }
         }
 
         private static uint Fnv1aFold(uint hash, string s)
