@@ -1,4 +1,6 @@
-# Plan: pipeline skills — diff-grounded branch naming
+> **Historical / archival** — Moved from `docs/todo/skills-branch-naming-diff-preflight-plan.md` under **§3.3.5 explicit user override** (“archive now”). Planning text here is **superseded** by the current orchestrator SKILL files and repo pipeline rules. For **current** behavior, see [`.cursor/rules/gbearos-pipeline.mdc`](../../.cursor/rules/gbearos-pipeline.mdc), [`.cursor/skills/gbearos-branch-complete/SKILL.md`](../../.cursor/skills/gbearos-branch-complete/SKILL.md), and [`.cursor/skills/gbearos-git-branch-init/SKILL.md`](../../.cursor/skills/gbearos-git-branch-init/SKILL.md).
+
+# Plan: pipeline skills — diff-grounded branch naming *(archived)*
 
 ## Technical Approach
 
@@ -23,3 +25,7 @@ This change set touches only `.cursor/skills/*.md` and `docs/todo/`; **no** impa
 ## High-Risk Systems
 
 - **Low risk:** documentation-only skill updates. Miswording could confuse agents; verify against workspace branch-prefix and mutation-approval rules.
+
+---
+
+Copyright (c) 2026 Garrett Wyrick. Archived from `docs/todo/skills-branch-naming-diff-preflight-plan.md` as part of `gbearos-doc-sync`. Licensed under GPL-3.0 — see repository `LICENSE`.

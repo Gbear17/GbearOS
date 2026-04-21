@@ -1,6 +1,8 @@
-# ROAD-012 — Phase 2 IGC string safety (delivery branch)
+> **Historical / archival** — Moved from `docs/todo/road-012-igc-string-safety-plan.md` under **§3.3.5 explicit user override** (“archive now”). The **technical Phase 2 narrative** is captured in greater detail in [`phase-02-protocol-hardening-string-safety.md`](./phase-02-protocol-hardening-string-safety.md). For **current** ingress and wire behavior, see [`docs/architecture/igc_contract.md`](../architecture/igc_contract.md) § *PB1 string ingress* and [`docs/architecture/contract_checklist.md`](../architecture/contract_checklist.md) § *E*.
 
-> **Status:** Implementation complete on branch `feat/road-012-igc-string-safety`; this file records MDK baseline for branch-init / merge gates.
+# ROAD-012 — Phase 2 IGC string safety (delivery branch) *(archived)*
+
+> **Status (at archival):** Implementation complete on branch `feat/road-012-igc-string-safety`; this file recorded MDK baseline for branch-init / merge gates.
 
 ## Technical Approach
 
@@ -25,3 +27,7 @@
 
 - DTO wire + MAC ordering (sanitize before serialize/sign).
 - `dist/` artifact spot-check vs `GbearOS_Shared` after deploy.
+
+---
+
+Copyright (c) 2026 Garrett Wyrick. Archived from `docs/todo/road-012-igc-string-safety-plan.md` as part of `gbearos-doc-sync`. Licensed under GPL-3.0 — see repository `LICENSE`.
