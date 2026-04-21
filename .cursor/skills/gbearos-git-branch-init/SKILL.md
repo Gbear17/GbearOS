@@ -9,7 +9,8 @@ Act as a **Senior Software Architect & DevOps Engineer**. This is a **Composite 
 
 **Constraints:**
 
-- All plans **must** live under `docs/todo/`.
+- All **active** plans **must** live under `docs/todo/`.
+  - **Exception (implemented work already archived):** If a matching, clearly relevant plan exists under `docs/history/` and the work is already implemented, that history file may be treated as the **canonical plan** for branch-init **without creating a new** `docs/todo/` plan file. (Baseline counts are still required in the Step 4 hold block.)
 - This workflow must branch **off `main`**.
 
 ## Execution order (must follow exactly)
@@ -56,6 +57,8 @@ Before creating or overwriting anything:
 
 1. If the user **named a path** under `docs/todo/` (or pasted one), treat that file as the **canonical plan** for this branch init.
 2. Else, scan `docs/todo/` for `*-plan.md`. If one file clearly matches the **described branch purpose** (same feature/fix area and intent), treat it as the canonical plan.
+3. Else, scan `docs/history/` for a plan that clearly matches the described branch purpose.
+   - If a matching `docs/history/` plan exists and the described work is already implemented (e.g. roadmap status is `IMPLEMENTED` with normative `DOC:` pointers), treat that history file as the **canonical plan** and **do not** create a new `docs/todo/` plan file.
 3. If a canonical plan exists:
    - **Read it** and compare to what the user said this branch is for.
    - If the purpose **matches** (same workstream; no contradiction on scope or constraints): **do not** create a second plan file and **do not** replace the whole document. Only **edit the file if something required is missing or stale** (see **Minimum edits** below).
@@ -91,6 +94,7 @@ Present:
 - The proposed branch name (`[type]/[title]`)
 - The path to the plan file actually used (existing canonical doc or newly created `docs/todo/[title]-plan.md`)
 - Whether the plan file was **unchanged**, **patched** (say what was added), or **created**
+  - If a `docs/history/` plan was used as the canonical plan under the exception above, state that **no new** `docs/todo/` plan was created.
 - The baseline PB1/PB2 counts from `gbearos-util-mdk-build` that were cited or verified in the plan
 
 **Stop.** Do not create the branch or push until the user replies **Proceed** (or provides edits).
