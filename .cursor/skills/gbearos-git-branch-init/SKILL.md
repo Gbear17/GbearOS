@@ -31,14 +31,24 @@ From the repo root:
 2. If the active branch is not `main`, **stop** and instruct the user to switch to `main` before continuing.
 3. Run `git fetch origin` (keep `origin` as the primary remote).
 
+### 2b) Diff-grounded branch naming (required before proposing `[type]/[title]`)
+
+**Read-only evidence (no mutation approval):** `git status`, `git diff`, and `git diff --cached` do **not** modify the repo. The agent **must** run them from the repo root **silently** (no STOP prompt) **before** proposing or finalizing the branch name, and **must** read their output.
+
+1. Run, in order: `git status`, `git diff`, `git diff --cached`.
+2. **Ground the proposal in the diffs:**
+   - If **either** unstaged (`git diff`) or staged (`git diff --cached`) output is non-empty: choose Conventional Commit `type` and kebab-case `[title]` **primarily** from what actually changed (paths, behavior, scope) in those diffs. The proposed branch name **must** reflect that evidence (`feat/`, `fix/`, `chore/`, `docs/`, `refactor/`, `perf/` per workspace branch-prefix rules).
+   - If **both** diffs are empty (clean index and working tree): derive `[title]` and `type` from the user request, canonical `docs/todo/` plan stem, and the sections below—there is no local diff to analyze.
+3. **Do not** invent a generic branch name from chat context alone when local diffs exist that tell a more specific, accurate story.
+
 ### 3) Plan file under `docs/todo/` (required, before creating the branch)
 
 Derive:
 
 - `[title]` as a short kebab-case name for this work (when creating a new file from scratch).
 - A Conventional Commit `type` (pick exactly one): `feat`, `fix`, `perf`, `chore`, `docs`, `refactor`.
-- Proposed branch name: `[type]/[title]`
-- When reusing an existing `docs/todo/<stem>-plan.md`, derive `[title]` from `<stem>` (the kebab-case work name in the filename) unless the user explicitly asked for a different branch slug; keep branch name and canonical plan filename aligned.
+- Proposed branch name: `[type]/[title]` — **must** already satisfy **step 2b** when local diffs exist.
+- When reusing an existing `docs/todo/<stem>-plan.md`, derive `[title]` from `<stem>` (the kebab-case work name in the filename) unless the user explicitly asked for a different branch slug; keep branch name and canonical plan filename aligned. If **step 2b** diffs contradict a naive match to `<stem>`, prefer the diff-grounded name unless the user explicitly wants alignment with the filename.
 
 **Existing plan first (do not duplicate)**
 
