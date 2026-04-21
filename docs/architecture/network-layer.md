@@ -68,7 +68,7 @@ The **NetworkManager** should depend on **abstractions** (interfaces or delegate
 
 | Topic | Location |
 |-------|----------|
-| Envelope wrap / parse | **`GbearOS_Shared/network/SenderEnvelope.cs`** — **`Wrap`**, **`TryParse`**; MAC = **8** hex digits (**`X8`**) from **32-bit FNV-1a**; replay = strictly increasing **`DateTime.UtcNow.Ticks`** per envelope **`PBID`** (field 0) on PB2. |
+| Envelope wrap / parse | **`GbearOS_Shared/network/SenderEnvelope.cs`** — **`Wrap`**, **`TryParse`**, **`EvictStaleReplayState`**; MAC = **8** hex digits (**`X8`**) from **32-bit FNV-1a**; replay = strictly increasing **`DateTime.UtcNow.Ticks`** per envelope **`PBID`** (field 0) on PB2, with **silence-based baseline expiry** (`ReplaySilenceExpiryTicks`, 90s) after the last **accepted** packet per sender. |
 | PB1 send path | **`GbearOS_PB1_Core/Program.cs`** — **`SendDto`** (requires non-empty **`SharedKey`**); **`EnableNetwork`** gates the five primary telemetry sends. |
 | PB2 ingress | **`GbearOS_PB2_Display/igc_parser.cs`** — empty **`SharedKey`** ⇒ **`Route`** returns immediately (no **`SYS_STATUS`**, no DTOs); else **`SYS_STATUS`** raw, other tags via **`SenderEnvelope.TryParse`** then **`Serializer.Deserialize`**. |
 | Config | **`[Network]`** in PB1 and PB2 Custom Data — PB1 **`PBID`** supplies envelope field 0 — see [configuration.md](../configuration.md). |

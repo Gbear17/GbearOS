@@ -25,6 +25,8 @@ namespace IngameScript
         private int _listenerCount;
 
         private readonly Dictionary<string, long> _networkLastSeen = new Dictionary<string, long>();
+        private readonly Dictionary<string, long> _networkLastAcceptedWallUtc = new Dictionary<string, long>();
+        private readonly List<string> _replayEvictScratch = new List<string>();
         private int _droppedEnvelopeCount;
 
         private InventorySummaryDTO _inventorySummary = new InventorySummaryDTO();
@@ -148,6 +150,14 @@ namespace IngameScript
 
         public void ProcessMessages()
         {
+            long utcNow = System.DateTime.UtcNow.Ticks;
+            SenderEnvelope.EvictStaleReplayState(
+                _networkLastSeen,
+                _networkLastAcceptedWallUtc,
+                utcNow,
+                SenderEnvelope.ReplaySilenceExpiryTicks,
+                _replayEvictScratch);
+
             for (int i = 0; i < _listenerCount; i++)
             {
                 IMyBroadcastListener listener = _listeners[i];
@@ -161,7 +171,7 @@ namespace IngameScript
 
                     try
                     {
-                        Route(msg, text);
+                        Route(msg, text, utcNow);
                     }
                     catch
                     {
@@ -194,7 +204,7 @@ namespace IngameScript
                 outList.Add(SelfStatus);
         }
 
-        private void Route(MyIGCMessage msg, string text)
+        private void Route(MyIGCMessage msg, string text, long utcNowTicks)
         {
             if (string.IsNullOrEmpty(_sharedKey))
             {
@@ -206,14 +216,22 @@ namespace IngameScript
             if (tag == IGCChannels.SYS_STATUS)
             {
                 long src = msg.Source;
-                _systemStatusTicks[src] = System.DateTime.UtcNow.Ticks;
+                _systemStatusTicks[src] = utcNowTicks;
                 _systemStatuses[src] = text ?? string.Empty;
                 return;
             }
 
             string innerPayload;
             string envelopePbId;
-            if (!SenderEnvelope.TryParse(text, _sharedKey, _networkLastSeen, out envelopePbId, out innerPayload))
+            if (!SenderEnvelope.TryParse(
+                    text,
+                    _sharedKey,
+                    _networkLastSeen,
+                    _networkLastAcceptedWallUtc,
+                    utcNowTicks,
+                    SenderEnvelope.ReplaySilenceExpiryTicks,
+                    out envelopePbId,
+                    out innerPayload))
             {
                 _droppedEnvelopeCount++;
                 return;

@@ -148,7 +148,8 @@ Write-Host "[PB2] Envelope TryParse + protocol" -ForegroundColor Cyan
 [void](Test-Contains 'PB2 FNV offset basis' $pb2 '2166136261')
 [void](Test-Contains 'PB2 FNV prime' $pb2 '16777619')
 [void](Test-Contains 'PB2 four-part Split' $pb2 $pipeFourSplit)
-[void](Test-Contains 'PB2 Base64 decode' $pb2 'Convert.FromBase64String')
+# Anchor may be line-wrapped by MDK minifier (Convert.\nFromBase64String); substring must survive on one logical path.
+[void](Test-Contains 'PB2 Base64 decode' $pb2 'FromBase64String')
 [void](Test-Contains 'PB2 UTF-8 decode' $pb2 'Encoding.UTF8.GetString')
 [void](Test-Contains 'PB2 MAC compare' $pb2 'ToString("X8")')
 [void](Test-Contains 'PB2 replay dictionary' $pb2 'Dictionary<string,long>')

@@ -41,7 +41,7 @@ For the **PB1 → PB2** rows above (all except **`SYS_STATUS`** as sent from PB1
   - **`PayloadB64`** = **Base64** (UTF-8, no line breaks) of the **inner** DTO string (semicolon-separated, protocol field first). Inner bodies may contain **`|`** (e.g. pipe-separated array fields); Base64 avoids colliding with envelope delimiters.  
   - **`Timestamp`** = decimal string; **monotonic per PB1 process** (`SenderEnvelope` bumps if `UtcNow.Ticks` would repeat) so back-to-back `SendDto` calls in one tick still pass replay checks.  
   - **`MAC`** = **8** uppercase hex digits from **32-bit FNV-1a** over **`PBID + Timestamp +` (decoded inner string) `+ SharedKey`**—not over the Base64 text.  
-- **Replay:** PB2 keeps **last accepted ticks per `PBID`** (envelope field 0); incoming timestamp must be **strictly greater** than the last seen for that sender.
+- **Replay:** PB2 keeps **last accepted envelope ticks per `PBID`** (envelope field 0); incoming timestamp must be **strictly greater** than the last accepted for that sender **unless** that sender has had **no accepted envelopes** for **`SenderEnvelope.ReplaySilenceExpiryTicks`** (90 seconds of wall-clock silence, `DateTime.UtcNow.Ticks`), in which case PB2 clears the baseline so a restarted PB1 can resume. **`SenderEnvelope.EvictStaleReplayState`** prunes expired senders so the cache stays bounded. MAC and malformed-envelope checks are unchanged.
 
 **PB1 transmit policy:** `SendDto` requires a **non-empty** `SharedKey` (orchestrator echoes **`NET BLOCKED: SharedKey missing.`** and does not send). **`EnableNetwork`** gates the **five** primary telemetry broadcasts; **`PB1_WARNINGS`** still uses `SendDto` and the same key requirement.
 
