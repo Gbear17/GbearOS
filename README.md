@@ -9,9 +9,9 @@ GbearOS is a **two-programmable-block system** for **Space Engineers**: **PB1 (C
 ## Player quick start
 
 1. **Install the scripts** — If your copy of the repo includes a `dist/` folder with release **minified** scripts, copy them into Space Engineers local programmable-block scripts as you normally would. **This tree may not ship `dist/`**; if it is missing, build and deploy from source (one line: [Developer setup](#developer-setup) → [`docs/setup.md`](docs/setup.md)).
-2. **Tag the blocks** — Add **`[GbearOS]`** to each programmable block’s **name** (or Custom Data where your workflow expects it) so PB1/PB2 participate in the script’s discovery rules. LCDs use name tags like **`[INV]`** / **`[GbearOS]`** as described under [LCD tag guide](#lcd-tag-guide).
+2. **Tag the blocks** — Add **`[GbearOS]`** to each programmable block’s **name** (or Custom Data where your workflow expects it) so PB1/PB2 participate in the script’s discovery rules. For LCDs, **`[GbearOS]`** in the **custom name** enables PB2 control; module commands live in the panel’s **Custom Data** (see [LCD tag guide](#lcd-tag-guide)).
 3. **Networking handshake** — In **Custom Data**, set the same **`SharedKey`** on **PB1** and **PB2** under **`[Network]`** (see [Connectivity & security](#connectivity--security)). Empty or mismatched keys cause telemetry to be dropped at the gate.
-4. **Wire the LCDs** — Use the command tags below on text panels (names or panel Custom Data for virtual dashboards). PB2 discovers panels on the **same construct** as the PB2 block.
+4. **Wire the LCDs** — Put **`[GbearOS]`** in the LCD’s **custom name**, then add one or more command tags in the LCD’s **Custom Data**. PB2 discovers panels on the **same construct** as the PB2 block.
 
 | Tag / command | What it drives |
 |---------------|----------------|

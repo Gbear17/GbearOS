@@ -22,6 +22,7 @@ namespace IngameScript
         private const uint FnvOffsetBasis = 2166136261u;
         private const uint FnvPrime = 16777619u;
 
+
         /// <summary>
         /// PB2-only: wall-clock silence after the last accepted envelope for a sender before its replay baseline is forgotten (Phase 3 / decision 3A).
         /// </summary>

@@ -66,6 +66,22 @@ function Test-Contains {
     return $false
 }
 
+$null = $failures # appease analyzers; used by Add-Failure
+
+function Test-Regex {
+    param(
+        [string] $Label,
+        [string] $Haystack,
+        [string] $Pattern
+    )
+    if ([regex]::IsMatch($Haystack, $Pattern, [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
+        Write-Host "  OK   $Label" -ForegroundColor Green
+        return $true
+    }
+    Add-Failure "$Label - missing regex match."
+    return $false
+}
+
 $distPb1 = Join-Path $RepoRoot 'dist\GbearOS_PB1_Core.cs'
 $distPb2 = Join-Path $RepoRoot 'dist\GbearOS_PB2_Display.cs'
 
@@ -89,7 +105,8 @@ if ($pb2.Length -lt 1000) { Add-Failure 'PB2 dist file unexpectedly small.' }
 # String needles (avoid nested quote parsing issues in the script body)
 $pipeFourSplit = "Split(new[]{'|'},4)"
 $protocolLiteral = '="1";'
-$macOrdinalCheck = 'StringComparison.Ordinal)){return false;}'
+# Allow minifiers to line-wrap tokens, e.g. "StringComparison.\nOrdinal" or insert other whitespace.
+$macOrdinalRegex = 'StringComparison\.\s*Ordinal\)\)\s*\{\s*return\s+false;\s*\}'
 
 # --- IGC channel literals (must match GbearOS_Shared/igc/channels.cs) ---
 # PB2 does not embed PB2ToPB1 (PB1 registers the reverse listener only).
@@ -168,7 +185,7 @@ if ($splitSemi -lt 6) {
     Write-Host "  OK   PB2 DTO Split(';') count: $splitSemi" -ForegroundColor Green
 }
 
-[void](Test-Contains 'PB2 MAC verify Ordinal' $pb2 $macOrdinalCheck)
+[void](Test-Regex 'PB2 MAC verify Ordinal' $pb2 $macOrdinalRegex)
 
 if ($failures.Count -gt 0) {
     Write-Host ""

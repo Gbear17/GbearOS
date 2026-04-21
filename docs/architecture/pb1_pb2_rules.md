@@ -62,7 +62,7 @@ PB2 **must not**:
 ### Update frequency
 
 - Registers **`UpdateFrequency.Update10`**.
-- Uses a **split loop**: lightweight work every `Update10`, heavier DTO diffing and **single-tag template** rotation **decimated** (see [engine.md](./engine.md)).
+- Uses a **split loop**: lightweight work every `Update10`, heavier DTO diffing **decimated** (see [engine.md](./engine.md)).
 
 ---
 

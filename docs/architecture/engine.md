@@ -29,19 +29,17 @@ So **one out of every ten** `Update10` callbacks is a **full tick**. At the usua
 
 - `RefreshPanelsIfNeeded()` — panel list refresh when countdown reaches zero.
 - `UpdateVirtualScrollsAndSyncFields` — scroll position animation, target advancement, pause logic.
-- `TryRenderVirtualPanels` — redraw `[GbearOS]` virtual panels when `MaskDirty` or `NeedsRedraw`.
+- `TryRenderVirtualPanels` — redraw `[GbearOS]` panels when command list inputs are dirty or scrolling requires a redraw.
 
 **Only when `isFullTick` is true:**
 
 - Recompute DTO dirty flags via `DtoChanged` against `_last*` caches; assign `_last*` to current DTO references.
-- Advance `_tickPhase = (_tickPhase + 1) % 5`.
-- Run the `switch (_tickPhase)` path: phased `RenderMaskLegacy` for **single-tag template** panels (name contains `[REF]`, `[PWR]`, `[ICE]`, `[INV]`, or `[WARN]` only—distinct from **`[GbearOS]`** virtual dashboards) and inventory paging for those templates.
 
 **Telemetry** (`Echo`, `RefreshStatusLcd`) is also gated on `isFullTick` in `Update10()` to limit status churn.
 
 ### Rationale
 
-Virtual scrolling and sprite redraw need **smooth** updates; DTO diffing and **five-way** phased rotation for single-tag templates are **cheaper** when decimated. Keeping scroll math on the fast path avoids stutter while bounding instruction cost on the slow path.
+Virtual scrolling and sprite redraw need **smooth** updates; DTO diffing is **cheaper** when decimated. Keeping scroll math on the fast path avoids stutter while bounding instruction cost on the slow path.
 
 ---
 
@@ -49,7 +47,9 @@ Virtual scrolling and sprite redraw need **smooth** updates; DTO diffing and **f
 
 ### Command model
 
-Panels whose custom name contains `[GbearOS]` load a **command list** from **panel** **Custom Data** (`ParseCustomDataCommands`): `HEAD`, `INV`, `REF`, `PWR`, `ICE`, `WARN`, with optional `INV` filter argument. `MaskFromCommandList` builds a bitmask for `MaskDirty`.
+Panels whose custom name contains `[GbearOS]` load a **command list** from **panel** **Custom Data** (`ParseCustomDataCommands`): `HEAD`, `INV`, `REF`, `PWR`, `ICE`, `WARN`, `STATUS`, plus layout directives such as `COL`.
+
+If Custom Data is empty or whitespace, PB2 defaults the command list to **`[INV]`**.
 
 `MeasureVirtualContent` computes:
 
@@ -57,6 +57,16 @@ Panels whose custom name contains `[GbearOS]` load a **command list** from **pan
 - **Total scrollable height** — per-command `SubheaderHeight` (skipped for filtered `INV`) plus `ModuleHeight`.
 
 The visible band for scrolling uses `yCutoff = textureSize.Y * 0.95703125f` and `viewportHeight = yCutoff - headerHeight`. Content is positioned with `drawStart = headerHeight - entry.ScrollPos`.
+
+### Module registry (static, allocation-safe)
+
+PB2 uses a **static dictionary registry** for tag/command → module mapping, initialized once during renderer init:
+
+- **Registry keys** are normalized command tokens (`INV`, `REF`, `PWR`, `ICE`, `WARN`, `STATUS`).
+- **Registry values** are module instances implementing `IDisplayComponent`.
+- **Dispatch** for measure/draw resolves a module key from the parsed command and calls `Measure` / `Draw` with the active column bounds from `LayoutManager`.
+
+This keeps module dispatch centralized and avoids per-tick registration work on the render hot path.
 
 ---
 

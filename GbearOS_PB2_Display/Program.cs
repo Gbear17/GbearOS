@@ -5,7 +5,7 @@
 // Purpose: PB2 entry point — IGC message handling and DTO-driven LCD refresh.
 // PB Association: PB2
 // Dependencies: LCDRenderer, WarningFormatter, IGCParser
-// Key Methods: Main, Update10, ProcessIGCMessages
+// Key Methods: Main
 
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI.Ingame;
