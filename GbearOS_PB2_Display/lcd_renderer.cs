@@ -226,13 +226,7 @@ namespace IngameScript
             _igcParser = igcParser;
             _refreshCountdown = 0;
 
-            _displayModuleByTag = new Dictionary<string, IDisplayComponent>(StringComparer.OrdinalIgnoreCase);
-            _displayModuleByTag["INV"] = new InventoryDisplayModule(this);
-            _displayModuleByTag["PWR"] = new PowerDisplayModule(this);
-            _displayModuleByTag["ICE"] = new IceDisplayModule(this);
-            _displayModuleByTag["REF"] = new RefineryDisplayModule(this);
-            _displayModuleByTag["WARN"] = new WarningDisplayModule(this);
-            _displayModuleByTag["STATUS"] = new StatusDisplayModule(this);
+            InitModuleRegistry();
         }
 
         private IDisplayComponent TryGetVirtualModule(string commandType)
@@ -243,74 +237,7 @@ namespace IngameScript
             return _displayModuleByTag.TryGetValue(commandType, out comp) ? comp : null;
         }
 
-        private static CommandType ParseCommandTypeString(string typeToken)
-        {
-            if (string.IsNullOrEmpty(typeToken))
-                return CommandType.Unknown;
-            if (string.Equals(typeToken, "HEAD", StrIX.C))
-                return CommandType.Head;
-            if (string.Equals(typeToken, "INV", StrIX.C))
-                return CommandType.Inv;
-            if (string.Equals(typeToken, "REF", StrIX.C))
-                return CommandType.Ref;
-            if (string.Equals(typeToken, "PWR", StrIX.C))
-                return CommandType.Pwr;
-            if (string.Equals(typeToken, "ICE", StrIX.C))
-                return CommandType.Ice;
-            if (string.Equals(typeToken, "WARN", StrIX.C))
-                return CommandType.Warn;
-            if (string.Equals(typeToken, "STATUS", StrIX.C))
-                return CommandType.Status;
-            if (string.Equals(typeToken, LayoutManager.CmdCol, StrIX.C))
-                return CommandType.Col;
-            return CommandType.Unknown;
-        }
-
-        private static string ModuleKeyForCommand(ref DisplayCommand cmd)
-        {
-            if (cmd.TypeEnum == CommandType.Unknown)
-                return cmd.UnknownKind;
-            switch (cmd.TypeEnum)
-            {
-                case CommandType.Inv:
-                    return "INV";
-                case CommandType.Ref:
-                    return "REF";
-                case CommandType.Pwr:
-                    return "PWR";
-                case CommandType.Ice:
-                    return "ICE";
-                case CommandType.Warn:
-                    return "WARN";
-                case CommandType.Status:
-                    return "STATUS";
-                default:
-                    return null;
-            }
-        }
-
-        private static string SubheaderLabelForCommand(CommandType t, string unknownKind)
-        {
-            switch (t)
-            {
-                case CommandType.Inv:
-                    return "INVENTORY";
-                case CommandType.Ref:
-                    return "REFINERY STATUS";
-                case CommandType.Ice:
-                    return "ICE STATUS";
-                case CommandType.Pwr:
-                    return "POWER GRID STATUS";
-                case CommandType.Warn:
-                    return "WARNING STATUS";
-                case CommandType.Status:
-                    return "SYSTEM STATUS";
-                case CommandType.Unknown:
-                    return unknownKind != null ? unknownKind : "";
-                default:
-                    return "";
-            }
-        }
+        // Note: ParseCommandTypeString, ModuleKeyForCommand, and SubheaderLabelForCommand live in pb2_module_registry.cs
 
         public void RenderNoSignal(double secondsOffline)
         {
@@ -601,6 +528,7 @@ namespace IngameScript
 
                 var cmds = new List<DisplayCommand>(8);
                 ParseCustomDataCommands(p.CustomData, cmds);
+
                 if (cmds.Count == 0)
                     continue;
                 e.Commands = cmds;

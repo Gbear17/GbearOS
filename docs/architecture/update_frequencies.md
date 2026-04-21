@@ -41,7 +41,7 @@ PB1 must not:
 PB2 also registers **`Update10`**, not `Update100`. It still **throttles** expensive work:
 
 - **Every** `Update10`: virtual scroll animation, selective redraws, panel refresh countdown handling.
-- **Every tenth** `Update10` (`_tick10 % 10 == 0`): DTO dirty-flag passes, phased **single-tag template** rendering (`[INV]` / `[REF]` / … panels—see [engine.md](./engine.md)), and some telemetry echo/status LCD updates.
+- **Every tenth** `Update10` (`_tick10 % 10 == 0`): DTO dirty-flag passes, plus some telemetry echo/status LCD updates.
 
 So PB2 **enters** at the same coarse cadence as PB1’s `Update10`, but **CPU-heavy** display passes run at roughly **one-tenth** of that rate. Details: [engine.md](./engine.md).
 

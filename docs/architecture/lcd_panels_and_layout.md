@@ -1,4 +1,4 @@
-> **AI Summary:** User-facing LCD layout—single-tag panels versus GbearOS virtual dashboard and how PB2 discovers panels.
+> **AI Summary:** User-facing LCD layout—how PB2 discovers `[GbearOS]` panels and renders module commands from panel Custom Data.
 
 # LCD panels and layout
 

@@ -9,8 +9,6 @@ Long-form phase plans and branch notes. Status is **planned** or **partial** unl
 
 | Document | Purpose |
 |----------|---------|
-| [phase-03-replay-state-resilience-delivery-plan.md](./phase-03-replay-state-resilience-delivery-plan.md) | Phase 3 replay resilience — delivery branch baseline (see history archive) |
-| [phase-04-pb2-module-interface-and-registry-plan.md](./phase-04-pb2-module-interface-and-registry-plan.md) | Phase 4 — PB2 module interface + registry |
 | [phase-05-extensions-telemetry-ui-global-version-plan.md](./phase-05-extensions-telemetry-ui-global-version-plan.md) | Phase 5 — extensions / global versioning |
 | [phase-06-instruction-budget-optimization-lightweight-state-plan.md](./phase-06-instruction-budget-optimization-lightweight-state-plan.md) | Phase 6 — instruction budget / lightweight state |
 
