@@ -75,6 +75,10 @@ The following applies to the **Payload** string **inside** the envelope (after *
 5. **Float and bool arrays:** split on **`|`** only (no escape processing). Bool scalars use **`1`** / **`0`** (and `ParseBool` accepts a limited `true` form).  
 6. **No JSON** for DTO bodies. **No extra type prefix** inside the string beyond field `0` (the protocol version).
 
+### PB1 string ingress (decision 2A)
+
+Player- or game-derived text that populates DTO string fields is sanitized once at PB1 ingestion using **`FormattingUtils.SanitizeIngressWireText`** in **`GbearOS_Shared/utils/formatting_utils.cs`** (replaces `;`, `|`, `\`, CR, and LF with a space). Sanitization runs before serialization and **`SenderEnvelope` MAC** so PB2 verifies the same payload it deserializes. **`SYS_STATUS`** remains plain text and is **not** covered by this DTO/MAC path.
+
 ### `InventorySummaryDTO`
 
 After `p[0] == "1"`, indices **1–27** are **floats** in order:

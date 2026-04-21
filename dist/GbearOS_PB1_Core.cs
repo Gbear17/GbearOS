@@ -212,223 +212,223 @@ MyInventoryItem>();Ʈ.GetItems(ƙ);for(int ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];
 true;}void ǵ(N ŧ){ŧ.Ȗ=Ǘ.Ȗ;ŧ.ȗ=Ǘ.ȗ;ŧ.Ș=Ǘ.Ș;ŧ.ș=Ǘ.ș;ŧ.Ț=Ǘ.Ț;ŧ.ț=Ǘ.ț;ŧ.Ȝ=Ǘ.Ȝ;ŧ.ȝ=Ǘ.ȝ;ŧ.Ȟ=Ǘ.Ȟ;ŧ.ȟ=Ǘ.ȟ;ŧ.Ƞ=Ǘ.Ƞ;ŧ.ȡ=Ǘ.ȡ;ŧ.Ȣ=Ǘ.Ȣ;ŧ.
 ȣ=Ǘ.ȣ;ŧ.Ȥ=Ǘ.Ȥ;ŧ.ȥ=Ǘ.ȥ;ŧ.Ȧ=Ǘ.Ȧ;ŧ.ȧ=Ǘ.ȧ;ŧ.Ȩ=Ǘ.Ȩ;ŧ.ȩ=Ǘ.ȩ;ŧ.Ȫ=Ǘ.Ȫ;ŧ.ȫ=Ǘ.ȫ;ŧ.Ȭ=Ǘ.Ȭ;ŧ.ȭ=Ǘ.ȭ;ŧ.Ȑ=Ǘ.Ȑ;ŧ.ê=Ǘ.ê;ŧ.Ú=Ǘ.Ú;}void Ƕ(X á
 ){int Â=ǥ.Count;if(Â==0){á.Ƿ=new string[0];á.Ǹ=new float[0];á.ǹ=new string[0];return;}var Ȯ=new string[Â];var ȯ=new float
-[Â];var Ȱ=new string[Â];int ȱ=0;foreach(var Ō in ǥ){var ȕ=Ō.Value;Ȯ[ȱ]=ȕ.Ǩ;ȯ[ȱ]=(float)ȕ.Ǧ;Ȱ[ȱ]=ȕ.ǧ;ȱ++;}á.Ƿ=Ȯ;á.Ǹ=ȯ;á.ǹ=
-Ȱ;}void ȅ(byte Ȳ,int ǿ){if(ǿ<=0||q==null||!q.Ĝ||p==null){return;}Ǚ.Clear();Ǚ.Append("INV ex=");Ǚ.Append(Ȳ);Ǚ.Append(" n="
-);Ǚ.Append(ǿ);p.Echo(Ǚ.ToString());}bool Ȅ(IMyInventory ȳ,int ȴ){ǘ.Clear();ȳ.GetItems(ǘ);if(ȴ<0||ȴ>=ǘ.Count){return false
-;}for(int ŧ=0;ŧ<Ǒ.Count;ŧ++){var Ų=Ǒ[ŧ];if(Ų==null||Ų==ȳ){continue;}if(ȵ(ȳ,ȴ,Ų)){return true;}}return false;}bool ȉ(
-IMyInventory ȳ,int ȴ,IMyInventory ȶ=null){ǘ.Clear();ȳ.GetItems(ǘ);if(ȴ<0||ȴ>=ǘ.Count){return false;}MyItemType ȷ=ǘ[ȴ].Type;ȸ Ⱥ=ȹ(ȷ);
-List<IMyInventory>Ȼ;switch(Ⱥ){case ȸ.ȼ:Ȼ=ǋ;break;case ȸ.Ƚ:Ȼ=ǌ;break;case ȸ.Ⱦ:Ȼ=Ǎ;break;case ȸ.ȿ:Ȼ=ǎ;break;case ȸ.ɀ:Ȼ=Ǐ;break
-;case ȸ.Ɂ:Ȼ=ǐ;break;default:Ȼ=Ǒ;break;}for(int ŧ=0;ŧ<Ȼ.Count;ŧ++){var Ų=Ȼ[ŧ];if(Ų==null||Ų==ȳ||Ų==ȶ){continue;}if(ȵ(ȳ,ȴ,Ų
-)){return true;}}if(Ⱥ==ȸ.ɂ){return false;}for(int ŧ=0;ŧ<Ǒ.Count;ŧ++){var Ų=Ǒ[ŧ];if(Ų==null||Ų==ȳ||Ų==ȶ){continue;}if(ȵ(ȳ,
-ȴ,Ų)){return true;}}return false;}private static bool ȵ(IMyInventory ȳ,int ȴ,IMyInventory Ų){if(!ȳ.IsConnectedTo(Ų)){
-return false;}return ȳ.TransferItemTo(Ų,ȴ,null,true,null);}void ȑ(IMyInventory Ʈ,ref N á){var ƙ=new List<MyInventoryItem>();Ʈ.
-GetItems(ƙ);for(int ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];var Ƹ=ƚ.Type;string Ƀ=Ƹ.SubtypeId;float ƞ=(float)ƚ.Amount;if(Ʉ(Ƹ)){if(ǂ.
-Contains(Ƀ)){Ʌ(ref á,Ƀ,ƞ);}else if(ǔ.Add(Ƀ)){Ǖ.Add(Ƀ);}continue;}if(Ȇ(Ƹ)){if(Ǆ.Contains(Ƀ)){Ɇ(ref á,Ƀ,ƞ);}continue;}if(ȃ(Ƹ)){á.Ȫ
-+=ƞ;continue;}if(ɇ(Ƹ)){á.ȫ+=ƞ;continue;}if(Ɉ(Ƹ)){á.Ȭ+=ƞ;continue;}if(ɉ(Ƹ)){á.ȭ+=ƞ;}}}private static void Ʌ(ref N á,string
-Ƀ,float ƞ){switch(Ƀ.ToUpperInvariant()){case"IRON":á.Ȗ+=ƞ;break;case"NICKEL":á.ȗ+=ƞ;break;case"COBALT":á.Ș+=ƞ;break;case
-"SILICON":á.ș+=ƞ;break;case"MAGNESIUM":á.Ț+=ƞ;break;case"SILVER":á.ț+=ƞ;break;case"GOLD":á.Ȝ+=ƞ;break;case"PLATINUM":á.ȝ+=ƞ;break
-;case"URANIUM":á.Ȟ+=ƞ;break;case"STONE":á.ȟ+=ƞ;break;case"ICE":á.Ƞ+=ƞ;break;}}private static void Ɇ(ref N á,string Ƀ,
-float ƞ){switch(Ƀ.ToUpperInvariant()){case"IRON":á.ȡ+=ƞ;break;case"NICKEL":á.Ȣ+=ƞ;break;case"COBALT":á.ȣ+=ƞ;break;case
-"SILICON":á.Ȥ+=ƞ;break;case"MAGNESIUM":á.ȥ+=ƞ;break;case"SILVER":á.Ȧ+=ƞ;break;case"GOLD":á.ȧ+=ƞ;break;case"PLATINUM":á.Ȩ+=ƞ;break
-;case"URANIUM":á.ȩ+=ƞ;break;}}bool Ȓ(MyItemType Ƹ){return true;}private static string ȓ(MyItemType Ƹ){if(Ʉ(Ƹ)){return
-"Ore";}if(Ȇ(Ƹ)){return"Ingot";}if(ȃ(Ƹ)){return"Component";}if(ɇ(Ƹ)){return"Ammo";}if(Ɉ(Ƹ)){return"Tool";}if(ɉ(Ƹ)){return
-"Bottle";}return"Other";}enum ȸ{ȼ,Ƚ,Ⱦ,ȿ,ɀ,Ɂ,ɂ}private static ȸ ȹ(MyItemType Ƹ){if(Ʉ(Ƹ)){return ȸ.ȼ;}if(Ȇ(Ƹ)){return ȸ.Ƚ;}if(ȃ(Ƹ)
-){return ȸ.Ⱦ;}if(ɇ(Ƹ)){return ȸ.ȿ;}if(Ɉ(Ƹ)){return ȸ.ɀ;}if(ɉ(Ƹ)){return ȸ.Ɂ;}return ȸ.ɂ;}private static bool Ʉ(MyItemType
-Ƹ){string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf("Ore",StringComparison.Ordinal)>=0;}private static bool Ȇ(MyItemType Ƹ){
-return Ƹ.TypeId.ToString().IndexOf("Ingot",StringComparison.Ordinal)>=0;}private static bool ȃ(MyItemType Ƹ){return Ƹ.TypeId.
-ToString().IndexOf("Component",StringComparison.Ordinal)>=0;}private static bool ɇ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();
-return ƹ.IndexOf("Ammo",StringComparison.Ordinal)>=0||ƹ.IndexOf("Magazine",StringComparison.Ordinal)>=0;}private static bool Ɉ
-(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();if(ƹ.IndexOf("PhysicalGun",StringComparison.Ordinal)>=0){return true;}if(ƹ.
-IndexOf("Welder",StringComparison.Ordinal)>=0){return true;}if(ƹ.IndexOf("Drill",StringComparison.Ordinal)>=0&&ƹ.IndexOf(
-"Component",StringComparison.Ordinal)<0){return true;}if(ƹ.IndexOf("Grinder",StringComparison.Ordinal)>=0){return true;}return
-false;}private static bool ɉ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf("OxygenContainer",StringComparison.
-Ordinal)>=0||ƹ.IndexOf("GasContainer",StringComparison.Ordinal)>=0;}bool Ǭ(){return p!=null&&p.Me!=null&&p.GridTerminalSystem!=
-null;}private static bool ǟ(IMyTerminalBlock Ə){if(Ə==null){return false;}string Ʒ=q!=null&&!string.IsNullOrEmpty(q.õ)?q.õ:
-"[Manual]";if(string.IsNullOrEmpty(Ʒ)){return false;}string ú=Ə.CustomName;return û.ü(ú,Ʒ);}bool Ź(IMyTerminalBlock Ə){return ǟ(Ə)
-;}bool ǻ(IMyTerminalBlock Ə){if(Ə==null||!Ə.IsSameConstructAs(p.Me)){return false;}var Ƒ=Ə as IMyInventoryOwner;return Ƒ
-!=null&&Ƒ.InventoryCount>0;}void Ǻ(IMyCargoContainer ƕ){string ú=ƕ.CustomName??string.Empty;bool Ɋ=û.ü(ú,ƻ);bool ɋ=û.ü(ú,Ƽ
-);bool Ɍ=û.ü(ú,ƽ);bool ɍ=û.ü(ú,ƾ);bool Ɏ=û.ü(ú,ƿ);bool ɏ=û.ü(ú,ǀ);bool ɐ=û.ü(ú,ǁ);bool ɑ=Ɋ||ɋ||Ɍ||ɍ||Ɏ||ɏ;for(int Ɩ=0;Ɩ<ƕ
-.InventoryCount;Ɩ++){var Ʈ=ƕ.GetInventory(Ɩ);if(Ɋ){ǋ.Add(Ʈ);}if(ɋ){ǌ.Add(Ʈ);}if(Ɍ){Ǎ.Add(Ʈ);}if(ɍ){ǎ.Add(Ʈ);}if(Ɏ){Ǐ.Add(
-Ʈ);}if(ɏ){ǐ.Add(Ʈ);}if(ɐ||!ɑ){Ǒ.Add(Ʈ);}}}}public class K{private const double ɒ=1e-9;private readonly List<
-IMyBatteryBlock>ɓ=new List<IMyBatteryBlock>();private readonly List<IMyReactor>ɔ=new List<IMyReactor>();private readonly List<
-IMyPowerProducer>ɕ=new List<IMyPowerProducer>(),ɖ=new List<IMyPowerProducer>();double ɗ;double ɘ,ə,ɚ,ɛ,ɜ,ɝ,ɞ,ɟ,ɠ,ɡ;private const int ř=
-38000;int Ś;byte ś=4;bool ɢ;public bool Í(List<IMyTerminalBlock>ŝ,List<IMyBatteryBlock>ɣ,ref T á){if(!Ǭ()){ś=4;ɤ(ref á);
-return true;}if(ś==4){ɓ.Clear();ɔ.Clear();ɕ.Clear();ɖ.Clear();ɢ=false;ś=0;Ś=0;}if(ś==0){if(!ɥ(ŝ,ɣ)){return false;}ɦ();ɧ();ɨ();
-var ɪ=ɩ();ɫ(á,ɪ);ś=4;return true;}return true;}private static void ɤ(ref T ŧ){ŧ.ɬ=0f;ŧ.ɭ=0f;ŧ.ɮ=0f;ŧ.ɯ=0f;ŧ.ɰ=0f;ŧ.ɱ=0f;ŧ.ɲ
-=0f;ŧ.ɳ=0f;ŧ.ɴ=0f;ŧ.ɵ=0f;ŧ.ɶ=0;ŧ.ɷ=0;ŧ.ɸ=0;ŧ.Û=false;}private static void ɫ(T Ų,T ų){Ų.ɬ=ų.ɬ;Ų.ɭ=ų.ɭ;Ų.ɮ=ų.ɮ;Ų.ɯ=ų.ɯ;Ų.ɰ=
-ų.ɰ;Ų.ɱ=ų.ɱ;Ų.ɲ=ų.ɲ;Ų.ɳ=ų.ɳ;Ų.ɴ=ų.ɴ;Ų.ɵ=ų.ɵ;Ų.ɶ=ų.ɶ;Ų.ɷ=ų.ɷ;Ų.ɸ=ų.ɸ;Ų.Û=ų.Û;}bool ɥ(List<IMyTerminalBlock>ŝ,List<
-IMyBatteryBlock>ɣ){if(ŝ==null){return true;}var ɹ=E.p.Me;if(!ɢ&&ɣ!=null){for(int ɺ=0;ɺ<ɣ.Count;ɺ++){var ɻ=ɣ[ɺ];if(ɻ!=null&&ɻ.
-IsSameConstructAs(ɹ)&&!Ź(ɻ)){ɓ.Add(ɻ);}}ɢ=true;}for(int ó=Ś;ó<ŝ.Count;ó++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=ó;return false;}
-var Ə=ŝ[ó];if(!Ə.IsSameConstructAs(ɹ)||Ź(Ə)){continue;}if(Ə is IMyBatteryBlock){continue;}var ɼ=Ə as IMyReactor;if(ɼ!=null)
-{ɔ.Add(ɼ);continue;}var ɽ=Ə as IMyPowerProducer;if(ɽ!=null){if(ɾ(ɽ)){ɕ.Add(ɽ);}else if(ɿ(ɽ)){ɖ.Add(ɽ);}}}return true;}
-private static bool ɿ(IMyPowerProducer ø){var ʀ=ø as IMyTerminalBlock;if(ʀ==null){return false;}string ʁ=ʀ.BlockDefinition.
-ToString();return ʁ.IndexOf("SolarPanel",ʂ.ʃ)>=0;}private static bool ɾ(IMyPowerProducer ø){var ʀ=ø as IMyTerminalBlock;if(ʀ==
-null){return false;}string ʁ=ʀ.BlockDefinition.ToString();return ʁ.IndexOf("HydrogenEngine",ʂ.ʃ)>=0;}void ɦ(){ɗ=0;ɘ=0;ə=0;ɚ=
-0;ɛ=0;ɜ=0;ɝ=0;ɞ=0;ɟ=0;ɠ=0;ɡ=0;for(int ó=0;ó<ɓ.Count;ó++){var ɻ=ɓ[ó];ɗ+=ɻ.CurrentStoredPower;ɘ+=ɻ.MaxStoredPower;ə+=ɻ.
-CurrentInput;ɚ+=ɻ.CurrentOutput;ɞ+=ɻ.MaxInput;ɟ+=ɻ.MaxOutput;}for(int ó=0;ó<ɖ.Count;ó++){ɛ+=ɖ[ó].CurrentOutput;}for(int ó=0;ó<ɔ.
-Count;ó++){ɜ+=ɔ[ó].CurrentOutput;ɠ+=ɔ[ó].MaxOutput;}for(int ó=0;ó<ɕ.Count;ó++){ɝ+=ɕ[ó].CurrentOutput;ɡ+=ɕ[ó].MaxOutput;}}void
-ɧ(){if(ɓ.Count==0){return;}var ž=E.q;double ʄ=0.25;double ʅ=0.80;if(ž!=null){ʄ=ž.Ē;ʅ=ž.ē;}double ʆ=0;if(ɘ>ɒ){ʆ=ɗ/ɘ;}bool
-ʇ=ʆ<ʄ;bool ʈ=ʆ>ʅ;for(int ó=0;ó<ɓ.Count;ó++){var ɻ=ɓ[ó];if(ʇ){ɻ.ChargeMode=ChargeMode.Recharge;}else if(ʈ){ɻ.ChargeMode=
-ChargeMode.Auto;}}}void ɨ(){var ž=E.q;if(ž==null||!ž.Ė){return;}bool ʉ=ɛ<ž.Ĕ;bool ʊ=ɛ>=ž.Ĕ;if(ʉ){for(int ó=0;ó<ɔ.Count;ó++){ɔ[ó].
-Enabled=true;}for(int ó=0;ó<ɕ.Count;ó++){ɕ[ó].Enabled=true;}}else if(ʊ){for(int ó=0;ó<ɔ.Count;ó++){ɔ[ó].Enabled=false;}for(int
-ó=0;ó<ɕ.Count;ó++){ɕ[ó].Enabled=false;}}}T ɩ(){var á=new T();á.ɬ=(float)ɗ;á.ɭ=(float)ɘ;á.ɮ=(float)ə;á.ɯ=(float)ɚ;á.ɰ=(
-float)ɞ;á.ɱ=(float)ɟ;á.ɲ=(float)ɜ;á.ɳ=(float)ɝ;á.ɴ=(float)ɠ;á.ɵ=(float)ɡ;á.ɶ=ɓ.Count;á.ɷ=ɔ.Count;á.ɸ=ɕ.Count;double ʋ=0;if(ɘ>
-ɒ){ʋ=ɗ/ɘ;}double ʌ=0.25;if(E.q!=null){ʌ=E.q.Ē;}á.Û=ɘ>ɒ&&ʋ<ʌ;return á;}bool Ǭ(){return E.p!=null&&E.p.Me!=null&&E.p.
-GridTerminalSystem!=null;}bool Ź(IMyTerminalBlock Ə){if(Ə==null){return false;}var ž=E.q;string Ʒ=ž!=null&&!string.IsNullOrEmpty(ž.õ)?ž.õ:
-"[Manual]";if(string.IsNullOrEmpty(Ʒ)){return false;}string ú=Ə.CustomName;return û.ü(ú,Ʒ);}}public sealed class G{private const
-double ʍ=0.05,ʎ=1000,ʏ=100000,ʐ=50000,ʑ=0.3,ʒ=125000;private readonly List<IMyRefinery>ʓ=new List<IMyRefinery>();private
-readonly HashSet<IMyInventory>ʔ=new HashSet<IMyInventory>();List<IMyTerminalBlock>a;private readonly List<string>ʕ=new List<
-string>();private readonly Dictionary<string,double>ʖ=new Dictionary<string,double>(StringComparer.OrdinalIgnoreCase);private
-readonly List<MyInventoryItem>ʗ=new List<MyInventoryItem>();private readonly Dictionary<string,int>ʘ=new Dictionary<string,int>(
-StringComparer.OrdinalIgnoreCase);private readonly List<KeyValuePair<string,int>>ʙ=new List<KeyValuePair<string,int>>(32);private
-static readonly int[]ʚ={2000,1000,500,250,100,50};string ʛ=string.Empty;private const int ř=38000;int Ś,ʜ;byte ʝ=255;
-Dictionary<string,int>ʞ;private static int ʢ(int ó,int ȇ,int ø){if(ø<=0){return 0;}if(ȇ<4){return 0;}int Ƹ;if(ȇ<8){int ʟ=(2*ȇ+2)/3
-;Ƹ=ó<ʟ?0:1;}else{int ʟ=(ȇ+1)/2;int ʠ=ȇ-ʟ;int ʡ=(ʠ+1)/2;if(ó<ʟ){Ƹ=0;}else if(ó<ʟ+ʡ){Ƹ=1;}else{Ƹ=2;}}if(Ƹ>=ø){Ƹ=ø-1;}return
-Ƹ;}private static double ʤ(string ʣ){if(ʣ==null){return ʑ;}switch(ʣ.ToLowerInvariant()){case"iron":case"silicon":return
-0.7;case"nickel":return 0.4;case"cobalt":return 0.3;case"magnesium":return 0.007;case"silver":return 0.1;case"gold":return
-0.01;case"platinum":return 0.005;case"uranium":return 0.01;default:return ʑ;}}private static double ʪ(string ʥ,A ž){if(
-string.Equals(ʥ,"Stone",ʂ.ʃ)){return ʐ;}double ß;string ý=ʦ(ʥ);if(ý==null||!ʧ(ž,ý,out ß)||ß<=0){if(!ʧ(ž,"Iron",out ß)||ß<=0){ß
-=ʒ;}}double ʨ=ʤ(ʥ);if(ʨ<=0){ʨ=ʑ;}double ʩ=ʍ*(ß/ʨ);if(ʩ<ʎ){ʩ=ʎ;}if(ʩ>ʏ){ʩ=ʏ;}return ʩ;}public bool Ê(List<IMyTerminalBlock
->ŝ,List<IMyRefinery>ǩ,ref P á){if(!Ǭ()){ʝ=255;ʫ(á);return true;}if(ʝ==255){a=ŝ;ʬ(ǩ);A ʭ=E.q;ʮ(ʭ!=null&&ʭ.Ý);ʕ.Clear();Ś=0
-;ʝ=1;return false;}if(ʝ==1){if(!ʯ()){return false;}ʖ.Clear();Ś=0;ʝ=2;return false;}if(ʝ==2){if(!ʰ()){return false;}ʱ();ʞ=
-ʲ();A ž=E.q;bool ʳ=ž!=null&&ž.Ý;if(ʳ){ʜ=0;Ś=0;ʝ=4;}else{ʝ=6;}return false;}if(ʝ==4){if(!ʴ()){return false;}Ś=0;ʝ=5;return
-false;}if(ʝ==5){if(!ʵ()){return false;}ʝ=6;return false;}if(ʝ==6){var ɪ=ʶ(ʞ);ʷ(á,ɪ);ʝ=255;return true;}return true;}private
-static void ʫ(P ŧ){ŧ.ë=new string[0];ŧ.ʸ=new string[0];ŧ.ʹ=new float[0];ŧ.ʺ=new string[0];ŧ.ʻ=new float[0];ŧ.ò=new bool[0];ŧ.ñ
-=new bool[0];ŧ.ʼ=null;ŧ.ʽ=null;}private static void ʷ(P Ų,P ų){Ų.ë=ų.ë;Ų.ʸ=ų.ʸ;Ų.ʹ=ų.ʹ;Ų.ʺ=ų.ʺ;Ų.ʻ=ų.ʻ;Ų.ò=ų.ò;Ų.ñ=ų.ñ;Ų.
-ʼ=ų.ʼ;Ų.ʽ=ų.ʽ;}bool ʯ(){if(a==null){return true;}for(int ɺ=Ś;ɺ<a.Count;ɺ++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=ɺ
-;return false;}var Ə=a[ɺ];if(Ź(Ə)){continue;}var Ƒ=Ə as IMyInventoryOwner;if(Ƒ==null){continue;}for(int ʾ=0;ʾ<Ƒ.
-InventoryCount;ʾ++){var Ʈ=Ƒ.GetInventory(ʾ);if(Ʈ==null){continue;}var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(int ȱ=0;ȱ<ƙ.
-Count;ȱ++){var Ƹ=ƙ[ȱ].Type;if(!Ʉ(Ƹ)){continue;}string Ƀ=Ƹ.SubtypeId;if(string.Equals(Ƀ,"Ice",ʂ.ʃ)){continue;}bool ʿ=false;for
-(int ń=0;ń<ʕ.Count;ń++){if(string.Equals(ʕ[ń],Ƀ,ʂ.ʃ)){ʿ=true;break;}}if(!ʿ){ʕ.Add(Ƀ);}}}}return true;}bool ʰ(){if(a==null
-){return true;}for(int ɺ=Ś;ɺ<a.Count;ɺ++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=ɺ;return false;}var Ə=a[ɺ];if(Ź(Ə))
-{continue;}var Ƒ=Ə as IMyInventoryOwner;if(Ƒ==null){continue;}for(int ʾ=0;ʾ<Ƒ.InventoryCount;ʾ++){var Ʈ=Ƒ.GetInventory(ʾ)
-;if(Ʈ==null){continue;}var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(int ȱ=0;ȱ<ƙ.Count;ȱ++){var ƚ=ƙ[ȱ];if(!ˀ(ƚ.Type
-)){continue;}string Ƀ=ƚ.Type.SubtypeId;double ƞ=(double)ƚ.Amount;double ˁ;if(!ʖ.TryGetValue(Ƀ,out ˁ)){ˁ=0;}ʖ[Ƀ]=ˁ+ƞ;}}}
-return true;}bool ʴ(){if(ʕ.Count==0){return true;}int ˆ=0;const int ˇ=20;for(int Ƹ=ʜ;Ƹ<ʕ.Count&&ˆ<ˇ;Ƹ++){if(E.p.Runtime.
-CurrentInstructionCount>ř){ʜ=Ƹ;return false;}string ˈ=ʕ[Ƹ];while(ˆ<ˇ&&ˉ(ˈ)){if(E.p.Runtime.CurrentInstructionCount>ř){ʜ=Ƹ;return false;}ˆ++;}}
-return true;}bool ʵ(){if(ʕ.Count==0){return true;}int ȇ=ʓ.Count;int ø=ʕ.Count;for(int ó=Ś;ó<ȇ;ó++){if(E.p.Runtime.
-CurrentInstructionCount>ř){Ś=ó;return false;}var ł=ʓ[ó];var ˊ=ł.InputInventory;if(ˊ==null){continue;}string ˋ=ʕ[ʢ(ó,ȇ,ø)];if(ˌ(ł,ˋ)<=50f&&ˍ(ł).
-RawValue>0){IMyInventory ˎ;int ˏ;if(ː(ˋ,ˊ,out ˎ,out ˏ)){for(int ń=0;ń<ʚ.Length;ń++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=
-ó;return false;}ˎ.GetItems(ʗ);if(ˏ>=ʗ.Count){break;}MyItemType ˑ=ʗ[ˏ].Type;if(!ˎ.CanTransferItemTo(ˊ,ˑ)){break;}
-MyFixedPoint ƞ=ʗ[ˏ].Amount;if(ƞ<=(MyFixedPoint)0){break;}MyFixedPoint ˠ=(MyFixedPoint)ʚ[ń];if(ƞ<ˠ){ˠ=ƞ;}if(ˠ<=(MyFixedPoint)0){
-continue;}if(ˎ.TransferItemTo(ˊ,ˏ,null,true,ˠ)){break;}}}}ʗ.Clear();ˊ.GetItems(ʗ);int ˡ=-1;MyFixedPoint ˢ=(MyFixedPoint)0;for(
-int ȱ=0;ȱ<ʗ.Count;ȱ++){var ƚ=ʗ[ȱ];if(!Ʉ(ƚ.Type)){continue;}if(!string.Equals(ƚ.Type.SubtypeId,ˋ,ʂ.ʃ)){continue;}if(ƚ.Amount
->ˢ){ˢ=ƚ.Amount;ˡ=ȱ;}}if(ˡ>0){ˊ.TransferItemTo(ˊ,ˡ,0,true,null);}}return true;}public string Ü(bool ˣ){if(!ˣ||ʓ.Count==0||
-ʕ.Count==0){return"--- REFINERY CASCADE ---\n"+"Refinery Balancing: OFF / STANDBY\n"+
-"(No scripted chunk pull; conveyors route ore when balancing is OFF.)";}int ȇ=ʓ.Count;int ø=ʕ.Count;int ˤ=0;int ˬ=0;int ˮ=0;for(int ó=0;ó<ȇ;ó++){int Ƹ=ʢ(ó,ȇ,ø);if(Ƹ==0){ˤ++;}else if(Ƹ==1){ˬ
-++;}else{ˮ++;}}var Ͱ=new StringBuilder(320);Ͱ.AppendLine("--- REFINERY CASCADE ---");Ͱ.Append("Total Refineries: ");Ͱ.
-AppendLine(ȇ.ToString());Ͱ.AppendLine(
-"(Live chunk pull uses the top 3 ranked ores in order; deeper ranks are balanced separately.)");int ͱ=ø<3?ø:3;for(int Ͳ=0;Ͳ<ͱ;Ͳ++){int Â=Ͳ==0?ˤ:(Ͳ==1?ˬ:ˮ);Ͱ.Append('[');Ͱ.Append('P');Ͱ.Append((char)('1'+Ͳ));Ͱ.
-Append("] ");Ͱ.Append(ʕ[Ͳ]);Ͱ.Append(": ");Ͱ.Append(Â);Ͱ.AppendLine(" assigned");}return Ͱ.ToString();}private static bool Ǭ()
-{return E.p!=null&&E.p.Me!=null&&E.p.GridTerminalSystem!=null;}string Ƶ(){A ͳ=E.q;return ͳ!=null&&!string.IsNullOrEmpty(ͳ
-.õ)?ͳ.õ:"[Manual]";}bool Ź(IMyTerminalBlock Ə){if(Ə==null){return false;}string Ʒ=Ƶ();if(string.IsNullOrEmpty(Ʒ)){return
+[Â];var Ȱ=new string[Â];int ȱ=0;foreach(var Ō in ǥ){var ȕ=Ō.Value;Ȯ[ȱ]=Ȳ.ȳ(ȕ.Ǩ);ȯ[ȱ]=(float)ȕ.Ǧ;Ȱ[ȱ]=Ȳ.ȳ(ȕ.ǧ);ȱ++;}á.Ƿ=Ȯ;
+á.Ǹ=ȯ;á.ǹ=Ȱ;}void ȅ(byte ȴ,int ǿ){if(ǿ<=0||q==null||!q.Ĝ||p==null){return;}Ǚ.Clear();Ǚ.Append("INV ex=");Ǚ.Append(ȴ);Ǚ.
+Append(" n=");Ǚ.Append(ǿ);p.Echo(Ǚ.ToString());}bool Ȅ(IMyInventory ȵ,int ȶ){ǘ.Clear();ȵ.GetItems(ǘ);if(ȶ<0||ȶ>=ǘ.Count){
+return false;}for(int ŧ=0;ŧ<Ǒ.Count;ŧ++){var Ų=Ǒ[ŧ];if(Ų==null||Ų==ȵ){continue;}if(ȷ(ȵ,ȶ,Ų)){return true;}}return false;}bool
+ȉ(IMyInventory ȵ,int ȶ,IMyInventory ȸ=null){ǘ.Clear();ȵ.GetItems(ǘ);if(ȶ<0||ȶ>=ǘ.Count){return false;}MyItemType ȹ=ǘ[ȶ].
+Type;Ⱥ ȼ=Ȼ(ȹ);List<IMyInventory>Ƚ;switch(ȼ){case Ⱥ.Ⱦ:Ƚ=ǋ;break;case Ⱥ.ȿ:Ƚ=ǌ;break;case Ⱥ.ɀ:Ƚ=Ǎ;break;case Ⱥ.Ɂ:Ƚ=ǎ;break;case
+Ⱥ.ɂ:Ƚ=Ǐ;break;case Ⱥ.Ƀ:Ƚ=ǐ;break;default:Ƚ=Ǒ;break;}for(int ŧ=0;ŧ<Ƚ.Count;ŧ++){var Ų=Ƚ[ŧ];if(Ų==null||Ų==ȵ||Ų==ȸ){
+continue;}if(ȷ(ȵ,ȶ,Ų)){return true;}}if(ȼ==Ⱥ.Ʉ){return false;}for(int ŧ=0;ŧ<Ǒ.Count;ŧ++){var Ų=Ǒ[ŧ];if(Ų==null||Ų==ȵ||Ų==ȸ){
+continue;}if(ȷ(ȵ,ȶ,Ų)){return true;}}return false;}private static bool ȷ(IMyInventory ȵ,int ȶ,IMyInventory Ų){if(!ȵ.
+IsConnectedTo(Ų)){return false;}return ȵ.TransferItemTo(Ų,ȶ,null,true,null);}void ȑ(IMyInventory Ʈ,ref N á){var ƙ=new List<
+MyInventoryItem>();Ʈ.GetItems(ƙ);for(int ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];var Ƹ=ƚ.Type;string Ʌ=Ƹ.SubtypeId;float ƞ=(float)ƚ.Amount;if(Ɇ(Ƹ
+)){if(ǂ.Contains(Ʌ)){ɇ(ref á,Ʌ,ƞ);}else if(ǔ.Add(Ʌ)){Ǖ.Add(Ʌ);}continue;}if(Ȇ(Ƹ)){if(Ǆ.Contains(Ʌ)){Ɉ(ref á,Ʌ,ƞ);}
+continue;}if(ȃ(Ƹ)){á.Ȫ+=ƞ;continue;}if(ɉ(Ƹ)){á.ȫ+=ƞ;continue;}if(Ɋ(Ƹ)){á.Ȭ+=ƞ;continue;}if(ɋ(Ƹ)){á.ȭ+=ƞ;}}}private static void ɇ
+(ref N á,string Ʌ,float ƞ){switch(Ʌ.ToUpperInvariant()){case"IRON":á.Ȗ+=ƞ;break;case"NICKEL":á.ȗ+=ƞ;break;case"COBALT":á.
+Ș+=ƞ;break;case"SILICON":á.ș+=ƞ;break;case"MAGNESIUM":á.Ț+=ƞ;break;case"SILVER":á.ț+=ƞ;break;case"GOLD":á.Ȝ+=ƞ;break;case
+"PLATINUM":á.ȝ+=ƞ;break;case"URANIUM":á.Ȟ+=ƞ;break;case"STONE":á.ȟ+=ƞ;break;case"ICE":á.Ƞ+=ƞ;break;}}private static void Ɉ(ref N á
+,string Ʌ,float ƞ){switch(Ʌ.ToUpperInvariant()){case"IRON":á.ȡ+=ƞ;break;case"NICKEL":á.Ȣ+=ƞ;break;case"COBALT":á.ȣ+=ƞ;
+break;case"SILICON":á.Ȥ+=ƞ;break;case"MAGNESIUM":á.ȥ+=ƞ;break;case"SILVER":á.Ȧ+=ƞ;break;case"GOLD":á.ȧ+=ƞ;break;case
+"PLATINUM":á.Ȩ+=ƞ;break;case"URANIUM":á.ȩ+=ƞ;break;}}bool Ȓ(MyItemType Ƹ){return true;}private static string ȓ(MyItemType Ƹ){if(Ɇ(
+Ƹ)){return"Ore";}if(Ȇ(Ƹ)){return"Ingot";}if(ȃ(Ƹ)){return"Component";}if(ɉ(Ƹ)){return"Ammo";}if(Ɋ(Ƹ)){return"Tool";}if(ɋ(Ƹ
+)){return"Bottle";}return"Other";}enum Ⱥ{Ⱦ,ȿ,ɀ,Ɂ,ɂ,Ƀ,Ʉ}private static Ⱥ Ȼ(MyItemType Ƹ){if(Ɇ(Ƹ)){return Ⱥ.Ⱦ;}if(Ȇ(Ƹ)){
+return Ⱥ.ȿ;}if(ȃ(Ƹ)){return Ⱥ.ɀ;}if(ɉ(Ƹ)){return Ⱥ.Ɂ;}if(Ɋ(Ƹ)){return Ⱥ.ɂ;}if(ɋ(Ƹ)){return Ⱥ.Ƀ;}return Ⱥ.Ʉ;}private static
+bool Ɇ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf("Ore",StringComparison.Ordinal)>=0;}private static bool Ȇ
+(MyItemType Ƹ){return Ƹ.TypeId.ToString().IndexOf("Ingot",StringComparison.Ordinal)>=0;}private static bool ȃ(MyItemType
+Ƹ){return Ƹ.TypeId.ToString().IndexOf("Component",StringComparison.Ordinal)>=0;}private static bool ɉ(MyItemType Ƹ){
+string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf("Ammo",StringComparison.Ordinal)>=0||ƹ.IndexOf("Magazine",StringComparison.
+Ordinal)>=0;}private static bool Ɋ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();if(ƹ.IndexOf("PhysicalGun",StringComparison.
+Ordinal)>=0){return true;}if(ƹ.IndexOf("Welder",StringComparison.Ordinal)>=0){return true;}if(ƹ.IndexOf("Drill",
+StringComparison.Ordinal)>=0&&ƹ.IndexOf("Component",StringComparison.Ordinal)<0){return true;}if(ƹ.IndexOf("Grinder",StringComparison.
+Ordinal)>=0){return true;}return false;}private static bool ɋ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf(
+"OxygenContainer",StringComparison.Ordinal)>=0||ƹ.IndexOf("GasContainer",StringComparison.Ordinal)>=0;}bool Ǭ(){return p!=null&&p.Me!=
+null&&p.GridTerminalSystem!=null;}private static bool ǟ(IMyTerminalBlock Ə){if(Ə==null){return false;}string Ʒ=q!=null&&!
+string.IsNullOrEmpty(q.õ)?q.õ:"[Manual]";if(string.IsNullOrEmpty(Ʒ)){return false;}string ú=Ə.CustomName;return û.ü(ú,Ʒ);}bool
+Ź(IMyTerminalBlock Ə){return ǟ(Ə);}bool ǻ(IMyTerminalBlock Ə){if(Ə==null||!Ə.IsSameConstructAs(p.Me)){return false;}var Ƒ
+=Ə as IMyInventoryOwner;return Ƒ!=null&&Ƒ.InventoryCount>0;}void Ǻ(IMyCargoContainer ƕ){string ú=ƕ.CustomName??string.
+Empty;bool Ɍ=û.ü(ú,ƻ);bool ɍ=û.ü(ú,Ƽ);bool Ɏ=û.ü(ú,ƽ);bool ɏ=û.ü(ú,ƾ);bool ɐ=û.ü(ú,ƿ);bool ɑ=û.ü(ú,ǀ);bool ɒ=û.ü(ú,ǁ);bool ɓ=
+Ɍ||ɍ||Ɏ||ɏ||ɐ||ɑ;for(int Ɩ=0;Ɩ<ƕ.InventoryCount;Ɩ++){var Ʈ=ƕ.GetInventory(Ɩ);if(Ɍ){ǋ.Add(Ʈ);}if(ɍ){ǌ.Add(Ʈ);}if(Ɏ){Ǎ.Add(
+Ʈ);}if(ɏ){ǎ.Add(Ʈ);}if(ɐ){Ǐ.Add(Ʈ);}if(ɑ){ǐ.Add(Ʈ);}if(ɒ||!ɓ){Ǒ.Add(Ʈ);}}}}public class K{private const double ɔ=1e-9;
+private readonly List<IMyBatteryBlock>ɕ=new List<IMyBatteryBlock>();private readonly List<IMyReactor>ɖ=new List<IMyReactor>();
+private readonly List<IMyPowerProducer>ɗ=new List<IMyPowerProducer>(),ɘ=new List<IMyPowerProducer>();double ə;double ɚ,ɛ,ɜ,ɝ,ɞ,
+ɟ,ɠ,ɡ,ɢ,ɣ;private const int ř=38000;int Ś;byte ś=4;bool ɤ;public bool Í(List<IMyTerminalBlock>ŝ,List<IMyBatteryBlock>ɥ,
+ref T á){if(!Ǭ()){ś=4;ɦ(ref á);return true;}if(ś==4){ɕ.Clear();ɖ.Clear();ɗ.Clear();ɘ.Clear();ɤ=false;ś=0;Ś=0;}if(ś==0){if(!
+ɧ(ŝ,ɥ)){return false;}ɨ();ɩ();ɪ();var ɬ=ɫ();ɭ(á,ɬ);ś=4;return true;}return true;}private static void ɦ(ref T ŧ){ŧ.ɮ=0f;ŧ.
+ɯ=0f;ŧ.ɰ=0f;ŧ.ɱ=0f;ŧ.ɲ=0f;ŧ.ɳ=0f;ŧ.ɴ=0f;ŧ.ɵ=0f;ŧ.ɶ=0f;ŧ.ɷ=0f;ŧ.ɸ=0;ŧ.ɹ=0;ŧ.ɺ=0;ŧ.Û=false;}private static void ɭ(T Ų,T ų){
+Ų.ɮ=ų.ɮ;Ų.ɯ=ų.ɯ;Ų.ɰ=ų.ɰ;Ų.ɱ=ų.ɱ;Ų.ɲ=ų.ɲ;Ų.ɳ=ų.ɳ;Ų.ɴ=ų.ɴ;Ų.ɵ=ų.ɵ;Ų.ɶ=ų.ɶ;Ų.ɷ=ų.ɷ;Ų.ɸ=ų.ɸ;Ų.ɹ=ų.ɹ;Ų.ɺ=ų.ɺ;Ų.Û=ų.Û;}bool ɧ(
+List<IMyTerminalBlock>ŝ,List<IMyBatteryBlock>ɥ){if(ŝ==null){return true;}var ɻ=E.p.Me;if(!ɤ&&ɥ!=null){for(int ɼ=0;ɼ<ɥ.Count;
+ɼ++){var ɽ=ɥ[ɼ];if(ɽ!=null&&ɽ.IsSameConstructAs(ɻ)&&!Ź(ɽ)){ɕ.Add(ɽ);}}ɤ=true;}for(int ó=Ś;ó<ŝ.Count;ó++){if(E.p.Runtime.
+CurrentInstructionCount>ř){Ś=ó;return false;}var Ə=ŝ[ó];if(!Ə.IsSameConstructAs(ɻ)||Ź(Ə)){continue;}if(Ə is IMyBatteryBlock){continue;}var ɾ=Ə
+as IMyReactor;if(ɾ!=null){ɖ.Add(ɾ);continue;}var ɿ=Ə as IMyPowerProducer;if(ɿ!=null){if(ʀ(ɿ)){ɗ.Add(ɿ);}else if(ʁ(ɿ)){ɘ.
+Add(ɿ);}}}return true;}private static bool ʁ(IMyPowerProducer ø){var ʂ=ø as IMyTerminalBlock;if(ʂ==null){return false;}
+string ʃ=ʂ.BlockDefinition.ToString();return ʃ.IndexOf("SolarPanel",ʄ.ʅ)>=0;}private static bool ʀ(IMyPowerProducer ø){var ʂ=ø
+as IMyTerminalBlock;if(ʂ==null){return false;}string ʃ=ʂ.BlockDefinition.ToString();return ʃ.IndexOf("HydrogenEngine",ʄ.ʅ)
+>=0;}void ɨ(){ə=0;ɚ=0;ɛ=0;ɜ=0;ɝ=0;ɞ=0;ɟ=0;ɠ=0;ɡ=0;ɢ=0;ɣ=0;for(int ó=0;ó<ɕ.Count;ó++){var ɽ=ɕ[ó];ə+=ɽ.CurrentStoredPower;ɚ
++=ɽ.MaxStoredPower;ɛ+=ɽ.CurrentInput;ɜ+=ɽ.CurrentOutput;ɠ+=ɽ.MaxInput;ɡ+=ɽ.MaxOutput;}for(int ó=0;ó<ɘ.Count;ó++){ɝ+=ɘ[ó].
+CurrentOutput;}for(int ó=0;ó<ɖ.Count;ó++){ɞ+=ɖ[ó].CurrentOutput;ɢ+=ɖ[ó].MaxOutput;}for(int ó=0;ó<ɗ.Count;ó++){ɟ+=ɗ[ó].CurrentOutput;ɣ
++=ɗ[ó].MaxOutput;}}void ɩ(){if(ɕ.Count==0){return;}var ž=E.q;double ʆ=0.25;double ʇ=0.80;if(ž!=null){ʆ=ž.Ē;ʇ=ž.ē;}double ʈ
+=0;if(ɚ>ɔ){ʈ=ə/ɚ;}bool ʉ=ʈ<ʆ;bool ʊ=ʈ>ʇ;for(int ó=0;ó<ɕ.Count;ó++){var ɽ=ɕ[ó];if(ʉ){ɽ.ChargeMode=ChargeMode.Recharge;}
+else if(ʊ){ɽ.ChargeMode=ChargeMode.Auto;}}}void ɪ(){var ž=E.q;if(ž==null||!ž.Ė){return;}bool ʋ=ɝ<ž.Ĕ;bool ʌ=ɝ>=ž.Ĕ;if(ʋ){for
+(int ó=0;ó<ɖ.Count;ó++){ɖ[ó].Enabled=true;}for(int ó=0;ó<ɗ.Count;ó++){ɗ[ó].Enabled=true;}}else if(ʌ){for(int ó=0;ó<ɖ.
+Count;ó++){ɖ[ó].Enabled=false;}for(int ó=0;ó<ɗ.Count;ó++){ɗ[ó].Enabled=false;}}}T ɫ(){var á=new T();á.ɮ=(float)ə;á.ɯ=(float)ɚ
+;á.ɰ=(float)ɛ;á.ɱ=(float)ɜ;á.ɲ=(float)ɠ;á.ɳ=(float)ɡ;á.ɴ=(float)ɞ;á.ɵ=(float)ɟ;á.ɶ=(float)ɢ;á.ɷ=(float)ɣ;á.ɸ=ɕ.Count;á.ɹ=
+ɖ.Count;á.ɺ=ɗ.Count;double ʍ=0;if(ɚ>ɔ){ʍ=ə/ɚ;}double ʎ=0.25;if(E.q!=null){ʎ=E.q.Ē;}á.Û=ɚ>ɔ&&ʍ<ʎ;return á;}bool Ǭ(){return
+E.p!=null&&E.p.Me!=null&&E.p.GridTerminalSystem!=null;}bool Ź(IMyTerminalBlock Ə){if(Ə==null){return false;}var ž=E.q;
+string Ʒ=ž!=null&&!string.IsNullOrEmpty(ž.õ)?ž.õ:"[Manual]";if(string.IsNullOrEmpty(Ʒ)){return false;}string ú=Ə.CustomName;
+return û.ü(ú,Ʒ);}}public sealed class G{private const double ʏ=0.05,ʐ=1000,ʑ=100000,ʒ=50000,ʓ=0.3,ʔ=125000;private readonly
+List<IMyRefinery>ʕ=new List<IMyRefinery>();private readonly HashSet<IMyInventory>ʖ=new HashSet<IMyInventory>();List<
+IMyTerminalBlock>a;private readonly List<string>ʗ=new List<string>();private readonly Dictionary<string,double>ʘ=new Dictionary<string,
+double>(StringComparer.OrdinalIgnoreCase);private readonly List<MyInventoryItem>ʙ=new List<MyInventoryItem>();private readonly
+Dictionary<string,int>ʚ=new Dictionary<string,int>(StringComparer.OrdinalIgnoreCase);private readonly List<KeyValuePair<string,int
+>>ʛ=new List<KeyValuePair<string,int>>(32);private static readonly int[]ʜ={2000,1000,500,250,100,50};string ʝ=string.
+Empty;private const int ř=38000;int Ś,ʞ;byte ʟ=255;Dictionary<string,int>ʠ;private static int ʤ(int ó,int ȇ,int ø){if(ø<=0){
+return 0;}if(ȇ<4){return 0;}int Ƹ;if(ȇ<8){int ʡ=(2*ȇ+2)/3;Ƹ=ó<ʡ?0:1;}else{int ʡ=(ȇ+1)/2;int ʢ=ȇ-ʡ;int ʣ=(ʢ+1)/2;if(ó<ʡ){Ƹ=0;}
+else if(ó<ʡ+ʣ){Ƹ=1;}else{Ƹ=2;}}if(Ƹ>=ø){Ƹ=ø-1;}return Ƹ;}private static double ʦ(string ʥ){if(ʥ==null){return ʓ;}switch(ʥ.
+ToLowerInvariant()){case"iron":case"silicon":return 0.7;case"nickel":return 0.4;case"cobalt":return 0.3;case"magnesium":return 0.007;
+case"silver":return 0.1;case"gold":return 0.01;case"platinum":return 0.005;case"uranium":return 0.01;default:return ʓ;}}
+private static double ʬ(string ʧ,A ž){if(string.Equals(ʧ,"Stone",ʄ.ʅ)){return ʒ;}double ß;string ý=ʨ(ʧ);if(ý==null||!ʩ(ž,ý,out
+ß)||ß<=0){if(!ʩ(ž,"Iron",out ß)||ß<=0){ß=ʔ;}}double ʪ=ʦ(ʧ);if(ʪ<=0){ʪ=ʓ;}double ʫ=ʏ*(ß/ʪ);if(ʫ<ʐ){ʫ=ʐ;}if(ʫ>ʑ){ʫ=ʑ;}
+return ʫ;}public bool Ê(List<IMyTerminalBlock>ŝ,List<IMyRefinery>ǩ,ref P á){if(!Ǭ()){ʟ=255;ʭ(á);return true;}if(ʟ==255){a=ŝ;ʮ(
+ǩ);A ʯ=E.q;ʰ(ʯ!=null&&ʯ.Ý);ʗ.Clear();Ś=0;ʟ=1;return false;}if(ʟ==1){if(!ʱ()){return false;}ʘ.Clear();Ś=0;ʟ=2;return false
+;}if(ʟ==2){if(!ʲ()){return false;}ʳ();ʠ=ʴ();A ž=E.q;bool ʵ=ž!=null&&ž.Ý;if(ʵ){ʞ=0;Ś=0;ʟ=4;}else{ʟ=6;}return false;}if(ʟ==
+4){if(!ʶ()){return false;}Ś=0;ʟ=5;return false;}if(ʟ==5){if(!ʷ()){return false;}ʟ=6;return false;}if(ʟ==6){var ɬ=ʸ(ʠ);ʹ(á
+,ɬ);ʟ=255;return true;}return true;}private static void ʭ(P ŧ){ŧ.ë=new string[0];ŧ.ʺ=new string[0];ŧ.ʻ=new float[0];ŧ.ʼ=
+new string[0];ŧ.ʽ=new float[0];ŧ.ò=new bool[0];ŧ.ñ=new bool[0];ŧ.ʾ=null;ŧ.ʿ=null;}private static void ʹ(P Ų,P ų){Ų.ë=ų.ë;Ų.
+ʺ=ų.ʺ;Ų.ʻ=ų.ʻ;Ų.ʼ=ų.ʼ;Ų.ʽ=ų.ʽ;Ų.ò=ų.ò;Ų.ñ=ų.ñ;Ų.ʾ=ų.ʾ;Ų.ʿ=ų.ʿ;}bool ʱ(){if(a==null){return true;}for(int ɼ=Ś;ɼ<a.Count;ɼ
+++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=ɼ;return false;}var Ə=a[ɼ];if(Ź(Ə)){continue;}var Ƒ=Ə as IMyInventoryOwner
+;if(Ƒ==null){continue;}for(int ˀ=0;ˀ<Ƒ.InventoryCount;ˀ++){var Ʈ=Ƒ.GetInventory(ˀ);if(Ʈ==null){continue;}var ƙ=new List<
+MyInventoryItem>();Ʈ.GetItems(ƙ);for(int ȱ=0;ȱ<ƙ.Count;ȱ++){var Ƹ=ƙ[ȱ].Type;if(!Ɇ(Ƹ)){continue;}string Ʌ=Ƹ.SubtypeId;if(string.Equals(Ʌ
+,"Ice",ʄ.ʅ)){continue;}bool ˁ=false;for(int ń=0;ń<ʗ.Count;ń++){if(string.Equals(ʗ[ń],Ʌ,ʄ.ʅ)){ˁ=true;break;}}if(!ˁ){ʗ.Add(
+Ʌ);}}}}return true;}bool ʲ(){if(a==null){return true;}for(int ɼ=Ś;ɼ<a.Count;ɼ++){if(E.p.Runtime.CurrentInstructionCount>ř
+){Ś=ɼ;return false;}var Ə=a[ɼ];if(Ź(Ə)){continue;}var Ƒ=Ə as IMyInventoryOwner;if(Ƒ==null){continue;}for(int ˀ=0;ˀ<Ƒ.
+InventoryCount;ˀ++){var Ʈ=Ƒ.GetInventory(ˀ);if(Ʈ==null){continue;}var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(int ȱ=0;ȱ<ƙ.
+Count;ȱ++){var ƚ=ƙ[ȱ];if(!ˆ(ƚ.Type)){continue;}string Ʌ=ƚ.Type.SubtypeId;double ƞ=(double)ƚ.Amount;double ˇ;if(!ʘ.TryGetValue
+(Ʌ,out ˇ)){ˇ=0;}ʘ[Ʌ]=ˇ+ƞ;}}}return true;}bool ʶ(){if(ʗ.Count==0){return true;}int ˈ=0;const int ˉ=20;for(int Ƹ=ʞ;Ƹ<ʗ.
+Count&&ˈ<ˉ;Ƹ++){if(E.p.Runtime.CurrentInstructionCount>ř){ʞ=Ƹ;return false;}string ˊ=ʗ[Ƹ];while(ˈ<ˉ&&ˋ(ˊ)){if(E.p.Runtime.
+CurrentInstructionCount>ř){ʞ=Ƹ;return false;}ˈ++;}}return true;}bool ʷ(){if(ʗ.Count==0){return true;}int ȇ=ʕ.Count;int ø=ʗ.Count;for(int ó=Ś;ó<
+ȇ;ó++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=ó;return false;}var ł=ʕ[ó];var ˌ=ł.InputInventory;if(ˌ==null){continue
+;}string ˍ=ʗ[ʤ(ó,ȇ,ø)];if(ˎ(ł,ˍ)<=50f&&ˏ(ł).RawValue>0){IMyInventory ː;int ˑ;if(ˠ(ˍ,ˌ,out ː,out ˑ)){for(int ń=0;ń<ʜ.
+Length;ń++){if(E.p.Runtime.CurrentInstructionCount>ř){Ś=ó;return false;}ː.GetItems(ʙ);if(ˑ>=ʙ.Count){break;}MyItemType ˡ=ʙ[ˑ].
+Type;if(!ː.CanTransferItemTo(ˌ,ˡ)){break;}MyFixedPoint ƞ=ʙ[ˑ].Amount;if(ƞ<=(MyFixedPoint)0){break;}MyFixedPoint ˢ=(
+MyFixedPoint)ʜ[ń];if(ƞ<ˢ){ˢ=ƞ;}if(ˢ<=(MyFixedPoint)0){continue;}if(ː.TransferItemTo(ˌ,ˑ,null,true,ˢ)){break;}}}}ʙ.Clear();ˌ.GetItems
+(ʙ);int ˣ=-1;MyFixedPoint ˤ=(MyFixedPoint)0;for(int ȱ=0;ȱ<ʙ.Count;ȱ++){var ƚ=ʙ[ȱ];if(!Ɇ(ƚ.Type)){continue;}if(!string.
+Equals(ƚ.Type.SubtypeId,ˍ,ʄ.ʅ)){continue;}if(ƚ.Amount>ˤ){ˤ=ƚ.Amount;ˣ=ȱ;}}if(ˣ>0){ˌ.TransferItemTo(ˌ,ˣ,0,true,null);}}return
+true;}public string Ü(bool ˬ){if(!ˬ||ʕ.Count==0||ʗ.Count==0){return"--- REFINERY CASCADE ---\n"+
+"Refinery Balancing: OFF / STANDBY\n"+"(No scripted chunk pull; conveyors route ore when balancing is OFF.)";}int ȇ=ʕ.Count;int ø=ʗ.Count;int ˮ=0;int Ͱ=0;int
+ͱ=0;for(int ó=0;ó<ȇ;ó++){int Ƹ=ʤ(ó,ȇ,ø);if(Ƹ==0){ˮ++;}else if(Ƹ==1){Ͱ++;}else{ͱ++;}}var Ͳ=new StringBuilder(320);Ͳ.
+AppendLine("--- REFINERY CASCADE ---");Ͳ.Append("Total Refineries: ");Ͳ.AppendLine(ȇ.ToString());Ͳ.AppendLine(
+"(Live chunk pull uses the top 3 ranked ores in order; deeper ranks are balanced separately.)");int ͳ=ø<3?ø:3;for(int ʹ=0;ʹ<ͳ;ʹ++){int Â=ʹ==0?ˮ:(ʹ==1?Ͱ:ͱ);Ͳ.Append('[');Ͳ.Append('P');Ͳ.Append((char)('1'+ʹ));Ͳ.
+Append("] ");Ͳ.Append(ʗ[ʹ]);Ͳ.Append(": ");Ͳ.Append(Â);Ͳ.AppendLine(" assigned");}return Ͳ.ToString();}private static bool Ǭ()
+{return E.p!=null&&E.p.Me!=null&&E.p.GridTerminalSystem!=null;}string Ƶ(){A Ͷ=E.q;return Ͷ!=null&&!string.IsNullOrEmpty(Ͷ
+.õ)?Ͷ.õ:"[Manual]";}bool Ź(IMyTerminalBlock Ə){if(Ə==null){return false;}string Ʒ=Ƶ();if(string.IsNullOrEmpty(Ʒ)){return
 false;}string ú=Ə.CustomName;return û.ü(ú,Ʒ);}private static bool ǻ(IMyTerminalBlock Ə){if(Ə==null||!Ə.IsSameConstructAs(E.p.
-Me)){return false;}var Ƒ=Ə as IMyInventoryOwner;return Ƒ!=null&&Ƒ.InventoryCount>0;}void ʬ(List<IMyRefinery>ǩ){ʓ.Clear();ʔ
-.Clear();if(ǩ==null){return;}for(int ó=0;ó<ǩ.Count;ó++){var ǣ=ǩ[ó];if(ǣ==null){continue;}var ʹ=ǣ.OutputInventory;if(ʹ!=
-null){ʔ.Add(ʹ);}ʓ.Add(ǣ);}}void ʮ(bool Ͷ){for(int ó=0;ó<ʓ.Count;ó++){var ý=ʓ[ó]as IMyProductionBlock;if(ý==null){continue;}ý
-.UseConveyorSystem=!Ͷ;}}private static bool Ʉ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf("Ore",
-StringComparison.Ordinal)>=0;}private static bool ˀ(MyItemType Ƹ){return Ƹ.TypeId.ToString().IndexOf("Ingot",StringComparison.Ordinal)>=
-0;}private static MyFixedPoint ˍ(IMyRefinery ł){var Ʈ=ł.InputInventory;if(Ʈ==null||Ʈ.MaxVolume.RawValue<=0){return(
-MyFixedPoint)0;}return Ʈ.MaxVolume-Ʈ.CurrentVolume;}float ˌ(IMyRefinery ł,string ˈ){var Ʈ=ł.InputInventory;if(Ʈ==null){return 0f;}
-float ƭ=0f;ʗ.Clear();Ʈ.GetItems(ʗ);for(int ȱ=0;ȱ<ʗ.Count;ȱ++){var ƚ=ʗ[ȱ];if(Ʉ(ƚ.Type)&&string.Equals(ƚ.Type.SubtypeId,ˈ,ʂ.ʃ))
-{ƭ+=(float)ƚ.Amount;}}return ƭ;}bool ͼ(IMyInventory ˎ,int ˏ,IMyInventory ͷ){if(ˎ==null||ͷ==null||ˎ==ͷ||ˏ<0){return false;
-}ˎ.GetItems(ʗ);if(ˏ>=ʗ.Count){return false;}MyItemType ˑ=ʗ[ˏ].Type;if(!ˎ.CanTransferItemTo(ͷ,ˑ)){return false;}if(ˎ.
-TransferItemTo(ͷ,ˏ,null,true,null)){return true;}ˎ.GetItems(ʗ);if(ˏ>=ʗ.Count){return false;}MyFixedPoint ƞ=ʗ[ˏ].Amount;if(ƞ<=(
-MyFixedPoint)0){return false;}for(int ͺ=1;ͺ<=8;ͺ++){double Ɲ=(double)ƞ/(1<<ͺ);if(Ɲ<0.01){break;}MyFixedPoint ͻ=(MyFixedPoint)Ɲ;if(ͻ
-<=(MyFixedPoint)0){continue;}if(ˎ.TransferItemTo(ͷ,ˏ,null,true,ͻ)){return true;}}return false;}bool ː(string ˈ,
-IMyInventory ͽ,out IMyInventory ˎ,out int ˏ){ˎ=null;ˏ=-1;MyFixedPoint ˢ=(MyFixedPoint)0;MyFixedPoint Ά=(MyFixedPoint)ʪ(ˈ,E.q);if(a==
-null){return false;}for(int ɺ=0;ɺ<a.Count;ɺ++){var Ə=a[ɺ];if(Ź(Ə)){continue;}var Ƒ=Ə as IMyInventoryOwner;if(Ƒ==null){
-continue;}var Έ=Ə as IMyRefinery;for(int ʾ=0;ʾ<Ƒ.InventoryCount;ʾ++){var Ʈ=Ƒ.GetInventory(ʾ);if(Ʈ==null||Ʈ==ͽ||ʔ.Contains(Ʈ)){
-continue;}ʗ.Clear();Ʈ.GetItems(ʗ);for(int ȱ=0;ȱ<ʗ.Count;ȱ++){var ƚ=ʗ[ȱ];if(!Ʉ(ƚ.Type)){continue;}if(!string.Equals(ƚ.Type.
-SubtypeId,ˈ,ʂ.ʃ)){continue;}if(Έ!=null&&ƚ.Amount<=Ά){continue;}if(ƚ.Amount>ˢ){ˢ=ƚ.Amount;ˎ=Ʈ;ˏ=ȱ;}}}}return ˎ!=null&&ˏ>=0&&ˢ>(
-MyFixedPoint)0;}bool ˉ(string ˈ,int Ή=-1){int Â=ʓ.Count;if(Â==0){return false;}const float Ί=0.5f;int Ό;float Ύ;if(Ή>=0&&Ή<Â){Ό=Ή;if
-(ˍ(ʓ[Ό]).RawValue<=0){return false;}Ύ=ˌ(ʓ[Ό],ˈ);}else{Ό=-1;Ύ=float.PositiveInfinity;long Ώ=-1;for(int ó=0;ó<Â;ó++){
-MyFixedPoint ΐ=ˍ(ʓ[ó]);if(ΐ.RawValue<=0){continue;}float ƞ=ˌ(ʓ[ó],ˈ);long Α=ΐ.RawValue;if(ƞ<Ύ-1e-4f||(Math.Abs(ƞ-Ύ)<1e-4f&&Α>Ώ)){Ύ=ƞ
-;Ώ=Α;Ό=ó;}}if(Ό<0){return false;}}IMyInventory ˊ=ʓ[Ό].InputInventory;if(ˊ==null){return false;}int Β=-1;float Γ=-1f;for(
-int ó=0;ó<Â;ó++){if(ó==Ό){continue;}float ƞ=ˌ(ʓ[ó],ˈ);if(ƞ>Γ){Γ=ƞ;Β=ó;}}if(Β>=0&&Γ>Ύ+Ί){var Δ=ʓ[Β].InputInventory;if(Δ!=
-null&&Δ!=ˊ){ʗ.Clear();Δ.GetItems(ʗ);int Ε=-1;MyFixedPoint Ζ=(MyFixedPoint)0;for(int ȱ=0;ȱ<ʗ.Count;ȱ++){var ƚ=ʗ[ȱ];if(!Ʉ(ƚ.
-Type)||!string.Equals(ƚ.Type.SubtypeId,ˈ,ʂ.ʃ)){continue;}if(ƚ.Amount>Ζ){Ζ=ƚ.Amount;Ε=ȱ;}}if(Ε>=0&&ˍ(ʓ[Ό]).RawValue>0&&ͼ(Δ,Ε,
-ˊ)){return true;}}}IMyInventory ˎ;int ˏ;if(!ː(ˈ,ˊ,out ˎ,out ˏ)){return false;}return ͼ(ˎ,ˏ,ˊ);}private static string ʦ(
-string ʥ){if(string.IsNullOrEmpty(ʥ)){return null;}if(string.Equals(ʥ,"Ice",ʂ.ʃ)){return null;}return ʥ;}private static bool ʧ
-(A ž,string Η,out double Ƌ){Ƌ=0;if(ž==null||ž.ā==null||string.IsNullOrEmpty(Η)){return false;}if(ž.ā.TryGetValue(Η,out Ƌ)
-){return true;}string Θ="Ingot/"+Η;return ž.ā.TryGetValue(Θ,out Ƌ);}private static readonly string[]Ι={"Iron","Nickel",
-"Silicon","Gravel"};double Ξ(A ž){double Κ=double.PositiveInfinity;int Λ=0;for(int ó=0;ó<Ι.Length;ó++){string Μ=Ι[ó];double Ƌ;if(
-!ʧ(ž,Μ,out Ƌ)){continue;}Λ++;if(Ƌ<=0){if(1.0<Κ){Κ=1.0;}continue;}double Ν;if(!ʖ.TryGetValue(Μ,out Ν)){Ν=0;}double ł=Ν/Ƌ;
-if(ł<Κ){Κ=ł;}}if(Λ==0){return double.PositiveInfinity;}return Κ;}double Ο(string Η,A ž){double Ƌ;if(!ʧ(ž,Η,out Ƌ)){return
-double.PositiveInfinity;}if(Ƌ<=0){return 1.0;}double Ν;if(!ʖ.TryGetValue(Η,out Ν)){Ν=0;}return Ν/Ƌ;}double Π(string ˈ,A ž){if(
-string.Equals(ˈ,"Stone",ʂ.ʃ)){return Ξ(ž);}string Μ=ʦ(ˈ);if(Μ==null){return double.PositiveInfinity;}return Ο(Μ,ž);}void ʱ(){A
-ž=E.q;double Ρ=ž!=null?ž.ĕ:0.05;if(Ρ<0){Ρ=0;}int Ĭ=ʕ.Count;for(int ȇ=0;ȇ<Ĭ-1;ȇ++){for(int ø=ȇ+1;ø<Ĭ;ø++){string Σ=ʕ[ȇ];
-string Ͱ=ʕ[ø];double Τ=Π(Σ,ž);double Υ=Π(Ͱ,ž);if(Ρ>0&&!string.IsNullOrEmpty(ʛ)){if(string.Equals(Σ,ʛ,ʂ.ʃ)){Τ-=Ρ;}if(string.
-Equals(Ͱ,ʛ,ʂ.ʃ)){Υ-=Ρ;}}if(Τ>Υ||(Τ==Υ&&string.CompareOrdinal(Σ,Ͱ)>0)){ʕ[ȇ]=Ͱ;ʕ[ø]=Σ;}}}if(Ĭ>0){ʛ=ʕ[0];}else{ʛ=string.Empty;}}
-Dictionary<string,int>ʲ(){ʘ.Clear();for(int ó=0;ó<ʕ.Count;ó++){ʘ[ʕ[ó]]=ó+1;}return ʘ;}private static string Ψ(IMyRefinery ł,out
-float Φ){Φ=0f;var Ʈ=ł.InputInventory;if(Ʈ==null){return string.Empty;}var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(int
-ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];if(Ʉ(ƚ.Type)){Φ+=(float)ƚ.Amount;}}if(ƙ.Count==0){return string.Empty;}var Χ=ƙ[0];if(!Ʉ(Χ.
-Type)){return string.Empty;}return Χ.Type.SubtypeId;}private static string Ϋ(IMyRefinery ł,out float Ω){Ω=0f;var Ʈ=ł.
-OutputInventory;if(Ʈ==null){return string.Empty;}string Ϊ=string.Empty;float ˢ=0f;var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(
-int ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];if(!ˀ(ƚ.Type)){continue;}float ȇ=(float)ƚ.Amount;Ω+=ȇ;if(ȇ>ˢ){ˢ=ȇ;Ϊ=ƚ.Type.SubtypeId;}}
-return Ϊ;}private static bool ά(IMyRefinery ł){var ý=ł as IMyProductionBlock;return ý!=null&&ý.IsProducing;}P ʶ(Dictionary<
-string,int>έ){int Â=ʓ.Count;var á=new P();if(Â==0){á.ë=new string[0];á.ʸ=new string[0];á.ʹ=new float[0];á.ʺ=new string[0];á.ʻ=
-new float[0];á.ò=new bool[0];á.ñ=new bool[0];ή(á,έ);return á;}var Ȯ=new string[Â];var ί=new string[Â];var ΰ=new float[Â];
-var α=new string[Â];var β=new float[Â];var γ=new bool[Â];var ñ=new bool[Â];for(int ó=0;ó<Â;ó++){var Έ=ʓ[ó];Ȯ[ó]=δ(Έ.
-CustomName);float ε;string ζ=Ψ(Έ,out ε);ί[ó]=ζ;ΰ[ó]=ε;ñ[ó]=ε>0.0001f;float η;string θ=Ϋ(Έ,out η);α[ó]=η>0.0001f?θ:string.Empty;β[ó
-]=η;γ[ó]=ά(Έ);}á.ë=Ȯ;á.ʸ=ί;á.ʹ=ΰ;á.ʺ=α;á.ʻ=β;á.ò=γ;á.ñ=ñ;ή(á,έ);return á;}private static string δ(string Ķ){if(string.
-IsNullOrEmpty(Ķ)){return string.Empty;}int Â=Ķ.Length;int ι=-1;for(int ó=0;ó<Â;ó++){char Ĭ=Ķ[ó];if(Ĭ==';'||Ĭ=='|'||Ĭ=='\\'||Ĭ=='\r'||
-Ĭ=='\n'){ι=ó;break;}}if(ι<0){return Ķ;}char[]κ=new char[Â];for(int ó=0;ó<ι;ó++){κ[ó]=Ķ[ó];}for(int ó=ι;ó<Â;ó++){char Ĭ=Ķ[
-ó];κ[ó]=(Ĭ==';'||Ĭ=='|'||Ĭ=='\\'||Ĭ=='\r'||Ĭ=='\n')?' ':Ĭ;}return new string(κ);}void ή(P á,Dictionary<string,int>έ){á.ʼ=
-null;á.ʽ=null;if(έ==null||έ.Count==0){return;}ʙ.Clear();foreach(var Ō in έ){if(string.Equals(Ō.Key,"Ice",ʂ.ʃ)){continue;}ʙ.
-Add(Ō);}ʙ.Sort((ȇ,ø)=>{int Ĭ=ȇ.Value.CompareTo(ø.Value);if(Ĭ!=0){return Ĭ;}return string.CompareOrdinal(ȇ.Key,ø.Key);});if(
-ʙ.Count==0){return;}int Â=ʙ.Count;int ƴ=(Â+1)/2;var Ͱ=new StringBuilder();for(int ó=0;ó<ƴ;ó++){if(ó>0){Ͱ.Append("  ");}Ͱ.
-Append(ó+1);Ͱ.Append(". ");Ͱ.Append(λ.μ(ʙ[ó].Key));}á.ʼ=Ͱ.ToString();Ͱ.Clear();for(int ó=ƴ;ó<Â;ó++){if(ó>ƴ){Ͱ.Append("  ");}Ͱ.
-Append(ó+1);Ͱ.Append(". ");Ͱ.Append(λ.μ(ʙ[ó].Key));}á.ʽ=Ͱ.Length>0?Ͱ.ToString():string.Empty;}}public class R{public float Ũ,ũ
-,Ū,ū,Ŭ,ŭ,Ů,ů;public int Ű,ű;public bool è;}public class X{public string[]Ƿ,ǹ;public float[]Ǹ;}public class N{public float
-Ȗ,ȗ,Ș,ș,Ț,ț,Ȝ,ȝ,Ȟ,ȟ,Ƞ,ȡ,Ȣ,ȣ,Ȥ,ȥ,Ȧ,ȧ,Ȩ,ȩ,Ȫ,ȫ,Ȭ,ȭ,Ȑ,ê,Ú;}public class T{public float ɬ,ɭ,ɮ,ɯ,ɰ,ɱ,ɲ,ɳ,ɴ,ɵ;public int ɶ,ɷ,ɸ;
-public bool Û;}public class P{public string[]ë,ʸ,ʺ;public float[]ʹ,ʻ;public bool[]ò,ñ;public string ʼ,ʽ;}public class V{public
-bool è,Û,é,ì,í,ï,þ;public int ÿ;public string Ā;}public static class r{public const string z="SYS_STATUS",Ø="PB1_WARNINGS",Ò
-="PB1ToPB2_InventorySummary",Ó="PB1ToPB2_RefineryStatus",Ô="PB1ToPB2_IceStatus",Õ="PB1ToPB2_PowerStatus",Ö=
-"PB1ToPB2_InventoryDynamic",s="PB2ToPB1";}public static class ψ{private const string ν="1";public static string ã(object á){if(á==null)return
-string.Empty;Type Ƹ=á.GetType();if(Ƹ==typeof(N))return ξ((N)á);if(Ƹ==typeof(P))return ο((P)á);if(Ƹ==typeof(R))return π((R)á);
-if(Ƹ==typeof(T))return ρ((T)á);if(Ƹ==typeof(X))return ς((X)á);if(Ƹ==typeof(V))return σ((V)á);return string.Empty;}private
-static string ξ(N ŧ){StringBuilder Ͱ=new StringBuilder(512);Ͱ.Append(ν).Append(';');Ͱ.Append(ŧ.Ȗ).Append(';');Ͱ.Append(ŧ.ȗ).
-Append(';');Ͱ.Append(ŧ.Ș).Append(';');Ͱ.Append(ŧ.ș).Append(';');Ͱ.Append(ŧ.Ț).Append(';');Ͱ.Append(ŧ.ț).Append(';');Ͱ.Append(ŧ
-.Ȝ).Append(';');Ͱ.Append(ŧ.ȝ).Append(';');Ͱ.Append(ŧ.Ȟ).Append(';');Ͱ.Append(ŧ.ȟ).Append(';');Ͱ.Append(ŧ.Ƞ).Append(';');Ͱ
-.Append(ŧ.ȡ).Append(';');Ͱ.Append(ŧ.Ȣ).Append(';');Ͱ.Append(ŧ.ȣ).Append(';');Ͱ.Append(ŧ.Ȥ).Append(';');Ͱ.Append(ŧ.ȥ).
-Append(';');Ͱ.Append(ŧ.Ȧ).Append(';');Ͱ.Append(ŧ.ȧ).Append(';');Ͱ.Append(ŧ.Ȩ).Append(';');Ͱ.Append(ŧ.ȩ).Append(';');Ͱ.Append(ŧ
-.Ȫ).Append(';');Ͱ.Append(ŧ.ȫ).Append(';');Ͱ.Append(ŧ.Ȭ).Append(';');Ͱ.Append(ŧ.ȭ).Append(';');Ͱ.Append(ŧ.Ȑ).Append(';');Ͱ
-.Append(ŧ.ê).Append(';');Ͱ.Append(ŧ.Ú);return Ͱ.ToString();}private static string ο(P ŧ){StringBuilder Ͱ=new
-StringBuilder(256);Ͱ.Append(ν).Append(';');Ͱ.Append(τ(ŧ.ë)).Append(';');Ͱ.Append(τ(ŧ.ʸ)).Append(';');Ͱ.Append(υ(ŧ.ʹ)).Append(';');Ͱ.
-Append(τ(ŧ.ʺ)).Append(';');Ͱ.Append(υ(ŧ.ʻ)).Append(';');Ͱ.Append(φ(ŧ.ò)).Append(';');Ͱ.Append(φ(ŧ.ñ)).Append(';');Ͱ.Append(ŧ.ʼ
-!=null?ŧ.ʼ:string.Empty).Append(';');Ͱ.Append(ŧ.ʽ!=null?ŧ.ʽ:string.Empty);return Ͱ.ToString();}private static string π(R ŧ
-){StringBuilder Ͱ=new StringBuilder(128);Ͱ.Append(ν).Append(';');Ͱ.Append(ŧ.Ũ).Append(';');Ͱ.Append(ŧ.ũ).Append(';');Ͱ.
-Append(ŧ.Ū).Append(';');Ͱ.Append(ŧ.ū).Append(';');Ͱ.Append(ŧ.Ŭ).Append(';');Ͱ.Append(ŧ.ŭ).Append(';');Ͱ.Append(ŧ.Ů).Append(';'
-);Ͱ.Append(ŧ.ů).Append(';');Ͱ.Append(ŧ.Ű).Append(';');Ͱ.Append(ŧ.ű).Append(';');Ͱ.Append(ŧ.è?'1':'0');return Ͱ.ToString()
-;}private static string ρ(T ŧ){StringBuilder Ͱ=new StringBuilder(256);Ͱ.Append(ν).Append(';');Ͱ.Append(ŧ.ɬ).Append(';');Ͱ
-.Append(ŧ.ɭ).Append(';');Ͱ.Append(ŧ.ɮ).Append(';');Ͱ.Append(ŧ.ɯ).Append(';');Ͱ.Append(ŧ.ɰ).Append(';');Ͱ.Append(ŧ.ɱ).
-Append(';');Ͱ.Append(ŧ.ɴ).Append(';');Ͱ.Append(ŧ.ɵ).Append(';');Ͱ.Append(ŧ.ɲ).Append(';');Ͱ.Append(ŧ.ɳ).Append(';');Ͱ.Append(ŧ
-.ɶ).Append(';');Ͱ.Append(ŧ.ɷ).Append(';');Ͱ.Append(ŧ.ɸ).Append(';');Ͱ.Append(ŧ.Û?'1':'0');return Ͱ.ToString();}private
-static string ς(X ŧ){StringBuilder Ͱ=new StringBuilder(128);Ͱ.Append(ν).Append(';');Ͱ.Append(τ(ŧ.Ƿ)).Append(';');Ͱ.Append(υ(ŧ.
-Ǹ)).Append(';');Ͱ.Append(τ(ŧ.ǹ));return Ͱ.ToString();}private static string σ(V ŧ){StringBuilder Ͱ=new StringBuilder(128)
-;Ͱ.Append(ν).Append(';');Ͱ.Append(ŧ.è?'1':'0').Append(';');Ͱ.Append(ŧ.Û?'1':'0').Append(';');Ͱ.Append(ŧ.é?'1':'0').Append
-(';');Ͱ.Append(ŧ.ì?'1':'0').Append(';');Ͱ.Append(ŧ.í?'1':'0').Append(';');Ͱ.Append(ŧ.ï?'1':'0').Append(';');Ͱ.Append(ŧ.ÿ)
-.Append(';');Ͱ.Append(ŧ.Ā!=null?ŧ.Ā:string.Empty).Append(';');Ͱ.Append(ŧ.þ?'1':'0');return Ͱ.ToString();}private static
-string τ(string[]ȇ){if(ȇ==null||ȇ.Length==0)return string.Empty;StringBuilder Ͱ=new StringBuilder(ȇ.Length*8);for(int ó=0;ó<ȇ.
-Length;ó++){if(ó>0)Ͱ.Append('|');χ(Ͱ,ȇ[ó]);}return Ͱ.ToString();}private static string υ(float[]ȇ){if(ȇ==null||ȇ.Length==0)
-return string.Empty;StringBuilder Ͱ=new StringBuilder(ȇ.Length*12);for(int ó=0;ó<ȇ.Length;ó++){if(ó>0)Ͱ.Append('|');Ͱ.Append(ȇ
-[ó].ToString());}return Ͱ.ToString();}private static string φ(bool[]ȇ){if(ȇ==null||ȇ.Length==0)return string.Empty;
-StringBuilder Ͱ=new StringBuilder(ȇ.Length*2);for(int ó=0;ó<ȇ.Length;ó++){if(ó>0)Ͱ.Append('|');Ͱ.Append(ȇ[ó]?'1':'0');}return Ͱ.
-ToString();}private static void χ(StringBuilder Ͱ,string ʣ){if(ʣ==null)return;for(int ó=0;ó<ʣ.Length;ó++){char Ĭ=ʣ[ó];if(Ĭ=='\\'
-){Ͱ.Append('\\');Ͱ.Append('\\');}else if(Ĭ=='|'){Ͱ.Append('\\');Ͱ.Append('|');}else Ͱ.Append(Ĭ);}}}public static class â{
-public static string ã(object á){return ψ.ã(á);}}public static class å{private const uint ω=2166136261u,ϊ=16777619u;private
-static long ϋ;public static uint ώ(string ό){return ύ(ω,ό);}public static string æ(string Ϗ,string ϐ,string ϑ){long ϒ=DateTime
-.UtcNow.Ticks;if(ϒ<=ϋ){ϒ=ϋ+1;}ϋ=ϒ;string ͺ=ϐ??"";string ϓ=ϒ.ToString();string ϔ=(Ϗ??"")+ϓ+ͺ+(ϑ??"");uint ϕ=ώ(ϔ);string ϖ=
-ϕ.ToString("X8");string ϗ=ͺ.Length==0?"":Convert.ToBase64String(Encoding.UTF8.GetBytes(ͺ));return(Ϗ??"")+"|"+ϓ+"|"+ϗ+"|"+
-ϖ;}private static uint ύ(uint Ϙ,string ʣ){if(ʣ==null||ʣ.Length==0){return Ϙ;}for(int ó=0;ó<ʣ.Length;ó++){char Ĭ=ʣ[ó];Ϙ^=(
-byte)(Ĭ&0xFF);Ϙ*=ϊ;Ϙ^=(byte)((Ĭ>>8)&0xFF);Ϙ*=ϊ;}return Ϙ;}}public static class û{public static bool ü(string ú,string Ʒ){if(
+Me)){return false;}var Ƒ=Ə as IMyInventoryOwner;return Ƒ!=null&&Ƒ.InventoryCount>0;}void ʮ(List<IMyRefinery>ǩ){ʕ.Clear();ʖ
+.Clear();if(ǩ==null){return;}for(int ó=0;ó<ǩ.Count;ó++){var ǣ=ǩ[ó];if(ǣ==null){continue;}var ͷ=ǣ.OutputInventory;if(ͷ!=
+null){ʖ.Add(ͷ);}ʕ.Add(ǣ);}}void ʰ(bool ͺ){for(int ó=0;ó<ʕ.Count;ó++){var ý=ʕ[ó]as IMyProductionBlock;if(ý==null){continue;}ý
+.UseConveyorSystem=!ͺ;}}private static bool Ɇ(MyItemType Ƹ){string ƹ=Ƹ.TypeId.ToString();return ƹ.IndexOf("Ore",
+StringComparison.Ordinal)>=0;}private static bool ˆ(MyItemType Ƹ){return Ƹ.TypeId.ToString().IndexOf("Ingot",StringComparison.Ordinal)>=
+0;}private static MyFixedPoint ˏ(IMyRefinery ł){var Ʈ=ł.InputInventory;if(Ʈ==null||Ʈ.MaxVolume.RawValue<=0){return(
+MyFixedPoint)0;}return Ʈ.MaxVolume-Ʈ.CurrentVolume;}float ˎ(IMyRefinery ł,string ˊ){var Ʈ=ł.InputInventory;if(Ʈ==null){return 0f;}
+float ƭ=0f;ʙ.Clear();Ʈ.GetItems(ʙ);for(int ȱ=0;ȱ<ʙ.Count;ȱ++){var ƚ=ʙ[ȱ];if(Ɇ(ƚ.Type)&&string.Equals(ƚ.Type.SubtypeId,ˊ,ʄ.ʅ))
+{ƭ+=(float)ƚ.Amount;}}return ƭ;}bool Ά(IMyInventory ː,int ˑ,IMyInventory ͻ){if(ː==null||ͻ==null||ː==ͻ||ˑ<0){return false;
+}ː.GetItems(ʙ);if(ˑ>=ʙ.Count){return false;}MyItemType ˡ=ʙ[ˑ].Type;if(!ː.CanTransferItemTo(ͻ,ˡ)){return false;}if(ː.
+TransferItemTo(ͻ,ˑ,null,true,null)){return true;}ː.GetItems(ʙ);if(ˑ>=ʙ.Count){return false;}MyFixedPoint ƞ=ʙ[ˑ].Amount;if(ƞ<=(
+MyFixedPoint)0){return false;}for(int ͼ=1;ͼ<=8;ͼ++){double Ɲ=(double)ƞ/(1<<ͼ);if(Ɲ<0.01){break;}MyFixedPoint ͽ=(MyFixedPoint)Ɲ;if(ͽ
+<=(MyFixedPoint)0){continue;}if(ː.TransferItemTo(ͻ,ˑ,null,true,ͽ)){return true;}}return false;}bool ˠ(string ˊ,
+IMyInventory Έ,out IMyInventory ː,out int ˑ){ː=null;ˑ=-1;MyFixedPoint ˤ=(MyFixedPoint)0;MyFixedPoint Ή=(MyFixedPoint)ʬ(ˊ,E.q);if(a==
+null){return false;}for(int ɼ=0;ɼ<a.Count;ɼ++){var Ə=a[ɼ];if(Ź(Ə)){continue;}var Ƒ=Ə as IMyInventoryOwner;if(Ƒ==null){
+continue;}var Ί=Ə as IMyRefinery;for(int ˀ=0;ˀ<Ƒ.InventoryCount;ˀ++){var Ʈ=Ƒ.GetInventory(ˀ);if(Ʈ==null||Ʈ==Έ||ʖ.Contains(Ʈ)){
+continue;}ʙ.Clear();Ʈ.GetItems(ʙ);for(int ȱ=0;ȱ<ʙ.Count;ȱ++){var ƚ=ʙ[ȱ];if(!Ɇ(ƚ.Type)){continue;}if(!string.Equals(ƚ.Type.
+SubtypeId,ˊ,ʄ.ʅ)){continue;}if(Ί!=null&&ƚ.Amount<=Ή){continue;}if(ƚ.Amount>ˤ){ˤ=ƚ.Amount;ː=Ʈ;ˑ=ȱ;}}}}return ː!=null&&ˑ>=0&&ˤ>(
+MyFixedPoint)0;}bool ˋ(string ˊ,int Ό=-1){int Â=ʕ.Count;if(Â==0){return false;}const float Ύ=0.5f;int Ώ;float ΐ;if(Ό>=0&&Ό<Â){Ώ=Ό;if
+(ˏ(ʕ[Ώ]).RawValue<=0){return false;}ΐ=ˎ(ʕ[Ώ],ˊ);}else{Ώ=-1;ΐ=float.PositiveInfinity;long Α=-1;for(int ó=0;ó<Â;ó++){
+MyFixedPoint Β=ˏ(ʕ[ó]);if(Β.RawValue<=0){continue;}float ƞ=ˎ(ʕ[ó],ˊ);long Γ=Β.RawValue;if(ƞ<ΐ-1e-4f||(Math.Abs(ƞ-ΐ)<1e-4f&&Γ>Α)){ΐ=ƞ
+;Α=Γ;Ώ=ó;}}if(Ώ<0){return false;}}IMyInventory ˌ=ʕ[Ώ].InputInventory;if(ˌ==null){return false;}int Δ=-1;float Ε=-1f;for(
+int ó=0;ó<Â;ó++){if(ó==Ώ){continue;}float ƞ=ˎ(ʕ[ó],ˊ);if(ƞ>Ε){Ε=ƞ;Δ=ó;}}if(Δ>=0&&Ε>ΐ+Ύ){var Ζ=ʕ[Δ].InputInventory;if(Ζ!=
+null&&Ζ!=ˌ){ʙ.Clear();Ζ.GetItems(ʙ);int Η=-1;MyFixedPoint Θ=(MyFixedPoint)0;for(int ȱ=0;ȱ<ʙ.Count;ȱ++){var ƚ=ʙ[ȱ];if(!Ɇ(ƚ.
+Type)||!string.Equals(ƚ.Type.SubtypeId,ˊ,ʄ.ʅ)){continue;}if(ƚ.Amount>Θ){Θ=ƚ.Amount;Η=ȱ;}}if(Η>=0&&ˏ(ʕ[Ώ]).RawValue>0&&Ά(Ζ,Η,
+ˌ)){return true;}}}IMyInventory ː;int ˑ;if(!ˠ(ˊ,ˌ,out ː,out ˑ)){return false;}return Ά(ː,ˑ,ˌ);}private static string ʨ(
+string ʧ){if(string.IsNullOrEmpty(ʧ)){return null;}if(string.Equals(ʧ,"Ice",ʄ.ʅ)){return null;}return ʧ;}private static bool ʩ
+(A ž,string Ι,out double Ƌ){Ƌ=0;if(ž==null||ž.ā==null||string.IsNullOrEmpty(Ι)){return false;}if(ž.ā.TryGetValue(Ι,out Ƌ)
+){return true;}string Κ="Ingot/"+Ι;return ž.ā.TryGetValue(Κ,out Ƌ);}private static readonly string[]Λ={"Iron","Nickel",
+"Silicon","Gravel"};double Π(A ž){double Μ=double.PositiveInfinity;int Ν=0;for(int ó=0;ó<Λ.Length;ó++){string Ξ=Λ[ó];double Ƌ;if(
+!ʩ(ž,Ξ,out Ƌ)){continue;}Ν++;if(Ƌ<=0){if(1.0<Μ){Μ=1.0;}continue;}double Ο;if(!ʘ.TryGetValue(Ξ,out Ο)){Ο=0;}double ł=Ο/Ƌ;
+if(ł<Μ){Μ=ł;}}if(Ν==0){return double.PositiveInfinity;}return Μ;}double Ρ(string Ι,A ž){double Ƌ;if(!ʩ(ž,Ι,out Ƌ)){return
+double.PositiveInfinity;}if(Ƌ<=0){return 1.0;}double Ο;if(!ʘ.TryGetValue(Ι,out Ο)){Ο=0;}return Ο/Ƌ;}double Σ(string ˊ,A ž){if(
+string.Equals(ˊ,"Stone",ʄ.ʅ)){return Π(ž);}string Ξ=ʨ(ˊ);if(Ξ==null){return double.PositiveInfinity;}return Ρ(Ξ,ž);}void ʳ(){A
+ž=E.q;double Τ=ž!=null?ž.ĕ:0.05;if(Τ<0){Τ=0;}int Ĭ=ʗ.Count;for(int ȇ=0;ȇ<Ĭ-1;ȇ++){for(int ø=ȇ+1;ø<Ĭ;ø++){string Υ=ʗ[ȇ];
+string Ͳ=ʗ[ø];double Φ=Σ(Υ,ž);double Χ=Σ(Ͳ,ž);if(Τ>0&&!string.IsNullOrEmpty(ʝ)){if(string.Equals(Υ,ʝ,ʄ.ʅ)){Φ-=Τ;}if(string.
+Equals(Ͳ,ʝ,ʄ.ʅ)){Χ-=Τ;}}if(Φ>Χ||(Φ==Χ&&string.CompareOrdinal(Υ,Ͳ)>0)){ʗ[ȇ]=Ͳ;ʗ[ø]=Υ;}}}if(Ĭ>0){ʝ=ʗ[0];}else{ʝ=string.Empty;}}
+Dictionary<string,int>ʴ(){ʚ.Clear();for(int ó=0;ó<ʗ.Count;ó++){ʚ[ʗ[ó]]=ó+1;}return ʚ;}private static string Ϊ(IMyRefinery ł,out
+float Ψ){Ψ=0f;var Ʈ=ł.InputInventory;if(Ʈ==null){return string.Empty;}var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(int
+ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];if(Ɇ(ƚ.Type)){Ψ+=(float)ƚ.Amount;}}if(ƙ.Count==0){return string.Empty;}var Ω=ƙ[0];if(!Ɇ(Ω.
+Type)){return string.Empty;}return Ω.Type.SubtypeId;}private static string έ(IMyRefinery ł,out float Ϋ){Ϋ=0f;var Ʈ=ł.
+OutputInventory;if(Ʈ==null){return string.Empty;}string ά=string.Empty;float ˤ=0f;var ƙ=new List<MyInventoryItem>();Ʈ.GetItems(ƙ);for(
+int ó=0;ó<ƙ.Count;ó++){var ƚ=ƙ[ó];if(!ˆ(ƚ.Type)){continue;}float ȇ=(float)ƚ.Amount;Ϋ+=ȇ;if(ȇ>ˤ){ˤ=ȇ;ά=ƚ.Type.SubtypeId;}}
+return ά;}private static bool ή(IMyRefinery ł){var ý=ł as IMyProductionBlock;return ý!=null&&ý.IsProducing;}P ʸ(Dictionary<
+string,int>ί){int Â=ʕ.Count;var á=new P();if(Â==0){á.ë=new string[0];á.ʺ=new string[0];á.ʻ=new float[0];á.ʼ=new string[0];á.ʽ=
+new float[0];á.ò=new bool[0];á.ñ=new bool[0];ΰ(á,ί);return á;}var Ȯ=new string[Â];var α=new string[Â];var β=new float[Â];
+var γ=new string[Â];var δ=new float[Â];var ε=new bool[Â];var ñ=new bool[Â];for(int ó=0;ó<Â;ó++){var Ί=ʕ[ó];Ȯ[ó]=Ȳ.ȳ(Ί.
+CustomName);float ζ;string η=Ϊ(Ί,out ζ);α[ó]=Ȳ.ȳ(η);β[ó]=ζ;ñ[ó]=ζ>0.0001f;float θ;string ι=έ(Ί,out θ);γ[ó]=θ>0.0001f?Ȳ.ȳ(ι):string
+.Empty;δ[ó]=θ;ε[ó]=ή(Ί);}á.ë=Ȯ;á.ʺ=α;á.ʻ=β;á.ʼ=γ;á.ʽ=δ;á.ò=ε;á.ñ=ñ;ΰ(á,ί);return á;}void ΰ(P á,Dictionary<string,int>ί){á
+.ʾ=null;á.ʿ=null;if(ί==null||ί.Count==0){return;}ʛ.Clear();foreach(var Ō in ί){if(string.Equals(Ō.Key,"Ice",ʄ.ʅ)){
+continue;}ʛ.Add(Ō);}ʛ.Sort((ȇ,ø)=>{int Ĭ=ȇ.Value.CompareTo(ø.Value);if(Ĭ!=0){return Ĭ;}return string.CompareOrdinal(ȇ.Key,ø.Key)
+;});if(ʛ.Count==0){return;}int Â=ʛ.Count;int ƴ=(Â+1)/2;var Ͳ=new StringBuilder();for(int ó=0;ó<ƴ;ó++){if(ó>0){Ͳ.Append(
+"  ");}Ͳ.Append(ó+1);Ͳ.Append(". ");Ͳ.Append(Ȳ.κ(ʛ[ó].Key));}á.ʾ=Ȳ.ȳ(Ͳ.ToString());Ͳ.Clear();for(int ó=ƴ;ó<Â;ó++){if(ó>ƴ){Ͳ.
+Append("  ");}Ͳ.Append(ó+1);Ͳ.Append(". ");Ͳ.Append(Ȳ.κ(ʛ[ó].Key));}á.ʿ=Ȳ.ȳ(Ͳ.Length>0?Ͳ.ToString():string.Empty);}}public
+class R{public float Ũ,ũ,Ū,ū,Ŭ,ŭ,Ů,ů;public int Ű,ű;public bool è;}public class X{public string[]Ƿ,ǹ;public float[]Ǹ;}public
+class N{public float Ȗ,ȗ,Ș,ș,Ț,ț,Ȝ,ȝ,Ȟ,ȟ,Ƞ,ȡ,Ȣ,ȣ,Ȥ,ȥ,Ȧ,ȧ,Ȩ,ȩ,Ȫ,ȫ,Ȭ,ȭ,Ȑ,ê,Ú;}public class T{public float ɮ,ɯ,ɰ,ɱ,ɲ,ɳ,ɴ,ɵ,ɶ,ɷ;
+public int ɸ,ɹ,ɺ;public bool Û;}public class P{public string[]ë,ʺ,ʼ;public float[]ʻ,ʽ;public bool[]ò,ñ;public string ʾ,ʿ;}
+public class V{public bool è,Û,é,ì,í,ï,þ;public int ÿ;public string Ā;}public static class r{public const string z=
+"SYS_STATUS",Ø="PB1_WARNINGS",Ò="PB1ToPB2_InventorySummary",Ó="PB1ToPB2_RefineryStatus",Ô="PB1ToPB2_IceStatus",Õ=
+"PB1ToPB2_PowerStatus",Ö="PB1ToPB2_InventoryDynamic",s="PB2ToPB1";}public static class φ{private const string λ="1";public static string ã(
+object á){if(á==null)return string.Empty;Type Ƹ=á.GetType();if(Ƹ==typeof(N))return μ((N)á);if(Ƹ==typeof(P))return ν((P)á);if(Ƹ
+==typeof(R))return ξ((R)á);if(Ƹ==typeof(T))return ο((T)á);if(Ƹ==typeof(X))return π((X)á);if(Ƹ==typeof(V))return ρ((V)á);
+return string.Empty;}private static string μ(N ŧ){StringBuilder Ͳ=new StringBuilder(512);Ͳ.Append(λ).Append(';');Ͳ.Append(ŧ.Ȗ)
+.Append(';');Ͳ.Append(ŧ.ȗ).Append(';');Ͳ.Append(ŧ.Ș).Append(';');Ͳ.Append(ŧ.ș).Append(';');Ͳ.Append(ŧ.Ț).Append(';');Ͳ.
+Append(ŧ.ț).Append(';');Ͳ.Append(ŧ.Ȝ).Append(';');Ͳ.Append(ŧ.ȝ).Append(';');Ͳ.Append(ŧ.Ȟ).Append(';');Ͳ.Append(ŧ.ȟ).Append(';'
+);Ͳ.Append(ŧ.Ƞ).Append(';');Ͳ.Append(ŧ.ȡ).Append(';');Ͳ.Append(ŧ.Ȣ).Append(';');Ͳ.Append(ŧ.ȣ).Append(';');Ͳ.Append(ŧ.Ȥ).
+Append(';');Ͳ.Append(ŧ.ȥ).Append(';');Ͳ.Append(ŧ.Ȧ).Append(';');Ͳ.Append(ŧ.ȧ).Append(';');Ͳ.Append(ŧ.Ȩ).Append(';');Ͳ.Append(ŧ
+.ȩ).Append(';');Ͳ.Append(ŧ.Ȫ).Append(';');Ͳ.Append(ŧ.ȫ).Append(';');Ͳ.Append(ŧ.Ȭ).Append(';');Ͳ.Append(ŧ.ȭ).Append(';');Ͳ
+.Append(ŧ.Ȑ).Append(';');Ͳ.Append(ŧ.ê).Append(';');Ͳ.Append(ŧ.Ú);return Ͳ.ToString();}private static string ν(P ŧ){
+StringBuilder Ͳ=new StringBuilder(256);Ͳ.Append(λ).Append(';');Ͳ.Append(ς(ŧ.ë)).Append(';');Ͳ.Append(ς(ŧ.ʺ)).Append(';');Ͳ.Append(σ(ŧ
+.ʻ)).Append(';');Ͳ.Append(ς(ŧ.ʼ)).Append(';');Ͳ.Append(σ(ŧ.ʽ)).Append(';');Ͳ.Append(τ(ŧ.ò)).Append(';');Ͳ.Append(τ(ŧ.ñ)).
+Append(';');Ͳ.Append(ŧ.ʾ!=null?ŧ.ʾ:string.Empty).Append(';');Ͳ.Append(ŧ.ʿ!=null?ŧ.ʿ:string.Empty);return Ͳ.ToString();}private
+static string ξ(R ŧ){StringBuilder Ͳ=new StringBuilder(128);Ͳ.Append(λ).Append(';');Ͳ.Append(ŧ.Ũ).Append(';');Ͳ.Append(ŧ.ũ).
+Append(';');Ͳ.Append(ŧ.Ū).Append(';');Ͳ.Append(ŧ.ū).Append(';');Ͳ.Append(ŧ.Ŭ).Append(';');Ͳ.Append(ŧ.ŭ).Append(';');Ͳ.Append(ŧ
+.Ů).Append(';');Ͳ.Append(ŧ.ů).Append(';');Ͳ.Append(ŧ.Ű).Append(';');Ͳ.Append(ŧ.ű).Append(';');Ͳ.Append(ŧ.è?'1':'0');
+return Ͳ.ToString();}private static string ο(T ŧ){StringBuilder Ͳ=new StringBuilder(256);Ͳ.Append(λ).Append(';');Ͳ.Append(ŧ.ɮ)
+.Append(';');Ͳ.Append(ŧ.ɯ).Append(';');Ͳ.Append(ŧ.ɰ).Append(';');Ͳ.Append(ŧ.ɱ).Append(';');Ͳ.Append(ŧ.ɲ).Append(';');Ͳ.
+Append(ŧ.ɳ).Append(';');Ͳ.Append(ŧ.ɶ).Append(';');Ͳ.Append(ŧ.ɷ).Append(';');Ͳ.Append(ŧ.ɴ).Append(';');Ͳ.Append(ŧ.ɵ).Append(';'
+);Ͳ.Append(ŧ.ɸ).Append(';');Ͳ.Append(ŧ.ɹ).Append(';');Ͳ.Append(ŧ.ɺ).Append(';');Ͳ.Append(ŧ.Û?'1':'0');return Ͳ.ToString()
+;}private static string π(X ŧ){StringBuilder Ͳ=new StringBuilder(128);Ͳ.Append(λ).Append(';');Ͳ.Append(ς(ŧ.Ƿ)).Append(';'
+);Ͳ.Append(σ(ŧ.Ǹ)).Append(';');Ͳ.Append(ς(ŧ.ǹ));return Ͳ.ToString();}private static string ρ(V ŧ){StringBuilder Ͳ=new
+StringBuilder(128);Ͳ.Append(λ).Append(';');Ͳ.Append(ŧ.è?'1':'0').Append(';');Ͳ.Append(ŧ.Û?'1':'0').Append(';');Ͳ.Append(ŧ.é?'1':'0').
+Append(';');Ͳ.Append(ŧ.ì?'1':'0').Append(';');Ͳ.Append(ŧ.í?'1':'0').Append(';');Ͳ.Append(ŧ.ï?'1':'0').Append(';');Ͳ.Append(ŧ.ÿ
+).Append(';');Ͳ.Append(ŧ.Ā!=null?ŧ.Ā:string.Empty).Append(';');Ͳ.Append(ŧ.þ?'1':'0');return Ͳ.ToString();}private static
+string ς(string[]ȇ){if(ȇ==null||ȇ.Length==0)return string.Empty;StringBuilder Ͳ=new StringBuilder(ȇ.Length*8);for(int ó=0;ó<ȇ.
+Length;ó++){if(ó>0)Ͳ.Append('|');υ(Ͳ,ȇ[ó]);}return Ͳ.ToString();}private static string σ(float[]ȇ){if(ȇ==null||ȇ.Length==0)
+return string.Empty;StringBuilder Ͳ=new StringBuilder(ȇ.Length*12);for(int ó=0;ó<ȇ.Length;ó++){if(ó>0)Ͳ.Append('|');Ͳ.Append(ȇ
+[ó].ToString());}return Ͳ.ToString();}private static string τ(bool[]ȇ){if(ȇ==null||ȇ.Length==0)return string.Empty;
+StringBuilder Ͳ=new StringBuilder(ȇ.Length*2);for(int ó=0;ó<ȇ.Length;ó++){if(ó>0)Ͳ.Append('|');Ͳ.Append(ȇ[ó]?'1':'0');}return Ͳ.
+ToString();}private static void υ(StringBuilder Ͳ,string ʥ){if(ʥ==null)return;for(int ó=0;ó<ʥ.Length;ó++){char Ĭ=ʥ[ó];if(Ĭ=='\\'
+){Ͳ.Append('\\');Ͳ.Append('\\');}else if(Ĭ=='|'){Ͳ.Append('\\');Ͳ.Append('|');}else Ͳ.Append(Ĭ);}}}public static class â{
+public static string ã(object á){return φ.ã(á);}}public static class å{private const uint χ=2166136261u,ψ=16777619u;private
+static long ω;public static uint ό(string ϊ){return ϋ(χ,ϊ);}public static string æ(string ύ,string ώ,string Ϗ){long ϐ=DateTime
+.UtcNow.Ticks;if(ϐ<=ω){ϐ=ω+1;}ω=ϐ;string ͼ=ώ??"";string ϑ=ϐ.ToString();string ϒ=(ύ??"")+ϑ+ͼ+(Ϗ??"");uint ϓ=ό(ϒ);string ϔ=
+ϓ.ToString("X8");string ϕ=ͼ.Length==0?"":Convert.ToBase64String(Encoding.UTF8.GetBytes(ͼ));return(ύ??"")+"|"+ϑ+"|"+ϕ+"|"+
+ϔ;}private static uint ϋ(uint ϖ,string ʥ){if(ʥ==null||ʥ.Length==0){return ϖ;}for(int ó=0;ó<ʥ.Length;ó++){char Ĭ=ʥ[ó];ϖ^=(
+byte)(Ĭ&0xFF);ϖ*=ψ;ϖ^=(byte)((Ĭ>>8)&0xFF);ϖ*=ψ;}return ϖ;}}public static class û{public static bool ü(string ú,string Ʒ){if(
 string.IsNullOrEmpty(ú)||string.IsNullOrEmpty(Ʒ))return false;return ú.IndexOf(Ʒ,StringComparison.OrdinalIgnoreCase)>=0;}}
-public static class λ{private static readonly StringBuilder ϙ=new StringBuilder(48);public static string μ(string Ƀ){if(string
-.IsNullOrEmpty(Ƀ)){return"-";}if(string.Equals(Ƀ,"Iron",ʂ.ʃ)){return"Fe";}if(string.Equals(Ƀ,"Nickel",ʂ.ʃ)){return"Ni";}
-if(string.Equals(Ƀ,"Cobalt",ʂ.ʃ)){return"Co";}if(string.Equals(Ƀ,"Silicon",ʂ.ʃ)){return"Si";}if(string.Equals(Ƀ,"Silver",ʂ
-.ʃ)){return"Ag";}if(string.Equals(Ƀ,"Gold",ʂ.ʃ)){return"Au";}if(string.Equals(Ƀ,"Magnesium",ʂ.ʃ)){return"Mg";}if(string.
-Equals(Ƀ,"Platinum",ʂ.ʃ)){return"Pt";}if(string.Equals(Ƀ,"Uranium",ʂ.ʃ)){return"U";}if(string.Equals(Ƀ,"Stone",ʂ.ʃ)){return
-"St";}if(string.Equals(Ƀ,"Ice",ʂ.ʃ)){return"Ic";}if(Ƀ.Length<=2){return Ƀ.ToUpperInvariant();}return Ƀ.Substring(0,2).
-ToUpperInvariant();}}public static class ƫ{public static float Ƭ(float Ő,float Ϛ,float ϛ){if(Ϛ>ϛ){float Ϝ=Ϛ;Ϛ=ϛ;ϛ=Ϝ;}if(Ő<Ϛ)return Ϛ;if(
-Ő>ϛ)return ϛ;return Ő;}}public static class ʂ{public const StringComparison ʃ=StringComparison.OrdinalIgnoreCase;
+public static class Ȳ{private static readonly StringBuilder ϗ=new StringBuilder(48);public static string κ(string Ʌ){if(string
+.IsNullOrEmpty(Ʌ)){return"-";}if(string.Equals(Ʌ,"Iron",ʄ.ʅ)){return"Fe";}if(string.Equals(Ʌ,"Nickel",ʄ.ʅ)){return"Ni";}
+if(string.Equals(Ʌ,"Cobalt",ʄ.ʅ)){return"Co";}if(string.Equals(Ʌ,"Silicon",ʄ.ʅ)){return"Si";}if(string.Equals(Ʌ,"Silver",ʄ
+.ʅ)){return"Ag";}if(string.Equals(Ʌ,"Gold",ʄ.ʅ)){return"Au";}if(string.Equals(Ʌ,"Magnesium",ʄ.ʅ)){return"Mg";}if(string.
+Equals(Ʌ,"Platinum",ʄ.ʅ)){return"Pt";}if(string.Equals(Ʌ,"Uranium",ʄ.ʅ)){return"U";}if(string.Equals(Ʌ,"Stone",ʄ.ʅ)){return
+"St";}if(string.Equals(Ʌ,"Ice",ʄ.ʅ)){return"Ic";}if(Ʌ.Length<=2){return Ʌ.ToUpperInvariant();}return Ʌ.Substring(0,2).
+ToUpperInvariant();}public static string ȳ(string Ķ){if(string.IsNullOrEmpty(Ķ)){return string.Empty;}int Â=Ķ.Length;int Ϙ=-1;for(int ó=
+0;ó<Â;ó++){char Ĭ=Ķ[ó];if(Ĭ==';'||Ĭ=='|'||Ĭ=='\\'||Ĭ=='\r'||Ĭ=='\n'){Ϙ=ó;break;}}if(Ϙ<0){return Ķ;}char[]ϙ=new char[Â];
+for(int ó=0;ó<Ϙ;ó++){ϙ[ó]=Ķ[ó];}for(int ó=Ϙ;ó<Â;ó++){char Ĭ=Ķ[ó];ϙ[ó]=(Ĭ==';'||Ĭ=='|'||Ĭ=='\\'||Ĭ=='\r'||Ĭ=='\n')?' ':Ĭ;}
+return new string(ϙ);}}public static class ƫ{public static float Ƭ(float Ő,float Ϛ,float ϛ){if(Ϛ>ϛ){float Ϝ=Ϛ;Ϛ=ϛ;ϛ=Ϝ;}if(Ő<Ϛ)
+return Ϛ;if(Ő>ϛ)return ϛ;return Ő;}}public static class ʄ{public const StringComparison ʅ=StringComparison.OrdinalIgnoreCase;

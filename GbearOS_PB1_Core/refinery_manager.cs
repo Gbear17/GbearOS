@@ -1267,17 +1267,17 @@ namespace IngameScript
             for (int i = 0; i < n; i++)
             {
                 var rf = _refineries[i];
-                names[i] = SanitizeIngressWireText(rf.CustomName);
+                names[i] = FormattingUtils.SanitizeIngressWireText(rf.CustomName);
 
                 float oSum;
                 string oSub = FrontInputSlotOreSubtype(rf, out oSum);
-                curOre[i] = oSub;
+                curOre[i] = FormattingUtils.SanitizeIngressWireText(oSub);
                 oreAmts[i] = oSum;
                 hasOre[i] = oSum > 0.0001f;
 
                 float iSum;
                 string iSub = DominantIngotSubtypeInOutput(rf, out iSum);
-                outIng[i] = iSum > 0.0001f ? iSub : string.Empty;
+                outIng[i] = iSum > 0.0001f ? FormattingUtils.SanitizeIngressWireText(iSub) : string.Empty;
                 outAmts[i] = iSum;
 
                 working[i] = IsRefineryWorking(rf);
@@ -1292,49 +1292,6 @@ namespace IngameScript
             dto.hasOre = hasOre;
             AssignPriorityDisplayLines(dto, priorityRanks);
             return dto;
-        }
-
-        /// <summary>
-        /// Sanitizes player-controlled text so it cannot corrupt the semicolon-delimited DTO wire format.
-        /// Applied once at ingress (scan layer) before any DTO population/serialization/MAC signing.
-        /// </summary>
-        private static string SanitizeIngressWireText(string raw)
-        {
-            if (string.IsNullOrEmpty(raw))
-            {
-                return string.Empty;
-            }
-
-            int n = raw.Length;
-            int firstBad = -1;
-            for (int i = 0; i < n; i++)
-            {
-                char c = raw[i];
-                if (c == ';' || c == '|' || c == '\\' || c == '\r' || c == '\n')
-                {
-                    firstBad = i;
-                    break;
-                }
-            }
-
-            if (firstBad < 0)
-            {
-                return raw;
-            }
-
-            char[] buf = new char[n];
-            for (int i = 0; i < firstBad; i++)
-            {
-                buf[i] = raw[i];
-            }
-
-            for (int i = firstBad; i < n; i++)
-            {
-                char c = raw[i];
-                buf[i] = (c == ';' || c == '|' || c == '\\' || c == '\r' || c == '\n') ? ' ' : c;
-            }
-
-            return new string(buf);
         }
 
         private void AssignPriorityDisplayLines(RefineryStatusDTO dto, Dictionary<string, int> priorityRanks)
@@ -1388,7 +1345,7 @@ namespace IngameScript
                 sb.Append(FormattingUtils.OreSubtypeAbbrev(_priorityEntriesScratch[i].Key));
             }
 
-            dto.priorityLine1 = sb.ToString();
+            dto.priorityLine1 = FormattingUtils.SanitizeIngressWireText(sb.ToString());
             sb.Clear();
             for (int i = mid; i < n; i++)
             {
@@ -1402,7 +1359,7 @@ namespace IngameScript
                 sb.Append(FormattingUtils.OreSubtypeAbbrev(_priorityEntriesScratch[i].Key));
             }
 
-            dto.priorityLine2 = sb.Length > 0 ? sb.ToString() : string.Empty;
+            dto.priorityLine2 = FormattingUtils.SanitizeIngressWireText(sb.Length > 0 ? sb.ToString() : string.Empty);
         }
     }
 }

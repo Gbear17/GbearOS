@@ -2,10 +2,10 @@
 
 // [GbearOS Component]
 // Name: formatting_utils.cs
-// Purpose: Human-readable formatting for floats, percents, large counts, warning lines, and ore abbreviations.
+// Purpose: Human-readable formatting for floats, percents, large counts, warning lines, ore abbreviations, and IGC DTO wire safety.
 // PB Association: Shared
 // Dependencies: None
-// Key Methods: FormatLargeNumber, FormatPercent
+// Key Methods: FormatLargeNumber, FormatPercent, SanitizeIngressWireText
 
 using System;
 using System.Text;
@@ -180,5 +180,52 @@ namespace IngameScript
 
             return sub.Substring(0, 2).ToUpperInvariant();
         }
+
+        #region IGC wire safety
+
+        /// <summary>
+        /// Replaces characters that would corrupt semicolon-delimited DTO fields or conflict with pipe-array escaping rules.
+        /// Not for general LCD formatting — use at PB1 ingress before DTO population, serialization, and MAC signing.
+        /// </summary>
+        public static string SanitizeIngressWireText(string raw)
+        {
+            if (string.IsNullOrEmpty(raw))
+            {
+                return string.Empty;
+            }
+
+            int n = raw.Length;
+            int firstBad = -1;
+            for (int i = 0; i < n; i++)
+            {
+                char c = raw[i];
+                if (c == ';' || c == '|' || c == '\\' || c == '\r' || c == '\n')
+                {
+                    firstBad = i;
+                    break;
+                }
+            }
+
+            if (firstBad < 0)
+            {
+                return raw;
+            }
+
+            char[] buf = new char[n];
+            for (int i = 0; i < firstBad; i++)
+            {
+                buf[i] = raw[i];
+            }
+
+            for (int i = firstBad; i < n; i++)
+            {
+                char c = raw[i];
+                buf[i] = (c == ';' || c == '|' || c == '\\' || c == '\r' || c == '\n') ? ' ' : c;
+            }
+
+            return new string(buf);
+        }
+
+        #endregion
     }
 }

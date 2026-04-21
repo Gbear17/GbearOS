@@ -894,9 +894,9 @@ namespace IngameScript
             foreach (var kv in _dynamicAccumScratch)
             {
                 var acc = kv.Value;
-                names[j] = acc.CleanName;
+                names[j] = FormattingUtils.SanitizeIngressWireText(acc.CleanName);
                 amounts[j] = (float)acc.Amount;
-                types[j] = acc.TypeLabel;
+                types[j] = FormattingUtils.SanitizeIngressWireText(acc.TypeLabel);
                 j++;
             }
 

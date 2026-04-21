@@ -9,12 +9,10 @@ Long-form phase plans and branch notes. Status is **planned** or **partial** unl
 
 | Document | Purpose |
 |----------|---------|
-| [phase-02-protocol-hardening-string-safety.md](./phase-02-protocol-hardening-string-safety.md) | Phase 2 — protocol hardening (string safety) |
-| [phase-03-replay-state-resilience.md](./phase-03-replay-state-resilience.md) | Phase 3 — replay-state resilience |
-| [phase-04-pb2-module-interface-and-registry.md](./phase-04-pb2-module-interface-and-registry.md) | Phase 4 — PB2 module interface + registry |
-| [phase-05-extensions-telemetry-ui-global-version.md](./phase-05-extensions-telemetry-ui-global-version.md) | Phase 5 — extensions / global versioning |
-| [phase-06-instruction-budget-optimization-lightweight-state.md](./phase-06-instruction-budget-optimization-lightweight-state.md) | Phase 6 — instruction budget / lightweight state |
-| [igc-deserialize-pb2-split-plan.md](./igc-deserialize-pb2-split-plan.md) | Branch plan: PB2-only IGC deserialize split |
+| [phase-03-replay-state-resilience-plan.md](./phase-03-replay-state-resilience-plan.md) | Phase 3 — replay-state resilience |
+| [phase-04-pb2-module-interface-and-registry-plan.md](./phase-04-pb2-module-interface-and-registry-plan.md) | Phase 4 — PB2 module interface + registry |
+| [phase-05-extensions-telemetry-ui-global-version-plan.md](./phase-05-extensions-telemetry-ui-global-version-plan.md) | Phase 5 — extensions / global versioning |
+| [phase-06-instruction-budget-optimization-lightweight-state-plan.md](./phase-06-instruction-budget-optimization-lightweight-state-plan.md) | Phase 6 — instruction budget / lightweight state |
 
 ---
 
