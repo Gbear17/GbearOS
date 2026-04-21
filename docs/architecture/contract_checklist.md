@@ -29,7 +29,11 @@ Confirm PB1 does not call deserialize entrypoints:
 - No `Serializer.Deserialize<...>` usage under `GbearOS_PB1_Core/`
 - No `IGCSerializer.Deserialize<...>` usage under `GbearOS_PB1_Core/`
 
-### E. Artifact sanity (required for release; see also artifact verification)
+### E. PB1 DTO string ingress (Phase 2, 2A)
+
+Confirm PB1 applies **`FormattingUtils.SanitizeIngressWireText`** to every player- or block-derived string that is written into DTO fields serialized over IGC (see [`igc_contract.md`](./igc_contract.md) § *PB1 string ingress*).
+
+### F. Artifact sanity (required for release; see also artifact verification)
 Normative procedure: [`artifact_verification.md`](./artifact_verification.md).
 
 - Build and deploy via MDK2 (`dotnet build`).

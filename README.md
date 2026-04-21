@@ -69,6 +69,7 @@ Full detail: [`docs/architecture/lcd_panels_and_layout.md`](docs/architecture/lc
 ## Connectivity & security
 
 - **SharedKey** — PB1 **`[Network]`** and PB2 **`[Network]`** must use the **same** `SharedKey` (after trim). Telemetry uses a **`SenderEnvelope`**: inner payload is **UTF-8 Base64**; the **MAC** is a fixed-width **hex** value derived from **FNV-1a** over the logical fields plus the shared key. **Mismatch or parse failure → message ignored.**
+- **DTO string ingress** — PB1 sanitizes block- and game-derived text that is packed into DTO fields **before** serialization and MAC, so player names cannot break semicolon framing. Normative detail: [`docs/architecture/igc_contract.md`](docs/architecture/igc_contract.md) § *PB1 string ingress*.
 - **Sender identity (PB1)** — Wire **`pbId`** follows **`[Prefix]-[Suffix]`**: up to **3** user-editable alphanumeric characters from **`[Network]` `PBID`** (default prefix **`CMD`** when absent) plus a **4-character hex** suffix taken from the block’s **entity id** (stable for that block). The script **rebinds** the suffix if hand-edited.
 
 Details: [`docs/architecture/igc_contract.md`](docs/architecture/igc_contract.md), [`docs/architecture/network-layer.md`](docs/architecture/network-layer.md).

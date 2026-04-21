@@ -71,13 +71,8 @@ Create `docs/todo/[title]-plan.md` and populate it from the user request.
    - Include the exact PB1/PB2 baseline lines (counts + remaining) and the resolved `script.cs` paths reported by `gbearos-util-mdk-build`.
    - Use those values as the baseline when estimating post-change size/headroom.
 4. **High-Risk Systems** — Systems/files with the highest coupling or break risk.
-5. **Cleanup reminder** — The plan must end with exactly:
 
-```markdown
-### Cleanup reminder
-
-**DELETE THIS FILE BEFORE FINAL PR SUBMISSION.**
-```
+Completion and archival of finished plans are handled by **`gbearos-util-doc-sync`** (§3.3); do **not** add a “delete this file before PR” footer to new plans.
 
 ### 4) Hold for approval (hard gate)
 
