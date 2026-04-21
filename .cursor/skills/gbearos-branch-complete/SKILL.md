@@ -33,18 +33,16 @@ If the active branch is **not** `main`, skip the “forgot to branch” workflow
 
 If the active branch **is** `main`, run the **“forgot to branch”** workflow:
 
-1. Review local changes since last commit:
-   - `git status`
-   - `git diff HEAD`
-   - `git diff --name-only HEAD`
-2. Draft and present:
+1. **Read-only diff preflight (required; no mutation approval):** From the repo root, the agent **must** run **silently** (no STOP prompt): `git status`, `git diff` (unstaged), and `git diff --cached` (staged). These commands are read-only. Optionally also `git diff HEAD` and/or `git diff --name-only HEAD` for a combined view—**do not** skip the unstaged/staged pair.
+2. **Ground the branch name in the diffs:** Formulate the suggested Conventional Commit `type` and kebab-case `[title]` **from the actual diff content** (paths, edits, scope)—not from chat context alone. If there are no local changes, say so and derive a minimal name from any stated intent, then still delegate **git branch init** with that summary.
+3. Draft and present:
    - A suggested Conventional Commit `type` (pick exactly one): `feat`, `fix`, `perf`, `chore`, `docs`, `refactor`
-   - A short kebab-case `[title]` derived from the diff (e.g. `docs-contracts-update`)
+   - A short kebab-case `[title]` derived from the diff evidence (e.g. `docs-contracts-update`)
    - Proposed branch name: `[type]/[title]`
    - A 1–2 sentence “branch description” (why this branch exists)
-3. Delegate branch creation via the existing orchestrator (avoid duplicating its behavior):
+4. Delegate branch creation via the existing orchestrator (avoid duplicating its behavior):
    - Instruct execution of **git branch init** (`git-branch-init` / `git branch init`) using the proposed `[type]/[title]` and description as the user-request summary input.
-4. After **git branch init** completes:
+5. After **git branch init** completes:
    - Confirm we are no longer on `main` (`git branch --show-current`)
    - Continue the pipeline at **Phase A**.
 
@@ -116,7 +114,7 @@ Rules:
 
 ## Supervisor checklist (copy for the agent)
 
-- [ ] Phase 0: branch safety preflight completed (including **git branch init** (`git-branch-init` / `git branch init`) if started on `main`); user acknowledged Checkpoint 0
+- [ ] Phase 0: branch safety preflight completed (when on `main`: read-only `git status`, `git diff`, `git diff --cached` run; branch name grounded in diffs; **git branch init** (`git-branch-init` / `git branch init`) if applicable); user acknowledged Checkpoint 0
 - [ ] Phase A: **git sync** (`git-sync` / `git sync`) executed and reported successful push; push succeeded or **pipeline aborted**; Checkpoint A cleared
 - [ ] Phase C: **pr submit** (`pr-submit` / `pr submit`) executed; PR URL captured; Checkpoint C cleared
 - [ ] Hard Hold D: user answered **yes** before any merge work, else stopped
