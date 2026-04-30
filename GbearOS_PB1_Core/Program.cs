@@ -66,6 +66,10 @@ namespace IngameScript
         private bool _cachedAssemblerStalled;
         private int _tickCounter = 0;
 
+        private const int DbgMatrixHoldUpdate10Ticks = 30; // ~5s at Update10 (10 ticks per update)
+        private int _dbgMatrixHoldTicksRemaining = 0;
+        private string _dbgMatrixHoldText = null;
+
         /// <summary>Torch Advanced PB Limiter: skip ticks until this UTC time after graceful shutdown.</summary>
         private DateTime _pblTime = DateTime.MinValue;
 
@@ -125,6 +129,22 @@ namespace IngameScript
 
             try
             {
+                if (_dbgMatrixHoldTicksRemaining > 0 && !string.IsNullOrEmpty(_dbgMatrixHoldText))
+                {
+                    Echo(_dbgMatrixHoldText);
+                    if ((updateSource & UpdateType.Update10) != 0)
+                    {
+                        _dbgMatrixHoldTicksRemaining--;
+                    }
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(argument) && string.Equals(argument, "DBG_MATRIX", StringComparison.OrdinalIgnoreCase))
+                {
+                    EmitModdedBlockDebugMatrix();
+                    return;
+                }
+
                 if ((updateSource & UpdateType.Update10) != 0)
                 {
                     U();
@@ -151,6 +171,116 @@ namespace IngameScript
                 Echo(err);
                 IGC.SendBroadcastMessage(IGCChannels.SYS_STATUS, err);
             }
+        }
+
+        private void EmitModdedBlockDebugMatrix()
+        {
+            if (_config == null || !_config.EnableDebug)
+            {
+                Echo("DBG_MATRIX: blocked (set [Debug] EnableDebug=true).");
+                return;
+            }
+
+            _globalBlocks.Clear();
+            GridTerminalSystem.GetBlocks(_globalBlocks);
+
+            const int rowCap = 120;
+            int rows = 0;
+
+            var sb = new StringBuilder(4096);
+            sb.AppendLine("=== DBG_MATRIX (PB1) ===");
+            sb.Append("PBID: ");
+            sb.AppendLine(_config.PBID ?? "CMD-????");
+            sb.Append("Blocks: ");
+            sb.AppendLine(_globalBlocks.Count.ToString());
+            sb.AppendLine("Cols: name | inv? | invN | Cargo Ref Asm Prod Pwr Reac Bat GasGen GasTank Solar | TypeId/SubtypeId");
+            sb.AppendLine();
+
+            for (int i = 0; i < _globalBlocks.Count && rows < rowCap; i++)
+            {
+                var b = _globalBlocks[i];
+                if (b == null || !b.IsSameConstructAs(Me))
+                {
+                    continue;
+                }
+
+                var owner = b as IMyInventoryOwner;
+                int invN = owner != null ? owner.InventoryCount : 0;
+                bool hasInv = invN > 0;
+
+                bool isCargo = b as IMyCargoContainer != null;
+                bool isRef = b as IMyRefinery != null;
+                bool isAsm = b as IMyAssembler != null;
+                bool isProd = b as IMyProductionBlock != null;
+                bool isPwr = b as IMyPowerProducer != null;
+                bool isReac = b as IMyReactor != null;
+                bool isBat = b as IMyBatteryBlock != null;
+                bool isGasGen = b as IMyGasGenerator != null;
+                bool isGasTank = b as IMyGasTank != null;
+                bool isSolar = b as IMySolarPanel != null;
+
+                // Keep output focused: include blocks that are likely relevant OR have inventory.
+                if (!hasInv && !(isCargo || isRef || isAsm || isProd || isPwr || isReac || isBat || isGasGen || isGasTank || isSolar))
+                {
+                    continue;
+                }
+
+                string typeId = "";
+                string subtypeId = "";
+                try
+                {
+                    var def = b.BlockDefinition;
+                    typeId = def.TypeIdString ?? "";
+                    subtypeId = def.SubtypeId ?? "";
+                }
+                catch
+                {
+                    // Some modded blocks or API edges may throw; debug should degrade safely.
+                }
+
+                sb.Append(FormattingUtils.SanitizeIngressWireText(b.CustomName ?? "(null)"));
+                sb.Append(" | ");
+                sb.Append(hasInv ? "Y" : "N");
+                sb.Append(" | ");
+                sb.Append(invN);
+                sb.Append(" | ");
+                sb.Append(isCargo ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isRef ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isAsm ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isProd ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isPwr ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isReac ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isBat ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isGasGen ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isGasTank ? "Y" : "N");
+                sb.Append(" ");
+                sb.Append(isSolar ? "Y" : "N");
+                sb.Append(" | ");
+                sb.Append(typeId);
+                sb.Append("/");
+                sb.AppendLine(subtypeId);
+
+                rows++;
+            }
+
+            sb.AppendLine();
+            sb.Append("Rows: ");
+            sb.Append(rows);
+            sb.Append(" (cap ");
+            sb.Append(rowCap);
+            sb.AppendLine(")");
+
+            _dbgMatrixHoldText = sb.ToString();
+            _dbgMatrixHoldTicksRemaining = DbgMatrixHoldUpdate10Ticks;
+            Echo(_dbgMatrixHoldText);
         }
 
         /// <summary>Torch PB Limiter hook — true skips this tick (cooldown active).</summary>

@@ -16,6 +16,13 @@ Harden PB1/PB2 behavior on modded blocks by broadening storage discovery safely 
   - cast success/failure: `IMyCargoContainer`, `IMyRefinery`, `IMyAssembler`, `IMyProductionBlock`, `IMyPowerProducer`, `IMyReactor`, `IMyBatteryBlock`
   - `BlockDefinition.TypeIdString` / `SubtypeId`
 
+#### Phase 0.1 — Expand matrix + make it persistent (no behavior change)
+- Extend the Phase 0 PB1 debug matrix to also emit cast success/failure for:
+  - `IMyGasGenerator`, `IMyGasTank`, `IMySolarPanel`
+- Make the matrix output persistent and dominant:
+  - When triggered, the matrix must override all other PB1 `Echo` output for at least 5 seconds.
+  - Matrix output row cap must be > 40 to support larger modded grids.
+
 #### Phase 1 — Introduce a first-class “tagged storage” cache
 - Extend PB1 cache refresh (`InventoryScanner.FillConstructBlockCaches` + PB1 `Program.cs` wiring) to build:
   - vanilla cargo (`IMyCargoContainer`) for compatibility

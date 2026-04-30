@@ -21,6 +21,53 @@ namespace IngameScript
         private MyGridProgram _me;
         private string _sharedKey = "";
 
+        // #region agent log
+        private const int AgentHoldUpdate10Ticks = 30; // ~5s at Update10 cadence (10 ticks per update)
+        private int _agentHoldTicksRemaining = 0;
+        private readonly List<string> _agentRecent = new List<string>(8);
+        private string _agentHoldText = null;
+
+        public bool AgentHoldActive { get { return _agentHoldTicksRemaining > 0 && !string.IsNullOrEmpty(_agentHoldText); } }
+
+        public string AgentGetHoldTextAndTick()
+        {
+            if (!AgentHoldActive)
+                return null;
+            _agentHoldTicksRemaining--;
+            return _agentHoldText;
+        }
+
+        private void AgentLog(string runId, string hypothesisId, string location, string message, string dataJson)
+        {
+            try
+            {
+                // Space Engineers prohibits file I/O; use Echo as the runtime evidence channel.
+                string line = "{\"sessionId\":\"3eb514\",\"runId\":\"" + (runId ?? "") + "\",\"hypothesisId\":\"" + (hypothesisId ?? "") +
+                              "\",\"location\":\"" + (location ?? "") + "\",\"message\":\"" + (message ?? "") +
+                              "\",\"data\":" + (dataJson ?? "{}") + ",\"timestamp\":" + System.DateTime.UtcNow.Ticks + "}";
+
+                if (_agentRecent.Count >= 8)
+                    _agentRecent.RemoveAt(0);
+                _agentRecent.Add("AGENTLOG " + line);
+
+                var sb = new System.Text.StringBuilder(1536);
+                sb.AppendLine("=== AGENTLOG (hold ~5s) ===");
+                for (int i = 0; i < _agentRecent.Count; i++)
+                    sb.AppendLine(_agentRecent[i]);
+                _agentHoldText = sb.ToString();
+                _agentHoldTicksRemaining = AgentHoldUpdate10Ticks;
+            }
+            catch
+            {
+            }
+        }
+        private static string AgentJsonEsc(string s)
+        {
+            if (s == null) return "";
+            return s.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\r", "\\r").Replace("\n", "\\n");
+        }
+        // #endregion
+
         private readonly IMyBroadcastListener[] _listeners = new IMyBroadcastListener[8];
         private int _listenerCount;
 
@@ -75,6 +122,16 @@ namespace IngameScript
 
             RegisterListener(IGCChannels.SYS_STATUS);
             RegisterListener(IGCChannels.PB1_WARNINGS);
+
+            // #region agent log
+            AgentLog(
+                "pre-fix",
+                "H2",
+                "GbearOS_PB2_Display/igc_parser.cs:Init",
+                "PB2 init completed (key cached once)",
+                "{\"pb2EntityId\":" + _me.Me.EntityId + ",\"pb2Pbid\":\"" + AgentJsonEsc(PBID) + "\",\"enableNetwork\":" + (EnableNetwork ? "true" : "false") +
+                ",\"sharedKeyLen\":" + (_sharedKey == null ? 0 : _sharedKey.Length) + "}");
+            // #endregion
         }
 
         private static string ExtractPbidPrefix(string raw, string defaultIfExtractEmpty)
@@ -138,6 +195,16 @@ namespace IngameScript
 
             EnableNetwork = enableNetwork;
             _sharedKey = key == null ? "" : key.Trim();
+
+            // #region agent log
+            AgentLog(
+                "pre-fix",
+                "H2",
+                "GbearOS_PB2_Display/igc_parser.cs:LoadNetworkSharedKeyFromCustomData",
+                "PB2 loaded Network settings from CustomData",
+                "{\"pb2EntityId\":" + pb.EntityId + ",\"pb2Pbid\":\"" + AgentJsonEsc(PBID) + "\",\"enableNetwork\":" + (EnableNetwork ? "true" : "false") +
+                ",\"sharedKeyLen\":" + (_sharedKey == null ? 0 : _sharedKey.Length) + "}");
+            // #endregion
         }
 
         private void RegisterListener(string channelTag)
@@ -146,6 +213,15 @@ namespace IngameScript
             listener.SetMessageCallback("PB1_MSG");
             _listeners[_listenerCount] = listener;
             _listenerCount++;
+
+            // #region agent log
+            AgentLog(
+                "pre-fix",
+                "H1",
+                "GbearOS_PB2_Display/igc_parser.cs:RegisterListener",
+                "PB2 registered broadcast listener",
+                "{\"channelTag\":\"" + AgentJsonEsc(channelTag) + "\",\"listenerCount\":" + _listenerCount + "}");
+            // #endregion
         }
 
         public void ProcessMessages()
@@ -208,6 +284,14 @@ namespace IngameScript
         {
             if (string.IsNullOrEmpty(_sharedKey))
             {
+                // #region agent log
+                AgentLog(
+                    "pre-fix",
+                    "H2",
+                    "GbearOS_PB2_Display/igc_parser.cs:Route",
+                    "Route ignored message because shared key is empty",
+                    "{\"tag\":\"" + AgentJsonEsc(msg.Tag) + "\",\"src\":" + msg.Source + ",\"sharedKeyLen\":0}");
+                // #endregion
                 return;
             }
 
@@ -218,6 +302,17 @@ namespace IngameScript
                 long src = msg.Source;
                 _systemStatusTicks[src] = utcNowTicks;
                 _systemStatuses[src] = text ?? string.Empty;
+
+                // #region agent log
+                string preview = text ?? "";
+                if (preview.Length > 64) preview = preview.Substring(0, 64);
+                AgentLog(
+                    "pre-fix",
+                    "H1",
+                    "GbearOS_PB2_Display/igc_parser.cs:Route(SYS_STATUS)",
+                    "Stored SYS_STATUS by msg.Source (multiple PB1s accumulate)",
+                    "{\"src\":" + src + ",\"tag\":\"SYS_STATUS\",\"textPreview\":\"" + AgentJsonEsc(preview) + "\",\"registryCount\":" + _systemStatuses.Count + "}");
+                // #endregion
                 return;
             }
 
@@ -234,8 +329,26 @@ namespace IngameScript
                     out innerPayload))
             {
                 _droppedEnvelopeCount++;
+
+                // #region agent log
+                AgentLog(
+                    "pre-fix",
+                    "H3",
+                    "GbearOS_PB2_Display/igc_parser.cs:Route(TryParse)",
+                    "Dropped envelope (MAC/replay/parse failure)",
+                    "{\"tag\":\"" + AgentJsonEsc(tag) + "\",\"src\":" + msg.Source + ",\"droppedEnvelopeCount\":" + _droppedEnvelopeCount + "}");
+                // #endregion
                 return;
             }
+
+            // #region agent log
+            AgentLog(
+                "pre-fix",
+                "H1",
+                "GbearOS_PB2_Display/igc_parser.cs:Route(accepted)",
+                "Accepted envelope",
+                "{\"tag\":\"" + AgentJsonEsc(tag) + "\",\"src\":" + msg.Source + ",\"envelopePbId\":\"" + AgentJsonEsc(envelopePbId) + "\",\"innerLen\":" + (innerPayload == null ? 0 : innerPayload.Length) + "}");
+            // #endregion
 
             if (tag == IGCChannels.PB1ToPB2_InventorySummary)
             {

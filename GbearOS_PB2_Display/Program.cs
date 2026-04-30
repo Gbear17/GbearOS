@@ -101,6 +101,18 @@ namespace IngameScript
 
             ProcessIGCMessages();
 
+            // Agent debug: if active, override ALL other Echo output for a short hold window,
+            // but DO NOT skip IGC processing (must stay functional while logging).
+            if (_igcParser != null && _igcParser.AgentHoldActive)
+            {
+                string hold = _igcParser.AgentGetHoldTextAndTick();
+                if (!string.IsNullOrEmpty(hold))
+                {
+                    Echo(hold);
+                    return;
+                }
+            }
+
             double secondsSinceData;
             if (_igcParser.LastPb1DataTicks == 0)
             {
